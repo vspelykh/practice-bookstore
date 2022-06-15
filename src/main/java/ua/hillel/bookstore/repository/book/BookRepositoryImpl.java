@@ -6,11 +6,10 @@ import ua.hillel.bookstore.dto.BookDTO;
 import ua.hillel.bookstore.model.Book;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class BookRepositoryImpl implements BookRepository{
+public class BookRepositoryImpl implements BookRepository {
 
     private final JpaBookRepository repository;
 
@@ -21,8 +20,7 @@ public class BookRepositoryImpl implements BookRepository{
 
     @Override
     public boolean delete(int id) {
-        repository.delete(get(id));
-        return true;
+        return repository.delete(id) != 0;
     }
 
     @Override

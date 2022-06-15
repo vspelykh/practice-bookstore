@@ -190,7 +190,7 @@
             <column name="id" valueNumeric="1"/>
             <column name="type" value="Hard"/>
         </insert>
-        <insert tableName="languages">
+        <insert tableName="covers">
             <column name="id" valueNumeric="2"/>
             <column name="type" value="Soft"/>
         </insert>
@@ -296,8 +296,8 @@
             <column name="cover_image_url" value="random_url7"/>
         </insert>
         <insert tableName="books">
-            <column name="id" valueNumeric="11"/>
-            <column name="vendor_code" valueNumeric="11"/>
+            <column name="id" valueNumeric="18"/>
+            <column name="vendor_code" valueNumeric="18"/>
             <column name="title" value="The Silent Patient"/>
             <column name="author_id" valueNumeric="10"/>
             <column name="publisher_id" valueNumeric="1"/>

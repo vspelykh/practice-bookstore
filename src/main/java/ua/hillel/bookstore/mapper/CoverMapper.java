@@ -7,7 +7,7 @@ import ua.hillel.bookstore.dto.CoverDTO;
 import ua.hillel.bookstore.mapper.base.BaseMapperConfig;
 import ua.hillel.bookstore.model.Cover;
 
-@Mapper(uses = BaseMapperConfig.class)
+@Mapper(componentModel = "spring",uses = BaseMapperConfig.class)
 public interface CoverMapper {
 
     CoverMapper INSTANCE = Mappers.getMapper(CoverMapper.class);

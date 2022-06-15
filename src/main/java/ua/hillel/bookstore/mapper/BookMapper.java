@@ -7,10 +7,9 @@ import ua.hillel.bookstore.dto.BookDTO;
 import ua.hillel.bookstore.mapper.base.BaseMapperConfig;
 import ua.hillel.bookstore.model.Book;
 
-@Mapper(uses = {BaseMapperConfig.class, AuthorMapper.class, PublisherMapper.class, SubCategoryMapper.class,
+@Mapper(componentModel = "spring",uses = {BaseMapperConfig.class, AuthorMapper.class, PublisherMapper.class, SubCategoryMapper.class,
         LanguageMapper.class, CoverMapper.class})
 public interface BookMapper {
-    BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
     @Mapping(target = "id", source = "entity.id")
     @Mapping(target = "vendorCode", source = "entity.vendorCode")
@@ -21,6 +20,9 @@ public interface BookMapper {
     @Mapping(target = "subCategory", source = "entity.subCategory")
     @Mapping(target = "language", source = "entity.language")
     @Mapping(target = "cover", source = "entity.cover")
+    @Mapping(target = "year", source = "entity.year")
+    @Mapping(target = "price", source = "entity.price")
+    @Mapping(target = "coverImageUrl", source = "entity.coverImageUrl")
     BookDTO toDTO(Book entity);
 
     @Mapping(target = "id", source = "dto.id")
@@ -32,5 +34,8 @@ public interface BookMapper {
     @Mapping(target = "subCategory", source = "dto.subCategory")
     @Mapping(target = "language", source = "dto.language")
     @Mapping(target = "cover", source = "dto.cover")
+    @Mapping(target = "year", source = "entity.year")
+    @Mapping(target = "price", source = "entity.price")
+    @Mapping(target = "coverImageUrl", source = "dto.coverImageUrl")
     Book toEntity(BookDTO dto);
 }

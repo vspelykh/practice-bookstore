@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 public class BookDTO implements Serializable {
@@ -19,4 +20,7 @@ public class BookDTO implements Serializable {
     private final SubCategoryDTO subCategory;
     private final LanguageDTO language;
     private final CoverDTO cover;
+    private final Integer year;
+    private final BigDecimal price;
+    private final String coverImageUrl;
 }

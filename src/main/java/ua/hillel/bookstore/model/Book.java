@@ -52,7 +52,6 @@ public class Book extends AbstractBaseEntity implements Serializable {
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
-    @Lob
     @Column(name = "cover_image_url", nullable = false)
     private String coverImageUrl;
 

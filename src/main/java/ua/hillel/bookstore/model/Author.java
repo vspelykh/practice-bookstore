@@ -29,7 +29,6 @@ public class Author extends AbstractBaseEntity implements Serializable {
 
     public Author() {
     }
-
     public Author(String name) {
         this.name = name;
     }

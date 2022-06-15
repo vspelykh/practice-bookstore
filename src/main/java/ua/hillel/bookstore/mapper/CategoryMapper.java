@@ -7,7 +7,7 @@ import ua.hillel.bookstore.dto.CategoryDTO;
 import ua.hillel.bookstore.mapper.base.BaseMapperConfig;
 import ua.hillel.bookstore.model.Category;
 
-@Mapper(uses = BaseMapperConfig.class)
+@Mapper(componentModel = "spring",uses = BaseMapperConfig.class)
 public interface CategoryMapper {
 
     CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);

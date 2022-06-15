@@ -7,7 +7,7 @@ import ua.hillel.bookstore.dto.PublisherDTO;
 import ua.hillel.bookstore.mapper.base.BaseMapperConfig;
 import ua.hillel.bookstore.model.Publisher;
 
-@Mapper(uses = BaseMapperConfig.class)
+@Mapper(componentModel = "spring",uses = BaseMapperConfig.class)
 public interface PublisherMapper {
     PublisherMapper INSTANCE = Mappers.getMapper(PublisherMapper.class);
 

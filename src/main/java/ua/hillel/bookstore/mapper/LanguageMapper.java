@@ -7,7 +7,7 @@ import ua.hillel.bookstore.dto.LanguageDTO;
 import ua.hillel.bookstore.mapper.base.BaseMapperConfig;
 import ua.hillel.bookstore.model.Language;
 
-@Mapper(uses = BaseMapperConfig.class)
+@Mapper(componentModel = "spring",uses = BaseMapperConfig.class)
 public interface LanguageMapper {
 
     LanguageMapper INSTANCE = Mappers.getMapper(LanguageMapper.class);

@@ -8,7 +8,7 @@ import ua.hillel.bookstore.dto.SubCategoryDTO;
 import ua.hillel.bookstore.mapper.base.BaseMapperConfig;
 import ua.hillel.bookstore.model.SubCategory;
 
-@Mapper(uses = {BaseMapperConfig.class, CategoryMapper.class})
+@Mapper(componentModel = "spring",uses = {BaseMapperConfig.class, CategoryMapper.class})
 public interface SubCategoryMapper {
 
     SubCategoryMapper INSTANCE = Mappers.getMapper(SubCategoryMapper.class);

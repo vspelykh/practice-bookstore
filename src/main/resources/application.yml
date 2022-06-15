@@ -1,3 +1,15 @@
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    doc-expansion: list
+  cache:
+    disabled: false
+  show-actuator: false
+
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -29,9 +41,9 @@ spring:
   thymeleaf:
     check-template-location: false
 
-#logging:
-#  level:
-#    org.liquibase: DEBUG
-#    org.hibernate:
-#      SQL: DEBUG
-#      type: TRACE
+logging:
+  level:
+    org.liquibase: DEBUG
+    org.hibernate:
+      SQL: DEBUG
+      type: TRACE

@@ -1,0 +1,37 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/books
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: none
+    generate-ddl: false
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+      cache:
+        use_second_level_cache: false
+        use_query_cache: false
+  liquibase:
+    enabled: true
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    change-log: classpath:db/liquibase-changelog.xml
+  thymeleaf:
+    check-template-location: false
+
+#logging:
+#  level:
+#    org.liquibase: DEBUG
+#    org.hibernate:
+#      SQL: DEBUG
+#      type: TRACE

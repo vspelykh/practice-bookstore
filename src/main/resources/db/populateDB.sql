@@ -65,11 +65,11 @@ VALUES ('Hard'),
 
 INSERT INTO books (vendor_code, title, author_id, publisher_id, pages, sub_category_id,
                    language_id, cover_id, year, price, cover_image_url)
-VALUES ('1', 'Morphology of Humans', 6, 1, 700, 1, 1, 2, 2015, 500, 'random_url1'),
-       ('2', 'Outliers: The Story of Success', 7, 3, 250, 5, 2, 1, 2020, 999, 'random_url2'),
-       ('3', 'It Ends With Us', 9, 2, 450, 8, 1, 1, 2010, 250, 'random_url3'),
-       ('4', 'The Confessions', 8, 3, 550, 5, 2, 1, 2009, 350, 'random_url4'),
-       ('5', 'Mohawk Saint: Catherine Tekakwitha and the Jesuits', 8, 3, 510, 6, 2, 1, 2009, 350, 'random_url5'),
-       ('6', 'Moneyball: The Art of Winning', 4, 3, 690, 11, 2, 2, 2000, 1999, 'random_url6'),
-       ('7', 'The Body in the Library: A Puzzle', 9, 3, 789, 16, 2, 1, 1970, 2000, 'random_url7'),
-       ('8', 'The Silent Patient', 10, 1, 550, 15, 1, 1, 1995, 666, 'random_url8');
+VALUES ('11', 'Morphology of Humans', 6, 1, 700, 1, 1, 2, 2015, 500, 'random_url1'),
+       ('12', 'Outliers: The Story of Success', 7, 3, 250, 5, 2, 1, 2020, 999, 'random_url2'),
+       ('13', 'It Ends With Us', 9, 2, 450, 8, 1, 1, 2010, 250, 'random_url3'),
+       ('14', 'The Confessions', 8, 3, 550, 5, 2, 1, 2009, 350, 'random_url4'),
+       ('15', 'Mohawk Saint: Catherine Tekakwitha and the Jesuits', 8, 3, 510, 6, 2, 1, 2009, 350, 'random_url5'),
+       ('16', 'Moneyball: The Art of Winning', 4, 3, 690, 11, 2, 2, 2000, 1999, 'random_url6'),
+       ('17', 'The Body in the Library: A Puzzle', 9, 3, 789, 16, 2, 1, 1970, 2000, 'random_url7'),
+       ('18', 'The Silent Patient', 10, 1, 550, 15, 1, 1, 1995, 666, 'random_url8');

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+
+    <changeSet id="02-01" author="Vladyslav Pelykh">
+        <insert tableName="categories">
+            <column name="id" valueNumeric="1"/>
+            <column name="category" value="Health"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" valueNumeric="2"/>
+            <column name="category" value="Business"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" valueNumeric="3"/>
+            <column name="category" value="Computing"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" valueNumeric="4"/>
+            <column name="category" value="Romance"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" valueNumeric="5"/>
+            <column name="category" value="Religion"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" valueNumeric="6"/>
+            <column name="category" value="Sport"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" valueNumeric="7"/>
+            <column name="category" value="Fantasy"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" valueNumeric="8"/>
+            <column name="category" value="Thriller"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-02" author="Vladyslav Pelykh">
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="1"/>
+            <column name="category_id" valueNumeric="1"/>
+            <column name="sub_category" value="Medicine"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="2"/>
+            <column name="category_id" valueNumeric="1"/>
+            <column name="sub_category" value="Animals"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="3"/>
+            <column name="category_id" valueNumeric="2"/>
+            <column name="sub_category" value="Sales"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="4"/>
+            <column name="category_id" valueNumeric="2"/>
+            <column name="sub_category" value="Leadership"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="5"/>
+            <column name="category_id" valueNumeric="3"/>
+            <column name="sub_category" value="Math"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="6"/>
+            <column name="category_id" valueNumeric="3"/>
+            <column name="sub_category" value="Physics"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="7"/>
+            <column name="category_id" valueNumeric="4"/>
+            <column name="sub_category" value="Historical"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="8"/>
+            <column name="category_id" valueNumeric="4"/>
+            <column name="sub_category" value="Romantic"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="9"/>
+            <column name="category_id" valueNumeric="5"/>
+            <column name="sub_category" value="Modern"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="10"/>
+            <column name="category_id" valueNumeric="5"/>
+            <column name="sub_category" value="Ancient"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="11"/>
+            <column name="category_id" valueNumeric="6"/>
+            <column name="sub_category" value="Football"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="12"/>
+            <column name="category_id" valueNumeric="6"/>
+            <column name="sub_category" value="Tennis"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="13"/>
+            <column name="category_id" valueNumeric="7"/>
+            <column name="sub_category" value="Low"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="14"/>
+            <column name="category_id" valueNumeric="7"/>
+            <column name="sub_category" value="Magic"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="15"/>
+            <column name="category_id" valueNumeric="8"/>
+            <column name="sub_category" value="Crime"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" valueNumeric="16"/>
+            <column name="category_id" valueNumeric="8"/>
+            <column name="sub_category" value="Psychological"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-03" author="Vladyslav Pelykh">
+        <insert tableName="publishers">
+            <column name="id" valueNumeric="1"/>
+            <column name="publisher" value="Ranok Publishing House Ltd."/>
+        </insert>
+        <insert tableName="publishers">
+            <column name="id" valueNumeric="2"/>
+            <column name="publisher" value="Svichado Publishers Ltd."/>
+        </insert>
+        <insert tableName="publishers">
+            <column name="id" valueNumeric="3"/>
+            <column name="publisher" value="Znannia Publishing House"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-04" author="Vladyslav Pelykh">
+        <insert tableName="authors">
+            <column name="id" valueNumeric="4"/>
+            <column name="author" value="Samuel Shem"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" valueNumeric="5"/>
+            <column name="author" value="Jerome Groopman"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" valueNumeric="6"/>
+            <column name="author" value="Emma Jane Unsworth"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" valueNumeric="7"/>
+            <column name="author" value="John Brooks"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" valueNumeric="8"/>
+            <column name="author" value="Brené Brown"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" valueNumeric="9"/>
+            <column name="author" value="Agatha Christie"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" valueNumeric="10"/>
+            <column name="author" value="Sir Arthur Conan Doyle"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-05" author="Vladyslav Pelykh">
+        <insert tableName="languages">
+            <column name="id" valueNumeric="1"/>
+            <column name="language" value="Ukrainian"/>
+        </insert>
+        <insert tableName="languages">
+            <column name="id" valueNumeric="2"/>
+            <column name="language" value="English"/>
+        </insert>
+        <insert tableName="languages">
+            <column name="id" valueNumeric="3"/>
+            <column name="language" value="Italian"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-06" author="Vladyslav Pelykh">
+        <insert tableName="covers">
+            <column name="id" valueNumeric="1"/>
+            <column name="type" value="Hard"/>
+        </insert>
+        <insert tableName="languages">
+            <column name="id" valueNumeric="2"/>
+            <column name="type" value="Soft"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-07" author="Vladyslav Pelykh">
+        <insert tableName="books">
+            <column name="id" valueNumeric="11"/>
+            <column name="vendor_code" valueNumeric="11"/>
+            <column name="title" value="Morphology of Humans"/>
+            <column name="author_id" valueNumeric="6"/>
+            <column name="publisher_id" valueNumeric="1"/>
+            <column name="pages" valueNumeric="700"/>
+            <column name="sub_category_id" valueNumeric="1"/>
+            <column name="language_id" valueNumeric="1"/>
+            <column name="cover_id" valueNumeric="2"/>
+            <column name="year" valueNumeric="2015"/>
+            <column name="price" valueNumeric="500"/>
+            <column name="cover_image_url" value="random_url1"/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" valueNumeric="12"/>
+            <column name="vendor_code" valueNumeric="12"/>
+            <column name="title" value="Outliers: The Story of Success"/>
+            <column name="author_id" valueNumeric="7"/>
+            <column name="publisher_id" valueNumeric="3"/>
+            <column name="pages" valueNumeric="250"/>
+            <column name="sub_category_id" valueNumeric="5"/>
+            <column name="language_id" valueNumeric="2"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year" valueNumeric="2020"/>
+            <column name="price" valueNumeric="99"/>
+            <column name="cover_image_url" value="random_url2"/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" valueNumeric="13"/>
+            <column name="vendor_code" valueNumeric="13"/>
+            <column name="title" value="It Ends With Us"/>
+            <column name="author_id" valueNumeric="9"/>
+            <column name="publisher_id" valueNumeric="2"/>
+            <column name="pages" valueNumeric="450"/>
+            <column name="sub_category_id" valueNumeric="8"/>
+            <column name="language_id" valueNumeric="1"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year" valueNumeric="2010"/>
+            <column name="price" valueNumeric="250"/>
+            <column name="cover_image_url" value="random_url3"/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" valueNumeric="14"/>
+            <column name="vendor_code" valueNumeric="14"/>
+            <column name="title" value="The Confessions"/>
+            <column name="author_id" valueNumeric="8"/>
+            <column name="publisher_id" valueNumeric="3"/>
+            <column name="pages" valueNumeric="550"/>
+            <column name="sub_category_id" valueNumeric="5"/>
+            <column name="language_id" valueNumeric="2"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year" valueNumeric="2009"/>
+            <column name="price" valueNumeric="350"/>
+            <column name="cover_image_url" value="random_url4"/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" valueNumeric="15"/>
+            <column name="vendor_code" valueNumeric="15"/>
+            <column name="title" value="Mohawk Saint: Catherine Tekakwitha and the Jesuits"/>
+            <column name="author_id" valueNumeric="8"/>
+            <column name="publisher_id" valueNumeric="3"/>
+            <column name="pages" valueNumeric="510"/>
+            <column name="sub_category_id" valueNumeric="6"/>
+            <column name="language_id" valueNumeric="2"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year" valueNumeric="2009"/>
+            <column name="price" valueNumeric="350"/>
+            <column name="cover_image_url" value="random_url5"/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" valueNumeric="16"/>
+            <column name="vendor_code" valueNumeric="16"/>
+            <column name="title" value="Moneyball: The Art of Winning"/>
+            <column name="author_id" valueNumeric="4"/>
+            <column name="publisher_id" valueNumeric="3"/>
+            <column name="pages" valueNumeric="690"/>
+            <column name="sub_category_id" valueNumeric="11"/>
+            <column name="language_id" valueNumeric="2"/>
+            <column name="cover_id" valueNumeric="2"/>
+            <column name="year" valueNumeric="2000"/>
+            <column name="price" valueNumeric="1999"/>
+            <column name="cover_image_url" value="random_url6"/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" valueNumeric="17"/>
+            <column name="vendor_code" valueNumeric="17"/>
+            <column name="title" value="The Body in the Library: A Puzzle"/>
+            <column name="author_id" valueNumeric="9"/>
+            <column name="publisher_id" valueNumeric="3"/>
+            <column name="pages" valueNumeric="789"/>
+            <column name="sub_category_id" valueNumeric="16"/>
+            <column name="language_id" valueNumeric="2"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year" valueNumeric="1970"/>
+            <column name="price" valueNumeric="2000"/>
+            <column name="cover_image_url" value="random_url7"/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" valueNumeric="11"/>
+            <column name="vendor_code" valueNumeric="11"/>
+            <column name="title" value="The Silent Patient"/>
+            <column name="author_id" valueNumeric="10"/>
+            <column name="publisher_id" valueNumeric="1"/>
+            <column name="pages" valueNumeric="550"/>
+            <column name="sub_category_id" valueNumeric="15"/>
+            <column name="language_id" valueNumeric="1"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year" valueNumeric="1995"/>
+            <column name="price" valueNumeric="666"/>
+            <column name="cover_image_url" value="random_url8"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

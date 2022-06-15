@@ -34,8 +34,8 @@ public interface BookMapper {
     @Mapping(target = "subCategory", source = "dto.subCategory")
     @Mapping(target = "language", source = "dto.language")
     @Mapping(target = "cover", source = "dto.cover")
-    @Mapping(target = "year", source = "entity.year")
-    @Mapping(target = "price", source = "entity.price")
+    @Mapping(target = "year", source = "dto.year")
+    @Mapping(target = "price", source = "dto.price")
     @Mapping(target = "coverImageUrl", source = "dto.coverImageUrl")
     Book toEntity(BookDTO dto);
 }

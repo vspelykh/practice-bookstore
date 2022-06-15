@@ -1,6 +1,5 @@
 package ua.hillel.bookstore.repository.publisher;
 
-import ua.hillel.bookstore.model.Author;
 import ua.hillel.bookstore.model.Publisher;
 
 import java.util.List;

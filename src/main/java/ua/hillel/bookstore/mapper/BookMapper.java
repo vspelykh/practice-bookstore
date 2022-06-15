@@ -2,12 +2,11 @@ package ua.hillel.bookstore.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 import ua.hillel.bookstore.dto.BookDTO;
 import ua.hillel.bookstore.mapper.base.BaseMapperConfig;
 import ua.hillel.bookstore.model.Book;
 
-@Mapper(componentModel = "spring",uses = {BaseMapperConfig.class, AuthorMapper.class, PublisherMapper.class, SubCategoryMapper.class,
+@Mapper(componentModel = "spring", uses = {BaseMapperConfig.class, AuthorMapper.class, PublisherMapper.class, SubCategoryMapper.class,
         LanguageMapper.class, CoverMapper.class})
 public interface BookMapper {
 

@@ -2,10 +2,8 @@ package ua.hillel.bookstore.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.hillel.bookstore.dto.AuthorDTO;
 import ua.hillel.bookstore.dto.PublisherDTO;
 import ua.hillel.bookstore.mapper.PublisherMapper;
-import ua.hillel.bookstore.model.Author;
 import ua.hillel.bookstore.model.Publisher;
 import ua.hillel.bookstore.repository.publisher.PublisherRepository;
 
@@ -20,7 +18,7 @@ public class PublisherService extends GenericQueryDSL<Publisher> {
     public final PublisherRepository repository;
     private final PublisherMapper mapper;
 
-    public List<PublisherDTO> getAllPublishers(){
+    public List<PublisherDTO> getAllPublishers() {
         List<PublisherDTO> publisherDTOs = new ArrayList<>();
         repository.getAll().forEach(publisher -> publisherDTOs.add(mapper.toDTO(publisher)));
         return publisherDTOs;

@@ -1,6 +1,5 @@
 package ua.hillel.bookstore.repository.author;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.hillel.bookstore.model.Author;
@@ -10,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class AuthorRepositoryImpl implements AuthorRepository{
+public class AuthorRepositoryImpl implements AuthorRepository {
 
     @PersistenceContext
     private EntityManager em;

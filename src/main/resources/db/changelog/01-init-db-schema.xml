@@ -110,7 +110,7 @@
     </changeSet>
     <changeSet id="8" author="Vladyslav Pelykh">
         <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="books" constraintName="FK_BOOKS_ON_AUTHOR"
-                                 referencedColumnNames="id" referencedTableName="authors"/>
+                                 referencedColumnNames="id" referencedTableName="authors" onDelete="CASCADE"/>
     </changeSet>
     <changeSet id="9" author="Vladyslav Pelykh">
         <addForeignKeyConstraint baseColumnNames="cover_id" baseTableName="books" constraintName="FK_BOOKS_ON_COVER"
@@ -124,7 +124,7 @@
     <changeSet id="11" author="Vladyslav Pelykh">
         <addForeignKeyConstraint baseColumnNames="publisher_id" baseTableName="books"
                                  constraintName="FK_BOOKS_ON_PUBLISHER" referencedColumnNames="id"
-                                 referencedTableName="publishers"/>
+                                 referencedTableName="publishers" onDelete="CASCADE"/>
     </changeSet>
     <changeSet id="12" author="Vladyslav Pelykh">
         <addForeignKeyConstraint baseColumnNames="sub_category_id" baseTableName="books"

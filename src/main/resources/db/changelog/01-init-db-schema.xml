@@ -44,7 +44,7 @@
             <column name="cover_id" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="year" type="INT">
+            <column name="year_of_publishing" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="price" type="DECIMAL">

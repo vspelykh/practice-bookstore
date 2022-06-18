@@ -46,7 +46,7 @@ public class Book extends AbstractBaseEntity implements Serializable {
     @JoinColumn(name = "cover_id", nullable = false)
     private Cover cover;
 
-    @Column(name = "year", nullable = false)
+    @Column(name = "year_of_publishing", nullable = false)
     private Integer year;
 
     @Column(name = "price", nullable = false)

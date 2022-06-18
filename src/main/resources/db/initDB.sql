@@ -46,18 +46,18 @@ CREATE TABLE covers
 
 CREATE TABLE books
 (
-    id              SERIAL PRIMARY KEY,
-    vendor_code     INTEGER NOT NULL,
-    title           VARCHAR NOT NULL,
-    author_id       INTEGER NOT NULL,
-    publisher_id    INTEGER NOT NULL,
-    pages           INTEGER NOT NULL,
-    sub_category_id INTEGER NOT NULL,
-    language_id     INTEGER NOT NULL,
-    cover_id        INTEGER NOT NULL,
-    "year"          INTEGER NOT NULL,
-    price           DECIMAL NOT NULL,
-    cover_image_url VARCHAR NOT NULL,
+    id                 SERIAL PRIMARY KEY,
+    vendor_code        INTEGER NOT NULL,
+    title              VARCHAR NOT NULL,
+    author_id          INTEGER NOT NULL,
+    publisher_id       INTEGER NOT NULL,
+    pages              INTEGER NOT NULL,
+    sub_category_id    INTEGER NOT NULL,
+    language_id        INTEGER NOT NULL,
+    cover_id           INTEGER NOT NULL,
+    year_of_publishing INTEGER NOT NULL,
+    price              DECIMAL NOT NULL,
+    cover_image_url    VARCHAR NOT NULL,
     FOREIGN KEY (author_id) REFERENCES authors ON DELETE CASCADE,
     FOREIGN KEY (publisher_id) REFERENCES publishers ON DELETE CASCADE,
     FOREIGN KEY (sub_category_id) REFERENCES sub_categories ON DELETE CASCADE,
@@ -119,7 +119,7 @@ VALUES ('Hard'),
        ('Soft');
 --
 INSERT INTO books (vendor_code, title, author_id, publisher_id, pages, sub_category_id,
-                   language_id, cover_id, "year", price, cover_image_url)
+                   language_id, cover_id, year_of_publishing, price, cover_image_url)
 VALUES ('1', 'Morphology of Humans', 3, 1, 700, 1, 1, 2, 2015, 500, 'random_url1'),
        ('2', 'Outliers: The Story of Success', 4, 3, 250, 5, 2, 1, 2020, 999, 'random_url2'),
        ('3', 'It Ends With Us', 6, 2, 450, 8, 1, 1, 2010, 250, 'random_url3'),

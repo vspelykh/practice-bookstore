@@ -1,6 +1,9 @@
 package ua.hillel.bookstore.repository.book;
 
-import ua.hillel.bookstore.dto.BookDTO;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import ua.hillel.bookstore.model.Book;
 
 import java.util.List;
@@ -15,5 +18,7 @@ public interface BookRepository {
 
     List<Book> getAll();
 
-    BookDTO getByVendorCode(int vendorCode);
+    Page<Book> findAll(BooleanExpression build, Pageable pageable);
+
+    Page<Book> findAll(PageRequest of);
 }

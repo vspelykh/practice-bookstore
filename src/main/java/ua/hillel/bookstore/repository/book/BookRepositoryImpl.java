@@ -1,8 +1,11 @@
 package ua.hillel.bookstore.repository.book;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import ua.hillel.bookstore.dto.BookDTO;
 import ua.hillel.bookstore.model.Book;
 
 import java.util.List;
@@ -33,8 +36,12 @@ public class BookRepositoryImpl implements BookRepository {
         return repository.findAll();
     }
 
+    public Page<Book> findAll(BooleanExpression build, Pageable pageable) {
+        return repository.findAll(build, pageable);
+    }
+
     @Override
-    public BookDTO getByVendorCode(int vendorCode) {
-        return repository.findByVendorCode(vendorCode);
+    public Page<Book> findAll(PageRequest of) {
+        return repository.findAll(of);
     }
 }

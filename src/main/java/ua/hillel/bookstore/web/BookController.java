@@ -47,9 +47,6 @@ public class BookController {
             bookDTOPage = service.findAll(PageRequest.of(pageNumber, pageSize, sort));
         }
         ControllerUtils.addPageHeaders(response, bookDTOPage);
-        for (BookDTO bookDTO : bookDTOPage){
-            System.out.println(bookDTO.getTitle() + "*" + bookDTO.getAuthor().getName() + "*" + bookDTO.getPublisher().getName());
-        }
         return new ResponseEntity<>(bookDTOPage, HttpStatus.OK);
     }
 

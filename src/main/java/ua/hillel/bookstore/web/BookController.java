@@ -34,6 +34,7 @@ public class BookController {
             @RequestParam(required = false, defaultValue = "title") String sortBy
     ) {
         Page<BookDTO> bookDTOPage;
+        Sort sort = ControllerUtils.getSort(sortBy);
         BookPredicatesBuilder builder = new BookPredicatesBuilder();
         if (search != null) {
             Pattern pattern = Pattern.compile("([a-zA-Z.]+?)([:<>])([a-zA-Z ]+?),");
@@ -41,11 +42,14 @@ public class BookController {
             while (matcher.find()) {
                 builder.with(matcher.group(1), matcher.group(2), matcher.group(3));
             }
-            bookDTOPage = service.findAll(builder.build(), PageRequest.of(pageNumber, pageSize, Sort.by(sortBy)));
+            bookDTOPage = service.findAll(builder.build(), PageRequest.of(pageNumber, pageSize, sort));
         } else {
-            bookDTOPage = service.findAll(PageRequest.of(pageNumber, pageSize, Sort.by(sortBy)));
+            bookDTOPage = service.findAll(PageRequest.of(pageNumber, pageSize, sort));
         }
         ControllerUtils.addPageHeaders(response, bookDTOPage);
+        for (BookDTO bookDTO : bookDTOPage){
+            System.out.println(bookDTO.getTitle() + "*" + bookDTO.getAuthor().getName() + "*" + bookDTO.getPublisher().getName());
+        }
         return new ResponseEntity<>(bookDTOPage, HttpStatus.OK);
     }
 

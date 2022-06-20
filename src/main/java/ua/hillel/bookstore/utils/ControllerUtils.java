@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import ua.hillel.bookstore.constant.ServiceHttpHeaders;
-import ua.hillel.bookstore.dto.BookDTO;
+import ua.hillel.bookstore.persistence.dto.BookDTO;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;

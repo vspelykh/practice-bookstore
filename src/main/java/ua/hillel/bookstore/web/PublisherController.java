@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ua.hillel.bookstore.dto.PublisherDTO;
-import ua.hillel.bookstore.model.Publisher;
+import ua.hillel.bookstore.persistence.dto.PublisherDTO;
+import ua.hillel.bookstore.persistence.entity.Publisher;
 import ua.hillel.bookstore.service.PublisherService;
 
 import java.util.List;

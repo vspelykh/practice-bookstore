@@ -4,7 +4,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.core.types.dsl.StringPath;
-import ua.hillel.bookstore.model.Book;
+import ua.hillel.bookstore.persistence.entity.Book;
 
 public class BookPredicate {
 

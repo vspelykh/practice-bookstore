@@ -28,7 +28,11 @@ public class BookService extends GenericQueryDSL<Book> {
     }
 
     public boolean delete(Integer id) {
-        return bookRepository.delete(id) != 0;
+        if (!bookRepository.existsById(id)){
+            return false;
+        }
+        bookRepository.deleteById(id);
+        return true;
     }
 
     @Transactional(Transactional.TxType.REQUIRED)

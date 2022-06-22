@@ -29,7 +29,11 @@ public class PublisherService extends GenericQueryDSL<Publisher> {
     }
 
     public boolean delete(Integer id) {
-    return repository.delete(id) != 0;
+        if (!repository.existsById(id)){
+            return false;
+        }
+        repository.deleteById(id);
+        return true;
     }
 
     @Transactional(Transactional.TxType.REQUIRED)

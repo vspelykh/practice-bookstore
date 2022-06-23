@@ -1,0 +1,32 @@
+{
+  "vendorCode": 22,
+  "title": "Test Book",
+  "author": {
+    "id": 5,
+    "name": "Brené Brown"
+  },
+  "publisher": {
+    "id": 3,
+    "name": "Znannia Publishing House"
+  },
+  "pages": 510,
+  "subCategory": {
+    "id": 6,
+    "category": {
+      "id": 3,
+      "name": "Computing"
+    },
+    "name": "Physics"
+  },
+  "language": {
+    "id": 1,
+    "name": "Ukrainian"
+  },
+  "cover": {
+    "id": 1,
+    "type": "Hard"
+  },
+  "year": 2022,
+  "price": 450,
+  "coverImageUrl": "random_url99"
+}

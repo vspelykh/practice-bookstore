@@ -1,0 +1,33 @@
+{
+  "id": 1,
+  "vendorCode": 11,
+  "title": "Morphology Edit",
+  "author": {
+    "id": 6,
+    "name": "Emma Jane Unsworth"
+  },
+  "publisher": {
+    "id": 1,
+    "name": "Ranok Publishing House Ltd."
+  },
+  "pages": 700,
+  "subCategory": {
+    "id": 1,
+    "category": {
+      "id": 1,
+      "name": "Health"
+    },
+    "name": "Medicine"
+  },
+  "language": {
+    "id": 1,
+    "name": "Ukrainian"
+  },
+  "cover": {
+    "id": 2,
+    "type": "Soft"
+  },
+  "year": 2015,
+  "price": 700,
+  "coverImageUrl": "random_url1"
+}

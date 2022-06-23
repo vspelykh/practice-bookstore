@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="Vladyslav Pelykh">
+        <createTable tableName="authors">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_authors"/>
+            </column>
+            <column name="author" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="Vladyslav Pelykh">
+        <createTable tableName="books">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_books"/>
+            </column>
+            <column name="vendor_code" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="publisher_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pages" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sub_category_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="language_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cover_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="year_of_publishing" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cover_image_url" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="Vladyslav Pelykh">
+        <createTable tableName="categories">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_categories"/>
+            </column>
+            <column name="category" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="Vladyslav Pelykh">
+        <createTable tableName="covers">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_covers"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="Vladyslav Pelykh">
+        <createTable tableName="languages">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_languages"/>
+            </column>
+            <column name="language" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="6" author="Vladyslav Pelykh">
+        <createTable tableName="publishers">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_publishers"/>
+            </column>
+            <column name="publisher" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="7" author="Vladyslav Pelykh">
+        <createTable tableName="sub_categories">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sub_categories"/>
+            </column>
+            <column name="category_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sub_category" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="8" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="books" constraintName="FK_BOOKS_ON_AUTHOR"
+                                 referencedColumnNames="id" referencedTableName="authors" onDelete="CASCADE"/>
+    </changeSet>
+    <changeSet id="9" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="cover_id" baseTableName="books" constraintName="FK_BOOKS_ON_COVER"
+                                 referencedColumnNames="id" referencedTableName="covers"/>
+    </changeSet>
+    <changeSet id="10" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="language_id" baseTableName="books"
+                                 constraintName="FK_BOOKS_ON_LANGUAGE" referencedColumnNames="id"
+                                 referencedTableName="languages"/>
+    </changeSet>
+    <changeSet id="11" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="publisher_id" baseTableName="books"
+                                 constraintName="FK_BOOKS_ON_PUBLISHER" referencedColumnNames="id"
+                                 referencedTableName="publishers" onDelete="CASCADE"/>
+    </changeSet>
+    <changeSet id="12" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="sub_category_id" baseTableName="books"
+                                 constraintName="FK_BOOKS_ON_SUB_CATEGORY" referencedColumnNames="id"
+                                 referencedTableName="sub_categories"/>
+    </changeSet>
+    <changeSet id="13" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="sub_categories"
+                                 constraintName="FK_SUB_CATEGORIES_ON_CATEGORY" referencedColumnNames="id"
+                                 referencedTableName="categories"/>
+    </changeSet>
+
+</databaseChangeLog>

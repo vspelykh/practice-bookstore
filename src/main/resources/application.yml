@@ -17,14 +17,14 @@ spring:
     console:
       enabled: true
   datasource:
-    url: jdbc:h2:mem:in-memory
-    username: sa
-    password:
-    driverClassName: org.h2.Driver
-#      url: jdbc:postgresql://localhost:5432/books
-#      driver-class-name: org.postgresql.Driver
-#      username: postgres
-#      password: password
+#    url: jdbc:h2:mem:in-memory
+#    username: sa
+#    password:
+#    driverClassName: org.h2.Driver
+      url: jdbc:postgresql://localhost:5432/books
+      driver-class-name: org.postgresql.Driver
+      username: postgres
+      password: password
   jpa:
     hibernate:
       ddl-auto: none
@@ -32,8 +32,8 @@ spring:
     show-sql: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-#              dialect: org.hibernate.dialect.PostgreSQL9Dialect
+#        dialect: org.hibernate.dialect.H2Dialect
+              dialect: org.hibernate.dialect.PostgreSQL9Dialect
       cache:
         use_second_level_cache: false
         use_query_cache: false

@@ -2,10 +2,10 @@ package ua.hillel.bookstore.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.hillel.bookstore.dto.PublisherDTO;
-import ua.hillel.bookstore.mapper.PublisherMapper;
-import ua.hillel.bookstore.model.Publisher;
-import ua.hillel.bookstore.repository.publisher.PublisherRepository;
+import ua.hillel.bookstore.persistence.dto.PublisherDTO;
+import ua.hillel.bookstore.persistence.entity.Publisher;
+import ua.hillel.bookstore.persistence.mapper.PublisherMapper;
+import ua.hillel.bookstore.persistence.repository.PublisherRepository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -20,16 +20,20 @@ public class PublisherService extends GenericQueryDSL<Publisher> {
 
     public List<PublisherDTO> getAllPublishers() {
         List<PublisherDTO> publisherDTOs = new ArrayList<>();
-        repository.getAll().forEach(publisher -> publisherDTOs.add(mapper.toDTO(publisher)));
+        repository.findAll().forEach(publisher -> publisherDTOs.add(mapper.toDTO(publisher)));
         return publisherDTOs;
     }
 
     public PublisherDTO get(Integer id) {
-        return mapper.toDTO(repository.get(id));
+        return mapper.toDTO(repository.getReferenceById(id));
     }
 
     public boolean delete(Integer id) {
-        return repository.delete(id);
+        if (!repository.existsById(id)){
+            return false;
+        }
+        repository.deleteById(id);
+        return true;
     }
 
     @Transactional(Transactional.TxType.REQUIRED)

@@ -1,17 +1,22 @@
 package ua.hillel.bookstore.web;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ua.hillel.bookstore.dto.*;
-import ua.hillel.bookstore.model.Book;
+import ua.hillel.bookstore.persistence.dto.BookDTO;
+import ua.hillel.bookstore.persistence.entity.Book;
 import ua.hillel.bookstore.service.BookService;
+import ua.hillel.bookstore.utils.BookPredicatesBuilder;
+import ua.hillel.bookstore.utils.ControllerUtils;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletResponse;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping(path = "/books", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -20,42 +25,34 @@ public class BookController {
 
     private final BookService service;
 
-    @GetMapping(path = "/all")
-    public ResponseEntity<List<BookDTO>> getAllBooks(
-            @RequestParam(required = false) Integer vendorCode,
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) AuthorDTO author,
-            @RequestParam(required = false) PublisherDTO publisher,
-            @RequestParam(required = false) Integer pagesFrom,
-            @RequestParam(required = false) Integer pagesTo,
-            @RequestParam(required = false) SubCategoryDTO subCategory,
-            @RequestParam(required = false) LanguageDTO language,
-            @RequestParam(required = false) CoverDTO cover,
-            @RequestParam(required = false) Integer year,
-            @RequestParam(required = false) BigDecimal priceFrom,
-            @RequestParam(required = false) BigDecimal priceTo) {
-
-        List<BookDTO> books = service.getAllBooks();
-        books = books.stream().
-                filter(book -> vendorCode == null || book.getVendorCode().toString().contains(vendorCode.toString())).
-                filter(book -> title == null || book.getTitle().contains(title)).
-                filter(book -> author == null || book.getAuthor().equals(author)).
-                filter(book -> publisher == null || book.getPublisher().equals(publisher)).
-                filter(book -> pagesFrom == null || book.getPages() >= pagesFrom).
-                filter(book -> pagesTo == null || book.getPages() <= pagesTo).
-                filter(book -> subCategory == null || book.getSubCategory().equals(subCategory)).
-                filter(book -> language == null || book.getLanguage().equals(language)).
-                filter(book -> cover == null || book.getCover().equals(cover)).
-                filter(book -> year == null || book.getYear().equals(year)).
-                filter(book -> priceFrom == null || book.getPrice().intValue() >= priceFrom.intValue()).
-                filter(book -> priceTo == null || book.getPrice().intValue() <= priceTo.intValue()).
-                collect(Collectors.toList());
-        return new ResponseEntity<>(books, HttpStatus.OK);
+    @GetMapping(value = "/all")
+    public ResponseEntity<Page<BookDTO>> search(
+            HttpServletResponse response,
+            @RequestParam(required = false, value = "search") String search,
+            @RequestParam(required = false, defaultValue = "0") Integer pageNumber,
+            @RequestParam(required = false, defaultValue = "20") Integer pageSize,
+            @RequestParam(required = false, defaultValue = "title") String sortBy
+    ) {
+        Page<BookDTO> bookDTOPage;
+        Sort sort = ControllerUtils.getSort(sortBy);
+        BookPredicatesBuilder builder = new BookPredicatesBuilder();
+        if (search != null) {
+            Pattern pattern = Pattern.compile("([a-zA-Z.]+?)([:<>])([a-zA-Z ]+?),");
+            Matcher matcher = pattern.matcher(search + ",");
+            while (matcher.find()) {
+                builder.with(matcher.group(1), matcher.group(2), matcher.group(3));
+            }
+            bookDTOPage = service.findAll(builder.build(), PageRequest.of(pageNumber, pageSize, sort));
+        } else {
+            bookDTOPage = service.findAll(PageRequest.of(pageNumber, pageSize, sort));
+        }
+        ControllerUtils.addPageHeaders(response, bookDTOPage);
+        return new ResponseEntity<>(bookDTOPage, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<BookDTO> getById(@PathVariable Integer id) {
-        return service != null
+        return service.get(id) != null
                 ? new ResponseEntity<>(service.get(id), HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -66,7 +63,7 @@ public class BookController {
     }
 
     @PostMapping
-    public Book createOrEditBook(@RequestBody BookDTO book){
-       return service.save(book);
+    public Book createOrEditBook(@RequestBody BookDTO book) {
+        return service.save(book);
     }
 }

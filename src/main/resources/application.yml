@@ -1,18 +1,21 @@
-springdoc:
-  api-docs:
-    enabled: true
-    path: /v3/api-docs
-  swagger-ui:
-    enabled: true
-    path: /swagger-ui.html
-    doc-expansion: list
-  cache:
-    disabled: false
-  show-actuator: false
-
+#springdoc:
+#  api-docs:
+#    enabled: true
+#    path: /v3/api-docs
+#  swagger-ui:
+#    enabled: true
+#    path: /swagger-ui.html
+#    doc-expansion: list
+#  cache:
+#    disabled: false
+#  show-actuator: false
 spring:
   main:
     allow-bean-definition-overriding: true
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
   h2:
     console:
       enabled: true
@@ -43,9 +46,8 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     change-log: classpath:db/liquibase-changelog.xml
-  thymeleaf:
-    check-template-location: false
-
+#  thymeleaf:
+#    check-template-location: false
 logging:
   level:
     org.liquibase: DEBUG

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
 
     @GetMapping
-    public String index() {
-        return "forward:/swagger-ui.html";
+    public String index(){
+
+        return "index";
     }
 }
-

@@ -10,7 +10,5 @@ import java.io.Serializable;
 public class SubCategoryDTO implements Serializable {
     private final Integer id;
     private final CategoryDTO category;
-    @NotBlank
-    @Size(min = 3, max = 120)
     private final String name;
 }

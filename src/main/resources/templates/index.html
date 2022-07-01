@@ -81,22 +81,18 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Filter</div>
-
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Categories:
+                            <!--                            categories-->
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <label class="form-check">
-                            <input class="form-check-input" type="checkbox" id="check1" name="option1"
-                                   value="something">
-                            <label class="form-check-label">Option 1</label>
-                        </label>
-                        <label class="form-check">
-                            <input class="form-check-input" type="checkbox" id="check2" name="option2"
-                                   value="something">
-                            <label class="form-check-label">Option 2</label>
+                        <!--/*@thymesVar id="categories" type="java.util.List"*/-->
+                        <!--/*@thymesVar id="category" type="ua.hillel.bookstore.persistence.dto.CategoryDTO"*/-->
+                        <label th:each="category: ${categories}" class="form-check">
+                            <input type="checkbox" name="categories-chosen" th:value="${category}"/>
+                            <label class="form-check-label" th:text="${category.name}"></label>
                         </label>
                         <!--                        subcategory-->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -105,15 +101,11 @@
                             Subcategories:
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <label class="form-check">
-                            <input class="form-check-input" type="checkbox" id="sub1" name="option1"
-                                   value="something">
-                            <label class="form-check-label">Option 1</label>
-                        </label>
-                        <label class="form-check">
-                            <input class="form-check-input" type="checkbox" id="sub2" name="option2"
-                                   value="something">
-                            <label class="form-check-label">Option 2</label>
+                        <!--/*@thymesVar id="subCategories" type="java.util.List"*/-->
+                        <!--/*@thymesVar id="subCategory" type="ua.hillel.bookstore.persistence.dto.SubCategoryDTO"*/-->
+                        <label th:each="subCategory: ${subCategories}" class="form-check">
+                            <input type="checkbox" name="sub-chosen" th:value="${subCategory}"/>
+                            <label class="form-check-label" th:text="${subCategory.name}"></label>
                         </label>
                     </div>
                 </div>

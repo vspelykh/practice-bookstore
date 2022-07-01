@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RestController
-@RequestMapping(path = "/books", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/rest/books", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class BookController {
 

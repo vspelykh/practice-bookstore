@@ -133,6 +133,12 @@
             <artifactId>font-awesome</artifactId>
             <version>6.1.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-expression-processor</artifactId>
+            <version>1.2.0</version>
+        </dependency>
     </dependencies>
 
     <build>

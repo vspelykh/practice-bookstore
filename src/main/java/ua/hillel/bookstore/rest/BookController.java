@@ -27,11 +27,8 @@ public class BookController {
 
     @GetMapping(value = "/all")
     public ResponseEntity<Page<BookDTO>> search(
-            HttpServletResponse response,
-            @RequestParam(required = false, value = "search") String search,
-            @RequestParam(required = false, defaultValue = "0") Integer pageNumber,
-            @RequestParam(required = false, defaultValue = "20") Integer pageSize,
-            @RequestParam(required = false, defaultValue = "title") String sortBy
+            HttpServletResponse response, @RequestParam(required = false, value = "search") String search,
+            Integer pageNumber, Integer pageSize, String sortBy
     ) {
         Page<BookDTO> bookDTOPage;
         Sort sort = ControllerUtils.getSort(sortBy);
@@ -42,9 +39,9 @@ public class BookController {
             while (matcher.find()) {
                 builder.with(matcher.group(1), matcher.group(2), matcher.group(3));
             }
-            bookDTOPage = service.findAll(builder.build(), PageRequest.of(pageNumber, pageSize, sort));
+            bookDTOPage = service.findAll(builder.build(), PageRequest.of(pageNumber - 1, pageSize, sort));
         } else {
-            bookDTOPage = service.findAll(PageRequest.of(pageNumber, pageSize, sort));
+            bookDTOPage = service.findAll(PageRequest.of(pageNumber - 1, pageSize, sort));
         }
         ControllerUtils.addPageHeaders(response, bookDTOPage);
         return new ResponseEntity<>(bookDTOPage, HttpStatus.OK);

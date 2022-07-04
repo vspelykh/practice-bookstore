@@ -11,6 +11,7 @@ import ua.hillel.bookstore.persistence.dto.BookDTO;
 import ua.hillel.bookstore.persistence.dto.CategoryDTO;
 import ua.hillel.bookstore.rest.BookController;
 import ua.hillel.bookstore.rest.CategoryController;
+import ua.hillel.bookstore.rest.PublisherController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -24,6 +25,7 @@ public class IndexController {
 
     private final BookController bookController;
     private final CategoryController categoryController;
+    private final PublisherController publisherController;
 
     @GetMapping
     public String index(@RequestParam(required = false, value = "search") String search,
@@ -45,6 +47,7 @@ public class IndexController {
         model.addAttribute("books", page);
         model.addAttribute("categories", categoryController.getCategories().getBody());
         model.addAttribute("subCategories", categoryController.getSubCategories(categoriesChosen).getBody());
+        model.addAttribute("publishers", publisherController.getAll(null).getBody());
         return "index";
     }
 }

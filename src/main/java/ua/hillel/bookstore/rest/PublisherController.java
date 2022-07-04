@@ -20,7 +20,7 @@ public class PublisherController {
     private final PublisherService service;
 
     @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PublisherDTO>> getAllAuthors(
+    public ResponseEntity<List<PublisherDTO>> getAll(
             @RequestParam(required = false) String name) {
 
         List<PublisherDTO> publishers = service.getAllPublishers();

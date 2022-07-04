@@ -20,7 +20,7 @@
         <springdoc.version>1.6.9</springdoc.version>
         <deps.flag-icon.version>2.4.0</deps.flag-icon.version>
         <deps.jquery.version>3.6.0</deps.jquery.version>
-        <deps.bootstrap.version>5.0.0</deps.bootstrap.version>
+        <deps.bootstrap.version>5.2.0-beta1</deps.bootstrap.version>
         <deps.bootstrap-select.version>1.13.18</deps.bootstrap-select.version>
         <deps.thymeleaf-layout-dialect.version>2.5.3</deps.thymeleaf-layout-dialect.version>    </properties>
     <dependencies>
@@ -109,7 +109,7 @@
             <version>${deps.thymeleaf-layout-dialect.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.webjars</groupId>
+            <groupId>org.webjars.npm</groupId>
             <artifactId>bootstrap</artifactId>
             <version>${deps.bootstrap.version}</version>
         </dependency>

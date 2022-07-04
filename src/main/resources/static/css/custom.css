@@ -179,6 +179,10 @@ table.table td i {
     font-size: 19px;
 }
 
+div.dataTables_wrapper div.dataTables_filter input {
+    width: 700px;
+}
+
 .pagination {
     float: right;
     margin: 0 0 5px;

@@ -26,9 +26,8 @@ public class BookController {
     private final BookService service;
 
     @GetMapping(value = "/all")
-    public ResponseEntity<Page<BookDTO>> search(
-            HttpServletResponse response, @RequestParam(required = false, value = "search") String search,
-            Integer pageNumber, Integer pageSize, String sortBy
+    public ResponseEntity<Page<BookDTO>> search(HttpServletResponse response, String search, Integer pageNumber,
+                                                Integer pageSize, String sortBy
     ) {
         Page<BookDTO> bookDTOPage;
         Sort sort = ControllerUtils.getSort(sortBy);

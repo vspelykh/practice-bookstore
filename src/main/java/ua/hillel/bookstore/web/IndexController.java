@@ -13,8 +13,6 @@ import ua.hillel.bookstore.rest.BookController;
 import ua.hillel.bookstore.rest.CategoryController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -28,13 +26,14 @@ public class IndexController {
     private final CategoryController categoryController;
 
     @GetMapping
-    public String index(@RequestParam(value = "categories-chosen", required = false) List<CategoryDTO> categoriesChosen,
+    public String index(@RequestParam(required = false, value = "search") String search,
+                        @RequestParam(value = "categories-chosen", required = false) List<CategoryDTO> categoriesChosen,
                         @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber,
                         @RequestParam(name = "size", required = false, defaultValue = "20") Integer pageSize,
                         @RequestParam(name = "sort", required = false, defaultValue = "title") String sortBy,
                         HttpServletResponse response, Model model) {
 
-        Page<BookDTO> page = bookController.search(response, null, pageNumber, pageSize, sortBy).getBody();
+        Page<BookDTO> page = bookController.search(response, search, pageNumber, pageSize, sortBy).getBody();
         if (Objects.requireNonNull(page).getTotalPages() > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, page.getTotalPages())
                     .boxed()

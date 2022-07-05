@@ -146,14 +146,14 @@
                                     <div class="accordion-body">
                                         <!--                                        /*@thymesVar id="publishers" type="java.util.List"*/-->
                                         <!--                                        /*@thymesVar id="publisher" type="ua.hillel.bookstore.persistence.dto.PublisherDTO"*/-->
-                                        <div class="form-check" th:each="publisher : ${publishers}">
+                                        <label class="form-check" th:each="publisher : ${publishers}">
                                             <!--/*@thymesVar id="getId" type="java.lang.Integer"*/-->
-                                            <input class="form-check-input" type="checkbox" th:value="${publisher}"
+                                            <input class="form-check-input filter-publishers" type="checkbox" th:value="${publisher.name}"
                                                    th:id="${publisher}">
                                             <label th:text="${publisher.name}" class="form-check-label"
                                                    th:for="${publisher}">
                                             </label>
-                                        </div>
+                                        </label>
                                     </div>
                                 </div>
                             </div>

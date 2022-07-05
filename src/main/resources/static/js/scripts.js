@@ -1,5 +1,6 @@
-$(document).ready( function () {
-    $('#bookTable').DataTable({
+$(document).ready(function() {
+
+    var table = $('#bookTable').dataTable({
         "pageLength": 5,
         "language": {
             search: "Search:",
@@ -16,4 +17,28 @@ $(document).ready( function () {
         ],
         order: [1, 'asc']
     });
+
+
+    $('input.filter-publishers').on('change', function() {
+        table.fnDraw();
+    });
+
+    $.fn.dataTable.ext.search.push(
+        function(settings, searchData, index, rowData) {
+            // No filtered checked - show all rows
+            if ($('.filter-publishers:checked').length === 0) {
+                return true;
+            }
+
+            // Filter(s) checked, apply logic
+            var found = false;
+            $('.filter-publishers').each(function(index, elem) {
+                if (elem.checked && rowData[3] === elem.value) {
+                    found = true;
+                }
+            });
+
+            return found;
+        }
+    );
 });

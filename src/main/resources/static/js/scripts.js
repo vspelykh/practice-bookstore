@@ -12,7 +12,7 @@ $(document).ready(function() {
                 visible: false,
                 searchable: false
             },
-            { "searchable": false, "targets": [0,3,4,5,6] },
+            { "searchable": false, "targets": [0,3,4,6] },
             { "orderable": true, "targets": [1,2,3,4,5]},
             {"orderable": false, "targets": [0, 6]}
         ],
@@ -22,6 +22,10 @@ $(document).ready(function() {
         ],
         order: [1, 'asc'],
 
+    });
+
+    $('#min, #max').on('change', function (){
+        table.fnDraw();
     });
 
     $('input.filter-categories').on('change', function (){
@@ -37,6 +41,21 @@ $(document).ready(function() {
     });
 
     $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            var min = parseInt($('#min').val(), 10);
+            var max = parseInt($('#max').val(), 10);
+            var age = parseFloat(data[5]) || 0; // use data for the age column
+
+            if (
+                (isNaN(min) && isNaN(max)) ||
+                (isNaN(min) && age <= max) ||
+                (min <= age && isNaN(max)) ||
+                (min <= age && age <= max)
+            ) {
+                return true;
+            }
+            return false;
+        },
 
         function categories(settings, searchData, index, rowData) {
             // No filtered checked - show all rows

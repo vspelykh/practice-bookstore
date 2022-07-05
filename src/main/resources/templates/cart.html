@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      lang="en" data-layout-decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">-->
+</head>
+<body>
+<main data-layout-fragment="content" style="padding-top: 55px">
+    <!--            table-->
+    <div class="container-xl table-book-body">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8"><h2>Your <b>cart</b></h2></div>
+                        <div class="col-sm-4">
+                        </div>
+                        <table id="cartTable" class="table table-striped table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="10%">Cover<i></i></th>
+                                <th>Title<i></i></th>
+                                <th>Author<i></i></th>
+                                <th>Publisher<i></i></th>
+                                <th>Year<i></i></th>
+                                <th>Price<i></i></th>
+                                <th>Quantity</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--                                table body-->
+                            <!--/*@thymesVar id="items" type="java.util.List"*/-->
+                            <!--/*@thymesVar id="item" type="ua.hillel.bookstore.persistence.dto.CartItemDTO"*/-->
+                            <tr th:each="item: ${items}">
+                                <td>
+                                    <img width="85%" height="85%" th:src="@{${item.book.coverImageUrl}}">
+                                </td>
+                                <td th:text="${item.book.title}"></td>
+                                <td th:text="${item.book.author.name}"></td>
+                                <td th:text="${item.book.publisher.name}"></td>
+                                <td th:text="${item.book.year}"></td>
+                                <td th:text="${item.book.price}"></td>
+                                <td th:text="${item.quantity}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

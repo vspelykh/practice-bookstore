@@ -15,11 +15,12 @@
         <div style="color: white">
             <h2>The first private bookstore</h2>
         </div>
-        <form style="margin-right: 20px" class="child">
+        <div style="margin-right: 20px" class="child">
             <i class="cart">Total sum : 0 dollars</i>
-            <img src="/img/cart.png" alt="Cart" width="40" height="40" class="fa"/>
-            <span class='badge badge-warning' id='lblCartCount'> 5 </span>
-        </form>
+            <a th:href="@{cart}"><img src="/img/cart.png" alt="Cart" width="40" height="40" class="fa"/></a>
+            <!--/*@thymesVar id="cartCapacity" type="java.lang.Integer"*/-->
+            <span class="badge badge-notify my-cart-badge" id='lblCartCount' th:text="${cartCapacity}"></span>
+        </div>
     </div>
     <!--    carousel-->
     <div style="background-image: linear-gradient(#6c757d, white)" id="myCarousel" class="carousel slide"
@@ -100,7 +101,8 @@
                                         <!--                        /*@thymesVar id="category" type="ua.hillel.bookstore.persistence.dto.CategoryDTO"*/-->
                                         <label class="form-check" th:each="category : ${categories}">
                                             <!--/*@thymesVar id="getId" type="java.lang.Integer"*/-->
-                                            <input class="form-check-input" type="checkbox" th:value="${category}"
+                                            <input class="form-check-input filter-categories" type="checkbox"
+                                                   th:value="${category.name}"
                                                    th:id="${category}">
                                             <label th:text="${category.name}" class="form-check-label"
                                                    th:for="${category}">
@@ -124,7 +126,8 @@
                                         <!--                                        /*@thymesVar id="subCategory" type="ua.hillel.bookstore.persistence.dto.SubCategoryDTO"*/-->
                                         <label class="form-check" th:each="subCategory : ${subCategories}">
                                             <!--/*@thymesVar id="getId" type="java.lang.Integer"*/-->
-                                            <input class="form-check-input" type="checkbox" th:value="${subCategory}"
+                                            <input class="form-check-input filter-subCategories" type="checkbox"
+                                                   th:value="${subCategory.name}"
                                                    th:id="${subCategory}">
                                             <label th:text="${subCategory.name}" class="form-check-label"
                                                    th:for="${subCategory}">
@@ -148,7 +151,8 @@
                                         <!--                                        /*@thymesVar id="publisher" type="ua.hillel.bookstore.persistence.dto.PublisherDTO"*/-->
                                         <label class="form-check" th:each="publisher : ${publishers}">
                                             <!--/*@thymesVar id="getId" type="java.lang.Integer"*/-->
-                                            <input class="form-check-input filter-publishers" type="checkbox" th:value="${publisher.name}"
+                                            <input class="form-check-input filter-publishers" type="checkbox"
+                                                   th:value="${publisher.name}"
                                                    th:id="${publisher}">
                                             <label th:text="${publisher.name}" class="form-check-label"
                                                    th:for="${publisher}">
@@ -157,9 +161,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                                            aria-controls="panelsStayOpen-collapseFour">
+                                        Price:
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"
+                                     aria-labelledby="panelsStayOpen-headingFour">
+                                    <div class="accordion-body">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <button type="button" style="margin-top: 10px" class="btn btn-primary">Filter</button>
-
                     </div>
                 </div>
             </nav>
@@ -189,13 +205,16 @@
                                         <th>Publisher<i></i></th>
                                         <th>Year<i></i></th>
                                         <th>Price<i></i></th>
-                                        <th>Add to cart</th>
+                                        <th></th>
+                                        <th>Category</th>
+                                        <th>Subcategory</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <!--                                table body-->
                                     <!--/*@thymesVar id="books" type="org.springframework.data.domain.Page"*/-->
                                     <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+
                                     <tr th:each="book: ${books}">
                                         <td>
                                             <img width="85%" height="85%" th:src="@{${book.coverImageUrl}}">
@@ -205,7 +224,19 @@
                                         <td th:text="${book.publisher.name}"></td>
                                         <td th:text="${book.year}"></td>
                                         <td th:text="${book.price}"></td>
-                                        <td>Add button</td>
+                                        <td>
+                                            <button data-th-id="${book.id}" style="margin-left: auto;margin-right: auto"
+                                                    class="btn btn-primary my-cart-btn" data-id="5"
+                                                    data-name="product 5"
+                                                    data-summary="summary 5" data-price="50"
+                                                    data-quantity="1">Add to Cart
+                                            </button>
+                                            <button style="margin-top: 10px; margin-left: auto;margin-right: auto"
+                                                    href="#" class="btn btn-dark">Details
+                                            </button>
+                                        </td>
+                                        <td th:text="${book.subCategory.category.name}"></td>
+                                        <td th:text="${book.subCategory.name}"></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -215,6 +246,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </main>
 </body>

@@ -8,8 +8,10 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.hillel.bookstore.persistence.dto.BookDTO;
+import ua.hillel.bookstore.persistence.dto.CartDTO;
 import ua.hillel.bookstore.persistence.dto.CategoryDTO;
 import ua.hillel.bookstore.rest.BookController;
+import ua.hillel.bookstore.rest.CartController;
 import ua.hillel.bookstore.rest.CategoryController;
 import ua.hillel.bookstore.rest.PublisherController;
 
@@ -26,6 +28,7 @@ public class IndexController {
     private final BookController bookController;
     private final CategoryController categoryController;
     private final PublisherController publisherController;
+    private final CartController cartController;
 
     @GetMapping
     public String index(@RequestParam(required = false, value = "search") String search,
@@ -48,6 +51,14 @@ public class IndexController {
         model.addAttribute("categories", categoryController.getCategories().getBody());
         model.addAttribute("subCategories", categoryController.getSubCategories(categoriesChosen).getBody());
         model.addAttribute("publishers", publisherController.getAll(null).getBody());
+        model.addAttribute("cartCapacity", cartController.getCapacity(1));
         return "index";
+    }
+
+    @GetMapping("/cart")
+    public String cart(Model model){
+
+        model.addAttribute("items", cartController.getCartItems(1));
+        return "cart";
     }
 }

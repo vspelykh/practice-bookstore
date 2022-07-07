@@ -56,10 +56,12 @@ public class BookController {
     }
 
     @GetMapping("/book/{id}")
-    public String bookInfo(@PathVariable("id") int id, Model model){
+    public String bookInfo(@PathVariable("id") int id, Model model) {
         ResponseEntity<BookDTO> responseBook = bookRestController.getById(id);
-        if (responseBook.getStatusCode().is2xxSuccessful()){
+        if (responseBook.getStatusCode().is2xxSuccessful()) {
             model.addAttribute("book", responseBook.getBody());
+            //TODO: print related books int info
+            model.addAttribute("related", bookRestController.getRelatedBooks(id));
         } else {
             //TODO: handling exception
         }
@@ -68,14 +70,14 @@ public class BookController {
     }
 
     @GetMapping("/cart")
-    public String cart(Model model){
+    public String cart(Model model) {
 
         model.addAttribute("items", cartAndWishlistController.getCartItems(SecurityUtil.getFakeAuthUserId()));
         return "cart";
     }
 
     @GetMapping("/wishlist")
-    public String wishlist(Model model){
+    public String wishlist(Model model) {
 
         List<WishlistItemDTO> booksFromWishlist = cartAndWishlistController.getBooksFromWishlist(SecurityUtil.getFakeAuthUserId());
         model.addAttribute("isEmpty", booksFromWishlist.isEmpty());

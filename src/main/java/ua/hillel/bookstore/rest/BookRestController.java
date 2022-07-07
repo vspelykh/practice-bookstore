@@ -15,6 +15,7 @@ import ua.hillel.bookstore.utils.BookPredicatesBuilder;
 import ua.hillel.bookstore.utils.ControllerUtils;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,5 +62,17 @@ public class BookRestController {
     @PostMapping
     public Book createOrEditBook(@RequestBody BookDTO book) {
         return service.save(book);
+    }
+
+    public List<BookDTO> getRelatedBooks(int id) {
+
+        BookDTO book = getById(id).getBody();
+        Map<BookDTO, Integer> related = new HashMap<>();
+        for (BookDTO searched : service.getAll()){
+            if (searched.isAvailable()){
+                related.put(searched, service.getMarkOfEqual(searched, Objects.requireNonNull(book)));
+            }
+        }
+        return service.getMostRelated(related);
     }
 }

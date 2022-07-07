@@ -11,6 +11,8 @@ import ua.hillel.bookstore.persistence.mapper.BookMapper;
 import ua.hillel.bookstore.persistence.repository.BookRepository;
 
 import javax.transaction.Transactional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService extends GenericQueryDSL<Book> {
@@ -49,5 +51,60 @@ public class BookService extends GenericQueryDSL<Book> {
     public Page<BookDTO> findAll(PageRequest of) {
         Page<Book> entities = bookRepository.findAll(of);
         return entities.map(mapper::toDTO);
+    }
+
+    public List<BookDTO> getAll() {
+        return bookRepository.findAll().stream().map(mapper::toDTO).collect(Collectors.toList());
+    }
+
+    public Integer getMarkOfEqual(BookDTO searched, BookDTO book) {
+        if (searched.equals(book)){
+            return 0;
+        }
+        int mark = 0;
+        if (searched.getAuthor().equals(book.getAuthor())){
+            mark+=3;
+        }
+        if (searched.getPublisher().equals(book.getPublisher())){
+            mark+=2;
+        }
+        if (searched.getSubCategory().equals(book.getSubCategory())){
+            mark+=4;
+        }
+        if (searched.getSubCategory().getCategory().equals(book.getSubCategory().getCategory())){
+            mark+=2;
+        }
+        String[] split1 = searched.getTitle().split(" ");
+        String[] split2 = book.getTitle().split(" ");
+        for (String s1 : split1){
+            for (String s2 : split2){
+                if (s1.contains(s2) || s2.contains(s1)){
+                    mark++;
+                }
+                if (s1.equals(s2)){
+                    mark+=2;
+                }
+            }
+        }
+        return mark;
+    }
+
+    public List<BookDTO> getMostRelated(Map<BookDTO, Integer> related) {
+        List<Map.Entry<BookDTO, Integer>> list = new ArrayList<>(related.entrySet());
+        list.sort(Map.Entry.comparingByValue((o1, o2) -> o2 - o1));
+
+        Map<BookDTO, Integer> result = new LinkedHashMap<>();
+        for (Map.Entry<BookDTO, Integer> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        List<BookDTO> relatedList = new LinkedList<>();
+        int i = 0;
+        while (i < 10) {
+            for (Map.Entry<BookDTO, Integer> entry : result.entrySet()) {
+                relatedList.add(entry.getKey());
+                i++;
+            }
+        }
+        return relatedList;
     }
 }

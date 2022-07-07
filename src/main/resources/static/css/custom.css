@@ -46,7 +46,6 @@
     margin-left: 0;
     margin-right: auto;
     color: white;
-    background-image: url("static/img/bestseller.jpg");
 }
 
 .img-centre {
@@ -254,5 +253,4 @@ div.dataTables_wrapper div.dataTables_filter input {
     color: #4a4a4a;
     transition: color 0.3s ease-in;
 }
-
 

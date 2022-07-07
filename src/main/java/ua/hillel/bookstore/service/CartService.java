@@ -34,7 +34,7 @@ public class CartService {
         repository.getReferenceById(userId).getItems().add(itemMapper.toEntity(item));
     }
 
-    public List<CartItemDTO> getCartItems(int id){
-        return repository.getReferenceById(id).getItems().stream().map(itemMapper::toDTO).collect(Collectors.toList());
+    public List<CartItemDTO> getCartItems(int userId){
+        return repository.getReferenceById(userId).getItems().stream().map(itemMapper::toDTO).collect(Collectors.toList());
     }
 }

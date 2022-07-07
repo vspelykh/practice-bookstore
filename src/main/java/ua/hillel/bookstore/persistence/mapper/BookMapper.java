@@ -21,6 +21,8 @@ public interface BookMapper {
     @Mapping(target = "cover", source = "entity.cover")
     @Mapping(target = "year", source = "entity.year")
     @Mapping(target = "price", source = "entity.price")
+    @Mapping(target = "description", source = "entity.description")
+    @Mapping(target = "amount", source = "entity.amount")
     @Mapping(target = "coverImageUrl", source = "entity.coverImageUrl")
     BookDTO toDTO(Book entity);
 
@@ -35,6 +37,8 @@ public interface BookMapper {
     @Mapping(target = "cover", source = "dto.cover")
     @Mapping(target = "year", source = "dto.year")
     @Mapping(target = "price", source = "dto.price")
+    @Mapping(target = "description", source = "dto.description")
+    @Mapping(target = "amount", source = "dto.amount")
     @Mapping(target = "coverImageUrl", source = "dto.coverImageUrl")
     Book toEntity(BookDTO dto);
 }

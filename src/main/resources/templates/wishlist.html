@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      lang="en" data-layout-decorate="~{fragments/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="/css/book.css">
+</head>
+<body>
+<main data-layout-fragment="content" style="padding-top: 55px">
+    <!--            table-->
+    <!--/*@thymesVar id="isEmpty" type="java.lang.Boolean"*/-->
+    <div th:if="${!isEmpty}" class="container-xl table-book-body">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8"><h2>Your <b>wishlist</b></h2></div>
+                        <div class="col-sm-4">
+                        </div>
+                        <table id="cartTable" class="table table-striped table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="10%">Cover<i></i></th>
+                                <th>Title<i></i></th>
+                                <th>Author<i></i></th>
+                                <th>Publisher<i></i></th>
+                                <th>Year<i></i></th>
+                                <th>Price<i></i></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--                                table body-->
+                            <!--/*@thymesVar id="wishlist" type="java.util.List"*/-->
+                            <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.WishlistItemDTO"*/-->
+                            <tr th:each="item: ${wishlist}">
+                                <td>
+                                    <img width="85%" height="85%" th:src="@{${item.book.coverImageUrl}}">
+                                </td>
+                                <td th:text="${item.book.title}"></td>
+                                <td th:text="${item.book.author.name}"></td>
+                                <td th:text="${item.book.publisher.name}"></td>
+                                <td th:text="${item.book.year}"></td>
+                                <td th:text="${item.book.price}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-book product-description" th:if="${isEmpty}">
+        <h1 style="margin-left: auto; margin-right: auto">Your wishlist is empty</h1>
+    </div>
+</main>
+
+</body>
+</html>

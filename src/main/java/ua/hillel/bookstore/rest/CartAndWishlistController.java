@@ -9,15 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 import ua.hillel.bookstore.persistence.dto.BookDTO;
 import ua.hillel.bookstore.persistence.dto.CartDTO;
 import ua.hillel.bookstore.persistence.dto.CartItemDTO;
+import ua.hillel.bookstore.persistence.dto.WishlistItemDTO;
+import ua.hillel.bookstore.persistence.entity.Wishlist;
 import ua.hillel.bookstore.service.CartService;
+import ua.hillel.bookstore.service.WishlistService;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class CartController {
+public class CartAndWishlistController {
 
     private final CartService cartService;
+    private final WishlistService wishlistService;
 
     //TODO: userId for getCart
     @GetMapping("/rest/cart")
@@ -32,12 +36,18 @@ public class CartController {
     }
 
     @GetMapping("/rest/cart/count")
-    public int getCapacity(int id) {
-        return cartService.getCartItems(id).size();
+    public int getCapacity(int userId) {
+        return cartService.getCartItems(userId).size();
     }
 
     @GetMapping("/rest/cart/items")
-    public List<CartItemDTO> getCartItems(int i) {
-        return cartService.getCartItems(i);
+    public List<CartItemDTO> getCartItems(int userId) {
+        return cartService.getCartItems(userId);
+    }
+
+    @GetMapping("/rest/wishlist/books")
+    public List<WishlistItemDTO> getBooksFromWishlist(int userId){
+
+        return wishlistService.getBooksFromWishlist(userId);
     }
 }

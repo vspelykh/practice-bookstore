@@ -8,15 +8,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "carts")
+@Table(name = "wishlists")
 @Getter
 @Setter
-public class Cart extends AbstractBaseEntity {
+public class Wishlist extends AbstractBaseEntity {
+
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cart")
-    private Set<CartItem> items = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "wishlist")
+    private Set<WishlistItem> wishlistItems = new java.util.LinkedHashSet<>();
 }

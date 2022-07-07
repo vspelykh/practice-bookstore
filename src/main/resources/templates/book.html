@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      lang="en" data-layout-decorate="~{fragments/layout}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+    <title th:text="${book.title}">Title</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="stylesheet" href="/css/book.css">
+</head>
+
+<body>
+<main data-layout-fragment="content" style="padding-top: 55px">
+
+    <div class="container-book basic-style">
+        <!-- Left Column / Headphones Image -->
+
+        <div class="left-column">
+            <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+            <img data-image="red" th:src="@{${book.coverImageUrl}}" alt="cover of book">
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+
+            <!-- Product Description -->
+            <div class="product-description">
+                <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+                <span th:text="${book.subCategory.category.name} + ', ' + ${book.subCategory.name}" >Category</span>
+                <h1 th:text="${book.title}">Title</h1>
+                <h3 th:text="${book.author.name}">Title</h3>
+                <p th:text="${book.description}">About book</p>
+            </div>
+
+        <!-- Product details -->
+        <div class="product-details">
+            <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+            <p th:text="'Publisher: ' + ${book.publisher.name}">Publisher</p>
+            <p th:text="'Year of publishsing: ' + ${book.year}">Year</p>
+            <p th:text="'Type of cover: ' + ${book.cover.type}">Cover</p>
+            <div class="cable-config">
+                <a th:href="@{/payment}">How to buy?</a>
+            </div>
+        </div>
+
+        <!-- Product Pricing -->
+        <div class="product-price">
+            <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+            <span th:text="${book.price} + ' grn'"></span>
+            <a th:if="${book.isAvailable()}" href="#" class="cart-btn">Add to cart</a>
+            <a th:if="${!book.isAvailable()}" href="#" class="cart-btn">Not available</a>
+            <a style="margin-left: 20px; background-color: #0a53be" href="#" class="cart-btn">Add to wishlist</a>
+        </div>
+    </div>
+    </div>
+</main>
+</body>
+</html>

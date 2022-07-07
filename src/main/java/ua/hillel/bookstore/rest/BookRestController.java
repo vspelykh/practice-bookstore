@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 @RestController
 @RequestMapping(path = "/rest/books", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-public class BookController {
+public class BookRestController {
 
     private final BookService service;
 

@@ -223,7 +223,7 @@
 
                                     <tr th:each="book: ${books}">
                                         <td>
-                                            <img width="85%" height="85%" th:src="@{${book.coverImageUrl}}">
+                                            <img width="85%" height="85%" th:src="@{${book.coverImageUrl}}" alt="title">
                                         </td>
                                         <td th:text="${book.title}"></td>
                                         <td th:text="${book.author.name}"></td>
@@ -231,15 +231,23 @@
                                         <td th:text="${book.year}"></td>
                                         <td th:text="${book.price}"></td>
                                         <td>
+                                            <a th:if="${book.isAvailable()}">
                                             <button data-th-id="${book.id}" style="margin-left: auto;margin-right: auto"
                                                     class="btn btn-primary my-cart-btn" data-id="5"
                                                     data-name="product 5"
                                                     data-summary="summary 5" data-price="50"
                                                     data-quantity="1">Add to Cart
                                             </button>
+                                            </a>
+                                            <a th:if="${!book.isAvailable()}">
+                                                <p style="color: red; margin-top: 15px" th:text="'Not available'"></p>
+                                            </a>
+                                            <a th:href="@{'/book/{id}'(id=${book.id})}">
                                             <button style="margin-top: 10px; margin-left: auto;margin-right: auto"
-                                                    href="#" class="btn btn-dark">Details
+                                                    class="btn btn-dark" onclick=""
+                                            >Details
                                             </button>
+                                            </a>
                                         </td>
                                         <td th:text="${book.subCategory.category.name}"></td>
                                         <td th:text="${book.subCategory.name}"></td>

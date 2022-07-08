@@ -9,6 +9,6 @@ public class CartItemDTO implements Serializable {
     private Integer id;
     private final CartDTO cart;
     private final BookDTO book;
-    private final int quantity;
+    private int quantity;
 
 }

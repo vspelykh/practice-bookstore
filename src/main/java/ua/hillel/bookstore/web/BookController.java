@@ -3,13 +3,14 @@ package ua.hillel.bookstore.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ua.hillel.bookstore.persistence.dto.BookDTO;
+import ua.hillel.bookstore.persistence.dto.CartItemDTO;
+import ua.hillel.bookstore.persistence.dto.UserDTO;
 import ua.hillel.bookstore.persistence.dto.WishlistItemDTO;
 import ua.hillel.bookstore.rest.BookRestController;
 import ua.hillel.bookstore.rest.CartAndWishlistController;
@@ -22,6 +23,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static ua.hillel.bookstore.utils.SecurityUtil.getFakeAuthUserId;
 
 @Controller
 @RequiredArgsConstructor
@@ -51,7 +54,8 @@ public class BookController {
         model.addAttribute("books", page);
         model.addAttribute("categories", categoryController.getCategories().getBody());
         model.addAttribute("publishers", publisherController.getAll(null).getBody());
-        model.addAttribute("cartCapacity", cartAndWishlistController.getCapacity(1));
+        model.addAttribute("cartCapacity", cartAndWishlistController.getCapacity(getFakeAuthUserId()));
+        model.addAttribute("cartSum", cartAndWishlistController.getCartSum(getFakeAuthUserId()));
         return "index";
     }
 
@@ -61,7 +65,10 @@ public class BookController {
         if (responseBook.getStatusCode().is2xxSuccessful()) {
             model.addAttribute("book", responseBook.getBody());
             //TODO: print related books int info
-            model.addAttribute("related", bookRestController.getRelatedBooks(id));
+
+            List<BookDTO> relatedBooks = bookRestController.getRelatedBooks(id);
+            model.addAttribute("related1", relatedBooks.subList(0, 5));
+            model.addAttribute("related2", relatedBooks.subList(5, 10));
         } else {
             //TODO: handling exception
         }
@@ -72,14 +79,37 @@ public class BookController {
     @GetMapping("/cart")
     public String cart(Model model) {
 
-        model.addAttribute("items", cartAndWishlistController.getCartItems(SecurityUtil.getFakeAuthUserId()));
+        model.addAttribute("isEmpty", cartAndWishlistController.getCartItems(getFakeAuthUserId()).isEmpty());
+        model.addAttribute("cartSum", cartAndWishlistController.getCartSum(getFakeAuthUserId()));
+        model.addAttribute("items", cartAndWishlistController.getCartItems(getFakeAuthUserId()));
         return "cart";
+    }
+
+    @PostMapping("/cart")
+    public String editQuantity(@ModelAttribute("id") int id, @ModelAttribute("quantity") Integer quantity,
+                               @ModelAttribute("action") String action) {
+
+        if ("edit".equals(action)) {
+            cartAndWishlistController.editQuantity(id, quantity);
+        } else if ("add".equals(action)){
+            BookDTO book = bookRestController.getById(id).getBody();
+            List<CartItemDTO> cartItems = cartAndWishlistController.getCartItems(getFakeAuthUserId());
+            for (CartItemDTO itemDTO : cartItems){
+                if (itemDTO.getBook().equals(book)){
+                    return "redirect:cart";
+                }
+            }
+            cartAndWishlistController.addItemToCart(book);
+        } else if ("delete".equals(action)){
+            cartAndWishlistController.deleteFromCart(id);
+        }
+        return "redirect:cart";
     }
 
     @GetMapping("/wishlist")
     public String wishlist(Model model) {
 
-        List<WishlistItemDTO> booksFromWishlist = cartAndWishlistController.getBooksFromWishlist(SecurityUtil.getFakeAuthUserId());
+        List<WishlistItemDTO> booksFromWishlist = cartAndWishlistController.getBooksFromWishlist(getFakeAuthUserId());
         model.addAttribute("isEmpty", booksFromWishlist.isEmpty());
         model.addAttribute("wishlist", booksFromWishlist);
         return "wishlist";

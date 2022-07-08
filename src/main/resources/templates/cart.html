@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Cart</title>
-    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="/css/book.css">
 </head>
 <body>
 <main data-layout-fragment="content" style="padding-top: 55px">
     <!--            table-->
-    <div class="container-xl table-book-body">
+    <!--/*@thymesVar id="isEmpty" type="java.lang.Boolean"*/-->
+    <div th:if="${!isEmpty}" class="container-xl table-book-body">
         <div class="table-responsive">
             <div class="table-wrapper">
                 <div class="table-title">
@@ -42,7 +43,30 @@
                                 <td th:text="${item.book.publisher.name}"></td>
                                 <td th:text="${item.book.year}"></td>
                                 <td th:text="${item.book.price}"></td>
-                                <td th:text="${item.quantity}"></td>
+                                <form name="edit-quantity" method="post" th:action="@{/cart}">
+                                    <td>
+                                        <input id="id" name="id" type="hidden" th:value="${item.id}">
+                                        <input id="action" name="action" type="hidden" th:value="edit">
+                                        <div class="form-group">
+                                            <label for="quantity">Select quantity</label>
+                                            <input style="width: 50px" required="required" type="number" id="quantity"
+                                                   name="quantity"
+                                                   th:placeholder="${item.quantity}" th:default="${item.quantity}">
+                                            <button type="submit" class="btn btn-primary">Edit</button>
+                                        </div>
+                                </form>
+                                <form name="delete" method="post" th:action="@{/cart}">
+                                    <input name="id" type="hidden" th:value="${item.id}">
+                                    <input name="action" type="hidden" th:value="delete">
+                                    <div class="form-group">
+                                        <label for="quantity"></label>
+                                        <label>
+                                            <input hidden type="number" name="quantity" th:value="0">
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -50,6 +74,15 @@
                 </div>
             </div>
         </div>
+        <div class="product-price container-book basic-style">
+            <!--/*@thymesVar id="cartSum" type="java.lang.Integer"*/-->
+            <span style="margin-left: auto" th:text="'Total sum is ' + ${cartSum} + ' grn'"></span>
+            <a style=" margin-right: auto" th:if="${cartSum!=0}" href="#" class="cart-btn">Make an order</a>
+        </div>
+        `
+    </div>
+    <div class="container-book product-description" th:if="${isEmpty}">
+        <h1 style="margin-left: auto; margin-right: auto">Your wishlist is empty</h1>
     </div>
 </main>
 </body>

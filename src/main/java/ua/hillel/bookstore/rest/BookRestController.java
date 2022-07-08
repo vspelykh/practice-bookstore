@@ -69,7 +69,7 @@ public class BookRestController {
         BookDTO book = getById(id).getBody();
         Map<BookDTO, Integer> related = new HashMap<>();
         for (BookDTO searched : service.getAll()){
-            if (searched.isAvailable()){
+            if (searched.isAvailable() && !searched.equals(book)){
                 related.put(searched, service.getMarkOfEqual(searched, Objects.requireNonNull(book)));
             }
         }

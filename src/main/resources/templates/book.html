@@ -5,8 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
     <title th:text="${book.title}">Title</title>
-    <meta name="robots" content="noindex,follow" />
+    <meta name="robots" content="noindex,follow"/>
     <link rel="stylesheet" href="/css/book.css">
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -26,32 +35,70 @@
             <!-- Product Description -->
             <div class="product-description">
                 <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
-                <span th:text="${book.subCategory.category.name} + ', ' + ${book.subCategory.name}" >Category</span>
+                <span th:text="${book.subCategory.category.name} + ', ' + ${book.subCategory.name}">Category</span>
                 <h1 th:text="${book.title}">Title</h1>
                 <h3 th:text="${book.author.name}">Title</h3>
                 <p th:text="${book.description}">About book</p>
             </div>
 
-        <!-- Product details -->
-        <div class="product-details">
-            <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
-            <p th:text="'Publisher: ' + ${book.publisher.name}">Publisher</p>
-            <p th:text="'Year of publishsing: ' + ${book.year}">Year</p>
-            <p th:text="'Type of cover: ' + ${book.cover.type}">Cover</p>
-            <div class="cable-config">
-                <a th:href="@{/payment}">How to buy?</a>
+            <!-- Product details -->
+            <div class="product-details">
+                <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+                <p th:text="'Publisher: ' + ${book.publisher.name}">Publisher</p>
+                <p th:text="'Year of publishsing: ' + ${book.year}">Year</p>
+                <p th:text="'Type of cover: ' + ${book.cover.type}">Cover</p>
+                <div class="cable-config">
+                    <a th:href="@{/payment}">How to buy?</a>
+                </div>
+            </div>
+
+            <!-- Product Pricing -->
+            <div class="product-price">
+                <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+                <span th:text="${book.price} + ' grn'"></span>
+                <form name="add-quantity" method="post" th:action="@{/cart}">
+                    <input id="id" name="id" type="hidden" th:value="${book.id}">
+                    <input id="quantity" name="quantity" type="hidden" th:value="1">
+                    <input id="action" name="action" type="hidden" th:value="'add'">
+                    <button type="submit" th:if="${book.isAvailable()}" class="cart-btn">Add to cart</button>
+                </form>
+                <a th:if="${!book.isAvailable()}" href="#" class="cart-btn">Not available</a>
+                <a style="margin-left: 20px; background-color: #0a53be" href="#" class="cart-btn">Add to wishlist</a>
             </div>
         </div>
-
-        <!-- Product Pricing -->
-        <div class="product-price">
-            <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
-            <span th:text="${book.price} + ' grn'"></span>
-            <a th:if="${book.isAvailable()}" href="#" class="cart-btn">Add to cart</a>
-            <a th:if="${!book.isAvailable()}" href="#" class="cart-btn">Not available</a>
-            <a style="margin-left: 20px; background-color: #0a53be" href="#" class="cart-btn">Add to wishlist</a>
-        </div>
     </div>
+    <div class="container-book basic-style cable-config product-description">
+        <h3 style="margin-right: auto; margin-left: auto">Recommendations</h3>
+    </div>
+
+    <!--/*@thymesVar id="related1" type="java.util.List"*/-->
+    <!--/*@thymesVar id="related2" type="java.util.List"*/-->
+    <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+    <div style="margin-left: auto; margin-right: auto" class="container-xxl basic-style product-description">
+        <div class="row" style="height: 450px">
+            <div th:each="book : ${related1}" class="col" style="max-height: 1000px">
+                <img style="height: 20%; display: block; margin-left: auto;margin-right: auto;"
+                     th:src="@{${book.coverImageUrl}}"
+                     alt="cover of book">
+                <p style="text-align: center" th:text="${book.title}"></p>
+                <p style="text-align: center" th:text="${book.author.name}"></p>
+                <div style="text-align:center">
+                    <a th:href="@{'/book/{id}'(id=${book.id})}" class="cart-btn">Details</a>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 450px">
+            <div th:each="book : ${related2}" class="col" style="max-height: 1000px">
+                <img style="height: 20%; display: block; margin-left: auto;margin-right: auto;"
+                     th:src="@{${book.coverImageUrl}}"
+                     alt="cover of book">
+                <p style="text-align: center" th:text="${book.title}"></p>
+                <p style="text-align: center" th:text="${book.author.name}"></p>
+                <div style="text-align:center">
+                    <a th:href="@{'/book/{id}'(id=${book.id})}" class="cart-btn">Details</a>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 </body>

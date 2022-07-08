@@ -4,15 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ua.hillel.bookstore.persistence.dto.BookDTO;
-import ua.hillel.bookstore.persistence.dto.CartDTO;
-import ua.hillel.bookstore.persistence.dto.CartItemDTO;
-import ua.hillel.bookstore.persistence.dto.WishlistItemDTO;
-import ua.hillel.bookstore.persistence.entity.Wishlist;
+import ua.hillel.bookstore.persistence.dto.*;
 import ua.hillel.bookstore.service.CartService;
 import ua.hillel.bookstore.service.WishlistService;
+import ua.hillel.bookstore.utils.SecurityUtil;
 
 import java.util.List;
 
@@ -30,9 +26,10 @@ public class CartAndWishlistController {
         return new ResponseEntity<>(cartService.get(id), HttpStatus.OK);
     }
 
-    @GetMapping("/addToCart")
-    public void addToCart(@RequestParam("book") BookDTO book, @RequestParam int quantity) {
-        cartService.addToCart(1, new CartItemDTO(null, book, quantity));
+    @GetMapping("/rest/cart/editQuantity")
+    public void editQuantity(int id, int quantity){
+
+        cartService.editQuantity(id, quantity);
     }
 
     @GetMapping("/rest/cart/count")
@@ -49,5 +46,22 @@ public class CartAndWishlistController {
     public List<WishlistItemDTO> getBooksFromWishlist(int userId){
 
         return wishlistService.getBooksFromWishlist(userId);
+    }
+
+    public int getCartSum(int userId) {
+        int sum = 0;
+        for (CartItemDTO item : cartService.getCartItems(userId)){
+            sum += (item.getBook().getPrice().intValue() * item.getQuantity());
+        }
+        return sum;
+    }
+
+    public void addItemToCart(BookDTO book) {
+        cartService.addToCart(SecurityUtil.getFakeAuthUserId(), book);
+    }
+
+    public void deleteFromCart(int id) {
+
+        cartService.deleteCartItem(id);
     }
 }

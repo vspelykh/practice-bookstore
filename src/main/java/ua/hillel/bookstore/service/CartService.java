@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import ua.hillel.bookstore.persistence.dto.BookDTO;
 import ua.hillel.bookstore.persistence.dto.CartDTO;
 import ua.hillel.bookstore.persistence.dto.CartItemDTO;
+import ua.hillel.bookstore.persistence.entity.Cart;
 import ua.hillel.bookstore.persistence.entity.CartItem;
-import ua.hillel.bookstore.persistence.mapper.BookMapper;
 import ua.hillel.bookstore.persistence.mapper.CartItemMapper;
 import ua.hillel.bookstore.persistence.mapper.CartMapper;
 import ua.hillel.bookstore.persistence.repository.CartItemRepository;
@@ -24,12 +24,23 @@ public class CartService {
     private final CartItemMapper itemMapper;
     private final CartMapper mapper;
 
-    public CartDTO get(Integer id) {
+    public CartDTO getCart(Integer id) {
         return mapper.toDTO(repository.getReferenceById(id));
     }
 
+    public CartItemDTO getCartItem(Integer id) {
+        return itemMapper.toDTO(itemRepository.getReferenceById(id));
+    }
+
+    public List<CartItemDTO> getCartItems(Integer cartId) {
+        return repository.getReferenceById(cartId).getItems().stream()
+                .map(itemMapper::toDTO).collect(Collectors.toList());
+    }
+
     public void clearCart(Integer id) {
-        repository.getReferenceById(id).getItems().clear();
+        Cart cart = repository.getReferenceById(id);
+        cart.getItems().clear();
+        repository.save(cart);
     }
 
     public void addToCart(Integer cartId, BookDTO bookDTO) {
@@ -37,10 +48,6 @@ public class CartService {
         item.setQuantity(1);
         itemRepository.save(item);
 
-    }
-
-    public List<CartItemDTO> getCartItems(int userId){
-        return repository.getReferenceById(userId).getItems().stream().map(itemMapper::toDTO).collect(Collectors.toList());
     }
 
     public void editQuantity(int id, int quantity) {

@@ -63,7 +63,14 @@
                     <button type="submit" th:if="${book.isAvailable()}" class="cart-btn">Add to cart</button>
                 </form>
                 <a th:if="${!book.isAvailable()}" href="#" class="cart-btn">Not available</a>
-                <a style="margin-left: 20px; background-color: #0a53be" href="#" class="cart-btn">Add to wishlist</a>
+                <form name="add-wishlist" method="post" th:action="@{/wishlist}">
+                    <input name="id" type="hidden" th:value="${book.id}">
+                    <input name="action" type="hidden" th:value="'add'">
+                    <button type="submit" style="margin-left: 20px; background-color: #0a53be" href="#"
+                            class="cart-btn">Add to wishlist</button>
+                </form>
+
+
             </div>
         </div>
     </div>

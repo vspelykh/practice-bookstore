@@ -232,27 +232,37 @@
                                         <td th:text="${book.year}"></td>
                                         <td th:text="${book.price}"></td>
                                         <td>
-
-                                            <form name="add-quantity" method="post" th:action="@{/cart}">
-                                                <a th:if="${book.isAvailable()}">
-                                                    <input id="id" name="id" type="hidden" th:value="${book.id}">
-                                                    <input id="quantity" name="quantity" type="hidden" th:value="1">
-                                                    <input id="action" name="action" type="hidden" th:value="'add'">
+                                            <div class="list-group">
+                                                <form name="add-quantity" method="post" th:action="@{/cart}">
+                                                    <a th:if="${book.isAvailable()}">
+                                                        <input id="id" name="id" type="hidden" th:value="${book.id}">
+                                                        <input id="quantity" name="quantity" type="hidden" th:value="1">
+                                                        <input id="action" name="action" type="hidden" th:value="'add'">
+                                                        <button type="submit" th:if="${book.isAvailable()}"
+                                                                style="margin-top: 10px"
+                                                                class="btn btn-primary my-cart-btn">Add to cart
+                                                        </button>
+                                                    </a>
+                                                </form>
+                                                <a th:if="${!book.isAvailable()}">
+                                                    <p style="color: red; margin-top: 15px"
+                                                       th:text="'Not available'"></p>
+                                                </a>
+                                                <form name="add-wishlist" method="post" th:action="@{/wishlist}">
+                                                    <input name="id" type="hidden" th:value="${book.id}">
+                                                    <input name="action" type="hidden" th:value="'add'">
                                                     <button type="submit" th:if="${book.isAvailable()}"
-                                                            style="margin-left: auto;margin-right: auto"
-                                                            class="btn btn-primary my-cart-btn">Add to cart
+                                                            style="margin-top: 10px"
+                                                            class="btn btn-success my-cart-btn">To wishlist
+                                                    </button>
+                                                </form>
+                                                <a th:href="@{'/book/{id}'(id=${book.id})}">
+                                                    <button style="margin-top: 10px"
+                                                            class="btn btn-dark" onclick=""
+                                                    >Details
                                                     </button>
                                                 </a>
-                                            </form>
-                                            <a th:if="${!book.isAvailable()}">
-                                                <p style="color: red; margin-top: 15px" th:text="'Not available'"></p>
-                                            </a>
-                                            <a th:href="@{'/book/{id}'(id=${book.id})}">
-                                                <button style="margin-top: 10px; margin-left: auto;margin-right: auto"
-                                                        class="btn btn-dark" onclick=""
-                                                >Details
-                                                </button>
-                                            </a>
+                                            </div>
                                         </td>
                                         <td th:text="${book.subCategory.category.name}"></td>
                                         <td th:text="${book.subCategory.name}"></td>

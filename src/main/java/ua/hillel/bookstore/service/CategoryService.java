@@ -1,14 +1,8 @@
 package ua.hillel.bookstore.service;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ua.hillel.bookstore.persistence.dto.BookDTO;
 import ua.hillel.bookstore.persistence.dto.CategoryDTO;
-import ua.hillel.bookstore.persistence.entity.Book;
 import ua.hillel.bookstore.persistence.entity.Category;
 import ua.hillel.bookstore.persistence.mapper.CategoryMapper;
 import ua.hillel.bookstore.persistence.repository.CategoryRepository;

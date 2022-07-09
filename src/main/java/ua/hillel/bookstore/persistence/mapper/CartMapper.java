@@ -2,9 +2,7 @@ package ua.hillel.bookstore.persistence.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ua.hillel.bookstore.persistence.dto.AuthorDTO;
 import ua.hillel.bookstore.persistence.dto.CartDTO;
-import ua.hillel.bookstore.persistence.entity.Author;
 import ua.hillel.bookstore.persistence.entity.Cart;
 import ua.hillel.bookstore.persistence.mapper.base.BaseMapperConfig;
 

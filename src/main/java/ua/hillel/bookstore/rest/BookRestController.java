@@ -15,18 +15,21 @@ import ua.hillel.bookstore.utils.BookPredicatesBuilder;
 import ua.hillel.bookstore.utils.ControllerUtils;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RestController
-@RequestMapping(path = "/rest/books", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/books", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class BookRestController {
 
     private final BookService service;
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/allQueryDSL")
     public ResponseEntity<Page<BookDTO>> search(HttpServletResponse response, String search, Integer pageNumber,
                                                 Integer pageSize, String sortBy
     ) {
@@ -45,6 +48,11 @@ public class BookRestController {
         }
         ControllerUtils.addPageHeaders(response, bookDTOPage);
         return new ResponseEntity<>(bookDTOPage, HttpStatus.OK);
+    }
+
+    @GetMapping("all")
+    public ResponseEntity<List<BookDTO>> getAll(){
+        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

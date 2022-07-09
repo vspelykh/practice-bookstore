@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.hillel.bookstore.persistence.dto.BookDTO;
-import ua.hillel.bookstore.persistence.dto.WishlistDTO;
 import ua.hillel.bookstore.persistence.dto.WishlistItemDTO;
 import ua.hillel.bookstore.service.WishlistService;
 

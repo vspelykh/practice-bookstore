@@ -49,6 +49,7 @@ public class BookController {
         model.addAttribute("size", pageSize);
         model.addAttribute("books", page);
         model.addAttribute("categories", categoryController.getCategories().getBody());
+        model.addAttribute("subCategories", categoryController.getSubCategories(null).getBody());
         model.addAttribute("publishers", publisherController.getAll(null).getBody());
         model.addAttribute("cartCapacity", cartController.getCapacity());
         model.addAttribute("cartSum", cartController.getCartSum());
@@ -58,7 +59,8 @@ public class BookController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("books", bookRestController.getAll().getBody());
-        model.addAttribute("categories", categoryController.getCategories().getBody());
+        model.addAttribute("subCategories", categoryController.getSubCategories(null).getBody());
+        model.addAttribute( "categories", categoryController.getCategories().getBody());
         model.addAttribute("publishers", publisherController.getAll(null).getBody());
         model.addAttribute("cartCapacity", cartController.getCapacity());
         model.addAttribute("cartSum", cartController.getCartSum());

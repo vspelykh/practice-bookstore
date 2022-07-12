@@ -12,8 +12,8 @@ import javax.persistence.*;
 public class WishlistItem extends AbstractBaseEntity {
 
     @ManyToOne
-    @JoinColumn(name = "wishlist_id")
-    private Wishlist wishlist;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToOne
     @JoinColumn(name = "book_id")

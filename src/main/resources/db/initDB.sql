@@ -1,6 +1,5 @@
 DROP TABLE IF EXISTS cart_items;
 DROP TABLE IF EXISTS wishlist_items;
-DROP TABLE IF EXISTS wishlists;
 DROP TABLE IF EXISTS carts;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS books;
@@ -86,12 +85,6 @@ CREATE TABLE carts
     FOREIGN KEY (user_id) REFERENCES users ON DELETE CASCADE
 );
 
-CREATE TABLE wishlists
-(
-    id      SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users ON DELETE CASCADE
-);
 
 CREATE TABLE cart_items
 (
@@ -107,9 +100,9 @@ CREATE TABLE wishlist_items
 (
     id          SERIAL PRIMARY KEY,
     book_id     INTEGER NOT NULL,
-    wishlist_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
     FOREIGN KEY (book_id) REFERENCES books ON DELETE CASCADE,
-    FOREIGN KEY (wishlist_id) REFERENCES wishlists ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users ON DELETE CASCADE
 );
 
 INSERT INTO categories (category)
@@ -215,6 +208,4 @@ INSERT INTO cart_items (cart_id, book_id, quantity)
 VALUES (1, 2, 3),
        (1, 5, 4);
 
-INSERT INTO wishlists
-VALUES (1, 1);
 

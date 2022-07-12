@@ -5,7 +5,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.hillel.bookstore.persistence.entity.WishlistItem;
 
+import java.util.List;
+
 @Repository
 @Transactional(readOnly = true)
 public interface WishlistItemRepository extends JpaRepository<WishlistItem, Integer> {
+
+    List<WishlistItem> findAllByUserId(int userId);
+
+    void deleteAllByUserId(int userId);
 }

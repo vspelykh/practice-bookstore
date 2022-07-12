@@ -7,6 +7,6 @@ import java.io.Serializable;
 @Data
 public class WishlistItemDTO implements Serializable {
     private Integer id;
-    private final WishlistDTO wishlist;
+    private final UserDTO user;
     private final BookDTO book;
 }

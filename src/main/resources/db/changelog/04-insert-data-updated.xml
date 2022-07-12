@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="02-01" author="Vladyslav Pelykh">
+        <insert tableName="categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category" value="Health"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category" value="Business"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category" value="Computing"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category" value="Romance"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category" value="Religion"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category" value="Sport"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category" value="Fantasy"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category" value="Thriller"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-02" author="Vladyslav Pelykh">
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="1"/>
+            <column name="sub_category" value="Medicine"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="1"/>
+            <column name="sub_category" value="Animals"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="2"/>
+            <column name="sub_category" value="Sales"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="2"/>
+            <column name="sub_category" value="Leadership"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="3"/>
+            <column name="sub_category" value="Math"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="3"/>
+            <column name="sub_category" value="Physics"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="4"/>
+            <column name="sub_category" value="Historical"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="4"/>
+            <column name="sub_category" value="Romantic"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="5"/>
+            <column name="sub_category" value="Modern"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="5"/>
+            <column name="sub_category" value="Ancient"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="6"/>
+            <column name="sub_category" value="Football"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="6"/>
+            <column name="sub_category" value="Tennis"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="7"/>
+            <column name="sub_category" value="Low"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="7"/>
+            <column name="sub_category" value="Magic"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="8"/>
+            <column name="sub_category" value="Crime"/>
+        </insert>
+        <insert tableName="sub_categories">
+            <column name="id" autoIncrement="true"/>
+            <column name="category_id" valueNumeric="8"/>
+            <column name="sub_category" value="Psychological"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-03" author="Vladyslav Pelykh">
+        <insert tableName="publishers">
+            <column name="id" autoIncrement="true"/>
+            <column name="publisher" value="Ranok Publishing House Ltd."/>
+        </insert>
+        <insert tableName="publishers">
+            <column name="id" autoIncrement="true"/>
+            <column name="publisher" value="Svichado Publishers Ltd."/>
+        </insert>
+        <insert tableName="publishers">
+            <column name="id" autoIncrement="true"/>
+            <column name="publisher" value="Znannia Publishing House"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-04" author="Vladyslav Pelykh">
+        <insert tableName="authors">
+            <column name="id" autoIncrement="true"/>
+            <column name="author" value="Samuel Shem"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" autoIncrement="true"/>
+            <column name="author" value="Jerome Groopman"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" autoIncrement="true"/>
+            <column name="author" value="Emma Jane Unsworth"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" autoIncrement="true"/>
+            <column name="author" value="John Brooks"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" autoIncrement="true"/>
+            <column name="author" value="Brené Brown"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" autoIncrement="true"/>
+            <column name="author" value="Agatha Christie"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" autoIncrement="true"/>
+            <column name="author" value="Sir Arthur Conan Doyle"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-05" author="Vladyslav Pelykh">
+        <insert tableName="languages">
+            <column name="id" autoIncrement="true"/>
+            <column name="language" value="Ukrainian"/>
+        </insert>
+        <insert tableName="languages">
+            <column name="id" autoIncrement="true"/>
+            <column name="language" value="English"/>
+        </insert>
+        <insert tableName="languages">
+            <column name="id" autoIncrement="true"/>
+            <column name="language" value="Italian"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-06" author="Vladyslav Pelykh">
+        <insert tableName="covers">
+            <column name="id" autoIncrement="true"/>
+            <column name="type" value="Hard"/>
+        </insert>
+        <insert tableName="covers">
+            <column name="id" autoIncrement="true"/>
+            <column name="type" value="Soft"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02-07" author="Vladyslav Pelykh">
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" valueNumeric="11"/>
+            <column name="title" value="Morphology of Humans"/>
+            <column name="author_id" valueNumeric="3"/>
+            <column name="publisher_id" valueNumeric="1"/>
+            <column name="pages" valueNumeric="700"/>
+            <column name="sub_category_id" valueNumeric="1"/>
+            <column name="language_id" valueNumeric="1"/>
+            <column name="cover_id" valueNumeric="2"/>
+            <column name="year_of_publishing" valueNumeric="2015"/>
+            <column name="price" valueNumeric="500"/>
+            <column name="cover_image_url" value="https://images-na.ssl-images-amazon.com/images/I/51XDxaU7GqL._SX326_BO1,204,203,200_.jpg"/>
+            <column name="amount" value="120"/>
+            <column name="description" value="This work has been selected by scholars as being culturally important, and is part of the knowledge base of civilization as we know it. This work was reproduced from the original artifact, and remains as true to the original work as possible. Therefore, you will see the original copyright references, library stamps (as most of these works have been housed in our most important libraries around the world), and other notations in the work.This work is in the public domain in the United States of America, and possibly other nations."/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" valueNumeric="12"/>
+            <column name="title" value="Outliers: The Story of Success"/>
+            <column name="author_id" valueNumeric="4"/>
+            <column name="publisher_id" valueNumeric="3"/>
+            <column name="pages" valueNumeric="250"/>
+            <column name="sub_category_id" valueNumeric="5"/>
+            <column name="language_id" valueNumeric="2"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year_of_publishing" valueNumeric="2020"/>
+            <column name="price" valueNumeric="99"/>
+            <column name="cover_image_url" value="https://img.yakaboo.ua/media/catalog/product/cache/1/image/398x565/31b681157c4c1a5551b0db4896e7972f/9/7/9780141043029-2.jpg"/>
+            <column name="amount" value="60"/>
+            <column name="description" value="In this stunning new book, Malcolm Gladwell takes us on an intellectual journey through the world of outliers -- the best and the brightest, the most famous and the most successful. He asks the question: what makes high-achievers different? His answer is that we pay too much attention to what successful people are like, and too little attention to where they are from: that is, their culture, their family, their generation, and the idiosyncratic experiences of their upbringing. Along the way he explains the secrets of software billionaires, what it takes to be a great soccer player, why Asians are good at math, and what made the Beatles the greatest rock band. Brilliant and entertaining, Outliers is a landmark work that will simultaneously delight and illuminate"/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" valueNumeric="13"/>
+            <column name="title" value="It Ends With Us"/>
+            <column name="author_id" valueNumeric="6"/>
+            <column name="publisher_id" valueNumeric="2"/>
+            <column name="pages" valueNumeric="450"/>
+            <column name="sub_category_id" valueNumeric="8"/>
+            <column name="language_id" valueNumeric="1"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year_of_publishing" valueNumeric="2010"/>
+            <column name="price" valueNumeric="250"/>
+            <column name="cover_image_url" value="https://img.yakaboo.ua/media/catalog/product/cache/1/image/398x565/31b681157c4c1a5551b0db4896e7972f/8/1/817vqet828l.jpg"/>
+            <column name="amount" value="150"/>
+            <column name="description" value="It Ends With Us is the story of Lily who witnessed her mother getting abused by her father all her life and feeling helpless to do anything about it. Determined to live her life on her terms, she moves to Boston and it is here that she meets Dr. Ryle Kincaid."/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" valueNumeric="14"/>
+            <column name="title" value="The Confessions"/>
+            <column name="author_id" valueNumeric="5"/>
+            <column name="publisher_id" valueNumeric="3"/>
+            <column name="pages" valueNumeric="550"/>
+            <column name="sub_category_id" valueNumeric="5"/>
+            <column name="language_id" valueNumeric="2"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year_of_publishing" valueNumeric="2009"/>
+            <column name="price" valueNumeric="350"/>
+            <column name="cover_image_url" value="https://images-na.ssl-images-amazon.com/images/I/71p8O18Y3NL.jpg"/>
+            <column name="amount" value="123"/>
+            <column name="description" value="The Confession is a 2010 legal thriller novel by John Grisham, his second novel to be published in 2010 (the previous was Theodore Boone: Kid Lawyer). The novel is about the murder of a high school cheerleader and how an innocent man was arrested for it."/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" valueNumeric="15"/>
+            <column name="title" value="Mohawk Saint: Catherine Tekakwitha and the Jesuits"/>
+            <column name="author_id" valueNumeric="5"/>
+            <column name="publisher_id" valueNumeric="3"/>
+            <column name="pages" valueNumeric="510"/>
+            <column name="sub_category_id" valueNumeric="6"/>
+            <column name="language_id" valueNumeric="2"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year_of_publishing" valueNumeric="2009"/>
+            <column name="price" valueNumeric="350"/>
+            <column name="cover_image_url" value="https://images-na.ssl-images-amazon.com/images/I/51z3ttFOOdL._SX331_BO1,204,203,200_.jpg"/>
+            <column name="amount" value="0"/>
+            <column name="description" value="On October 21, 2012, Pope Benedict XVI canonized Saint Kateri Tekakwitha as the first Native North American saint. Mohawk Saint is a work of history that situates her remarkable life in its seventeenth century setting, a time of wars, epidemics, and cultural transformations for the Indian
+peoples of the northeast. The daughter of a Algonquin mother and an Iroquois father, Catherine/Saint Kateri Tekakwitha (1656-1680) has become known over the centuries as a Catholic convert so holy that, almost immediately upon her death, she became the object of a cult. Today she is revered as a
+patron saint by Native Americans and the patroness of ecology and the environment by Catholics more generally, the first Native North American proposed for sainthood."/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" valueNumeric="16"/>
+            <column name="title" value="Moneyball: The Art of Winning"/>
+            <column name="author_id" valueNumeric="1"/>
+            <column name="publisher_id" valueNumeric="3"/>
+            <column name="pages" valueNumeric="690"/>
+            <column name="sub_category_id" valueNumeric="11"/>
+            <column name="language_id" valueNumeric="2"/>
+            <column name="cover_id" valueNumeric="2"/>
+            <column name="year_of_publishing" valueNumeric="2000"/>
+            <column name="price" valueNumeric="1999"/>
+            <column name="cover_image_url" value="https://images-na.ssl-images-amazon.com/images/I/41muYYGwiOL._SX331_BO1,204,203,200_.jpg"/>
+            <column name="amount" value="10"/>
+            <column name="description" value="Moneyball is a quest for the secret of success in baseball. In a narrative full of fabulous characters and brilliant excursions into the unexpected, Michael Lewis follows the low-budget Oakland A''s, visionary general manager Billy Beane, and the strange brotherhood of amateur baseball theorists."/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" valueNumeric="17"/>
+            <column name="title" value="The Body in the Library: A Puzzle"/>
+            <column name="author_id" valueNumeric="6"/>
+            <column name="publisher_id" valueNumeric="3"/>
+            <column name="pages" valueNumeric="789"/>
+            <column name="sub_category_id" valueNumeric="16"/>
+            <column name="language_id" valueNumeric="2"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year_of_publishing" valueNumeric="1970"/>
+            <column name="price" valueNumeric="2000"/>
+            <column name="cover_image_url" value="https://m.media-amazon.com/images/I/51VQGWGQHSL._AC_SY450_.jpg"/>
+            <column name="amount" value="123"/>
+            <column name="description" value="Read the story and assemble the puzzle (not the same as the picture shown), then using the clues in the booklet and the finished puzzle - work out how Miss Marple solved the crime!"/>
+        </insert>
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" valueNumeric="18"/>
+            <column name="title" value="The Silent Patient"/>
+            <column name="author_id" valueNumeric="7"/>
+            <column name="publisher_id" valueNumeric="1"/>
+            <column name="pages" valueNumeric="550"/>
+            <column name="sub_category_id" valueNumeric="15"/>
+            <column name="language_id" valueNumeric="1"/>
+            <column name="cover_id" valueNumeric="1"/>
+            <column name="year_of_publishing" valueNumeric="1995"/>
+            <column name="price" valueNumeric="666"/>
+            <column name="cover_image_url" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRFe_nR8cUhkckk_U_hdIHGQQhMPVp84bvL7eRVV8RL9MF_jEo5"/>
+            <column name="amount" value="45"/>
+            <column name="description" value="Alicia Berenson’s life is seemingly perfect. A famous painter married to an in-demand fashion photographer, she lives in a grand house with big windows overlooking a park in one of London’s most desirable areas. One evening her husband Gabriel returns home late from a fashion shoot, and Alicia shoots him five times in the face, and then never speaks another word.
+Alicia’s refusal to talk, or give any kind of explanation, turns a domestic tragedy into something far grander, a mystery that captures the public imagination and casts Alicia into notoriety. The price of her art skyrockets, and she, the silent patient, is hidden away from the tabloids and spotlight at the Grove, a secure forensic unit in North London."/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" value="19"/>
+            <column name="title" value="The Seven Husbands of Evelyn Hugo"/>
+            <column name="author_id" value="1"/>
+            <column name="publisher_id" value="2"/>
+            <column name="pages" value="456"/>
+            <column name="sub_category_id" value="1"/>
+            <column name="language_id" value="1"/>
+            <column name="cover_id" value="1"/>
+            <column name="year_of_publishing" value="1999"/>
+            <column name="price" value="250"/>
+            <column name="cover_image_url" value="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1498169036l/32620332._SY475_.jpg"/>
+            <column name="amount" value="250"/>
+            <column name="description" value="Aging and reclusive Hollywood movie icon Evelyn Hugo is finally ready to tell the truth about her glamorous and scandalous life. But when she chooses unknown magazine reporter Monique Grant for the job, no one is more astounded than Monique herself. Why her? Why now?
+
+Monique is not exactly on top of the world. Her husband has left her, and her professional life is going nowhere. Regardless of why Evelyn has selected her to write her biography, Monique is determined to use this opportunity to jumpstart her career.
+
+Summoned to Evelyn’s luxurious apartment, Monique listens in fascination as the actress tells her story. From making her way to Los Angeles in the 1950s to her decision to leave show business in the ‘80s, and, of course, the seven husbands along the way, Evelyn unspools a tale of ruthless ambition, unexpected friendship, and a great forbidden love. Monique begins to feel a very real connection to the legendary star, but as Evelyn’s story near its conclusion, it becomes clear that her life intersects with Monique’s own in tragic and irreversible ways."/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" value="20"/>
+            <column name="title" value="Ugly Love"/>
+            <column name="author_id" value="2"/>
+            <column name="publisher_id" value="2"/>
+            <column name="pages" value="678"/>
+            <column name="sub_category_id" value="2"/>
+            <column name="language_id" value="2"/>
+            <column name="cover_id" value="2"/>
+            <column name="year_of_publishing" value="2010"/>
+            <column name="price" value="123"/>
+            <column name="cover_image_url" value="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1632597571l/17788401._SY475_.jpg"/>
+            <column name="amount" value="10"/>
+            <column name="description" value="When Tate Collins meets airline pilot Miles Archer, she knows it isn’t love at first sight. They wouldn’t even go so far as to consider themselves friends. The only thing Tate and Miles have in common is an undeniable mutual attraction. Once their desires are out in the open, they realize they have the perfect set-up. He doesn’t want love, she doesn’t have time for love, so that just leaves the sex. Their arrangement could be surprisingly seamless, as long as Tate can stick to the only two rules Miles has for her.
+
+Never ask about the past.
+Don’t expect a future.
+
+They think they can handle it, but realize almost immediately they can’t handle it at all.
+
+Hearts get infiltrated.
+Promises get broken.
+Rules get shattered.
+Love gets ugly."/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" value="21"/>
+            <column name="title" value="The Unhoneymooners"/>
+            <column name="author_id" value="3"/>
+            <column name="publisher_id" value="3"/>
+            <column name="pages" value="547"/>
+            <column name="sub_category_id" value="3"/>
+            <column name="language_id" value="3"/>
+            <column name="cover_id" value="1"/>
+            <column name="year_of_publishing" value="2020"/>
+            <column name="price" value="450"/>
+            <column name="cover_image_url" value="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1548201335l/42201431.jpg"/>
+            <column name="amount" value="20"/>
+            <column name="description" value="Olive is always unlucky: in her career, in love, in…well, everything. Her identical twin sister Ami, on the other hand, is probably the luckiest person in the world. Her meet-cute with her fiancé is something out of a romantic comedy (gag) and she’s managed to finance her entire wedding by winning a series of Internet contests (double gag). Worst of all, she’s forcing Olive to spend the day with her sworn enemy, Ethan, who just happens to be the best man.
+
+Olive braces herself to get through 24 hours of wedding hell before she can return to her comfortable, unlucky life. But when the entire wedding party gets food poisoning from eating bad shellfish, the only people who aren’t affected are Olive and Ethan. And now there’s an all-expenses-paid honeymoon in Hawaii up for grabs.
+
+Putting their mutual hatred aside for the sake of a free vacation, Olive and Ethan head for paradise, determined to avoid each other at all costs. But when Olive runs into her future boss, the little white lie she tells him is suddenly at risk to become a whole lot bigger. She and Ethan now have to pretend to be loving newlyweds, and her luck seems worse than ever. But the weird thing is that she doesn’t mind playing pretend. In fact, she feels kind of... lucky.
+"/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" value="22"/>
+            <column name="title" value="The Love Hypothesis"/>
+            <column name="author_id" value="4"/>
+            <column name="publisher_id" value="1"/>
+            <column name="pages" value="123"/>
+            <column name="sub_category_id" value="4"/>
+            <column name="language_id" value="1"/>
+            <column name="cover_id" value="1"/>
+            <column name="year_of_publishing" value="2010"/>
+            <column name="price" value="120"/>
+            <column name="cover_image_url" value="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1611937942l/56732449.jpg"/>
+            <column name="amount" value="11"/>
+            <column name="description" value="As a third-year Ph.D. candidate, Olive Smith doesn't believe in lasting romantic relationships--but her best friend does, and that's what got her into this situation. Convincing Anh that Olive is dating and well on her way to a happily ever after was always going to take more than hand-wavy Jedi mind tricks: Scientists require proof. So, like any self-respecting biologist, Olive panics and kisses the first man she sees.
+
+That man is none other than Adam Carlsen, a young hotshot professor--and well-known ass. Which is why Olive is positively floored when Stanford's reigning lab tyrant agrees to keep her charade a secret and be her fake boyfriend. But when a big science conference goes haywire, putting Olive's career on the Bunsen burner, Adam surprises her again with his unyielding support and even more unyielding... six-pack abs.
+
+Suddenly their little experiment feels dangerously close to combustion. And Olive discovers that the only thing more complicated than a hypothesis on love is putting her own heart under the microscope."/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" value="23"/>
+            <column name="title" value="Just Last Night"/>
+            <column name="author_id" value="5"/>
+            <column name="publisher_id" value="2"/>
+            <column name="pages" value="777"/>
+            <column name="sub_category_id" value="6"/>
+            <column name="language_id" value="1"/>
+            <column name="cover_id" value="2"/>
+            <column name="year_of_publishing" value="1999"/>
+            <column name="price" value="350"/>
+            <column name="cover_image_url" value="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1606106948l/54870201.jpg"/>
+            <column name="amount" value="19"/>
+            <column name="description" value="Eve, Justin, Susie, and Ed have been friends since they were teenagers. Now in their thirties, the four are as close as ever, Thursday pub trivia night is sacred, and Eve is still secretly in love with Ed. Maybe she should have moved on by now, but she can’t stop thinking about what could have been. And she knows Ed still thinks about it, too.
+
+But then, in an instant, their lives are changed forever.
+
+In the aftermath, Eve’s world is upended. As stunning secrets are revealed, she begins to wonder if she really knew her friends as well as she thought. And when someone from the past comes back into her life, Eve’s future veers in a surprising new direction...
+
+They say every love story starts with a single moment. What if it was just last night? "/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" value="24"/>
+            <column name="title" value="The Therapist"/>
+            <column name="author_id" value="7"/>
+            <column name="publisher_id" value="2"/>
+            <column name="pages" value="765"/>
+            <column name="sub_category_id" value="10"/>
+            <column name="language_id" value="1"/>
+            <column name="cover_id" value="1"/>
+            <column name="year_of_publishing" value="2005"/>
+            <column name="price" value="450"/>
+            <column name="cover_image_url" value="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1604854806l/54860390.jpg"/>
+            <column name="amount" value="11"/>
+            <column name="description" value="The multimillion-copy New York Times bestselling author B.A. Paris returns to her heartland of gripping psychological suspense in The Therapist--a powerful tale of a house that holds a shocking secret.
+
+When Alice and Leo move into a newly renovated house in The Circle, a gated community of exclusive houses, it is everything they’ve dreamed of. But appearances can be deceptive…
+
+As Alice is getting to know her neighbours, she discovers a devastating secret about her new home, and begins to feel a strong connection with Nina, the therapist who lived there before.
+
+Alice becomes obsessed with trying to piece together what happened two years before. But no one wants to talk about it. Her neighbors are keeping secrets and things are not as perfect as they seem…"/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" value="25"/>
+            <column name="title" value="Akin"/>
+            <column name="author_id" value="7"/>
+            <column name="publisher_id" value="3"/>
+            <column name="pages" value="457"/>
+            <column name="sub_category_id" value="12"/>
+            <column name="language_id" value="2"/>
+            <column name="cover_id" value="2"/>
+            <column name="year_of_publishing" value="2010"/>
+            <column name="price" value="600"/>
+            <column name="cover_image_url" value="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1567137138l/43209291.jpg"/>
+            <column name="amount" value="23"/>
+            <column name="description" value="A retired New York professor's life is thrown into chaos when he takes a young great-nephew to the French Riviera, in hopes of uncovering his own mother's wartime secrets in the next masterpiece from New York Times bestselling author Emma Donoghue.
+
+Noah Selvaggio is a retired chemistry professor and widower living on the Upper West Side, but born in the South of France. He is days away from his first visit back to Nice since he was a child, bringing with him a handful of puzzling photos he's discovered from his mother's wartime years. But he receives a call from social services: Noah is the closest available relative of an eleven-year-old great-nephew he's never met, who urgently needs someone to look after him. Out of a feeling of obligation, Noah agrees to take Michael along on his trip.
+
+Much has changed in this famously charming seaside mecca, still haunted by memories of the Nazi occupation. The unlikely duo, suffering from jet lag and culture shock, bicker about everything from steak frites to screen time. But Noah gradually comes to appreciate the boy's truculent wit, and Michael's ease with tech and sharp eye help Noah unearth troubling details about their family's past. Both come to grasp the risks people in all eras have run for their loved ones, and find they are more akin than they knew.
+
+Written with all the tenderness and psychological intensity that made Room an international bestseller, Akin is a funny, heart-wrenching tale of an old man and a boy, born two generations apart, who unpick their painful story and start to write a new one together."/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" value="26"/>
+            <column name="title" value="How to Play Dead"/>
+            <column name="author_id" value="2"/>
+            <column name="publisher_id" value="3"/>
+            <column name="pages" value="750"/>
+            <column name="sub_category_id" value="13"/>
+            <column name="language_id" value="2"/>
+            <column name="cover_id" value="1"/>
+            <column name="year_of_publishing" value="2007"/>
+            <column name="price" value="400"/>
+            <column name="cover_image_url" value="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1559608473l/46141437._SY475_.jpg"/>
+            <column name="amount" value="111"/>
+            <column name="description" value="She's watching over them. And he's watching her...
+
+Ria Taylor is everything to everyone. Wife and mother, the centre of her family. And the manager of a refuge for women whose partners have driven them out of their own homes.
+
+But one night, with her husband away, Ria receives a terrifyingly sinister message. Someone is watching her. Someone who seems to know everything about her. She knows what she should do - seek help, just like she tells her clients to. But Ria is the help. As events escalate, and terror takes hold, Ria must decide whether to run or hide...
+
+"/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" value="27"/>
+            <column name="title" value="A Good Man"/>
+            <column name="author_id" value="4"/>
+            <column name="publisher_id" value="2"/>
+            <column name="pages" value="250"/>
+            <column name="sub_category_id" value="9"/>
+            <column name="language_id" value="1"/>
+            <column name="cover_id" value="2"/>
+            <column name="year_of_publishing" value="2019"/>
+            <column name="price" value="590"/>
+            <column name="cover_image_url" value="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1571686676l/52219910._SX318_SY475_.jpg"/>
+            <column name="amount" value="2"/>
+            <column name="description" value="Thomas Martin was a devoted family man who had all the trappings of an enviable life: a beautiful wife and daughter, a well-appointed home on Long Island's north shore, a job at a prestigious Manhattan advertising firm. He was also a devoted son and brother, shielding the women in his orbit from the everyday brutalities of the world.
+
+But what happens when Thomas's fragile ego is rocked? After committing a horrific deed -- that he can never undo -- Thomas grapples with his sense of self. Sometimes he casts himself as a victim and, at other times, a monster. All he ever did was try to be a good man, but maybe if he tells his version of the story, he might uncover how and why things unravelled so horribly."/>
+        </insert>
+
+        <insert tableName="books">
+            <column name="id" autoIncrement="true"/>
+            <column name="vendor_code" value="28"/>
+            <column name="title" value="The Starless Sea"/>
+            <column name="author_id" value="3"/>
+            <column name="publisher_id" value="3"/>
+            <column name="pages" value="250"/>
+            <column name="sub_category_id" value="5"/>
+            <column name="language_id" value="1"/>
+            <column name="cover_id" value="1"/>
+            <column name="year_of_publishing" value="2010"/>
+            <column name="price" value="250"/>
+            <column name="cover_image_url" value="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1617715077l/43575115._SY475_.jpg"/>
+            <column name="amount" value="11"/>
+            <column name="description" value="From the New York Times bestselling author of The Night Circus, a timeless love story set in a secret underground world—a place of pirates, painters, lovers, liars, and ships that sail upon a starless sea.
+
+Zachary Ezra Rawlins is a graduate student in Vermont when he discovers a mysterious book hidden in the stacks. As he turns the pages, entranced by tales of lovelorn prisoners, key collectors, and nameless acolytes, he reads something strange: a story from his own childhood. Bewildered by this inexplicable book and desperate to make sense of how his own life came to be recorded, Zachary uncovers a series of clues—a bee, a key, and a sword—that lead him to a masquerade party in New York, to a secret club, and through a doorway to an ancient library hidden far below the surface of the earth. What Zachary finds in this curious place is more than just a buried home for books and their guardians—it is a place of lost cities and seas, lovers who pass notes under doors and across time, and of stories whispered by the dead. Zachary learns of those who have sacrificed much to protect this realm, relinquishing their sight and their tongues to preserve this archive, and also of those who are intent on its destruction. Together with Mirabel, a fierce, pink-haired protector of the place, and Dorian, a handsome, barefoot man with shifting alliances, Zachary travels the twisting tunnels, darkened stairwells, crowded ballrooms, and sweetly soaked shores of this magical world, discovering his purpose—in both the mysterious book and in his own life. "/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="04-08" author="Vladyslav Pelykh">
+        <insert tableName="users">
+            <column name="id" autoIncrement="true"/>
+            <column name="name" value="Vlad"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="04-09" author="Vladyslav Pelykh">
+        <insert tableName="carts">
+            <column name="id" autoIncrement="true"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="04-10" author="Vladyslav Pelykh">
+        <insert tableName="wishlists">
+            <column name="id" autoIncrement="true"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

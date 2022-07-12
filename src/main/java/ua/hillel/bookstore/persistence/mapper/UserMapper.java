@@ -10,8 +10,10 @@ import ua.hillel.bookstore.persistence.mapper.base.BaseMapperConfig;
 public interface UserMapper {
 
     @Mapping(target = "id", source = "entity.id")
+    @Mapping(target = "name", source = "entity.name")
     UserDTO toDTO(User entity);
 
     @Mapping(target = "id", source = "dto.id")
+    @Mapping(target = "name", source = "dto.name")
     User toEntity(UserDTO dto);
 }

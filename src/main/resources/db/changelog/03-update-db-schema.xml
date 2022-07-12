@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="03-01" author="Vladyslav Pelykh">
+        <update tableName="books">
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </update>
+    </changeSet>
+    <changeSet id="03-02" author="Vladyslav Pelykh">
+        <createTable tableName="users">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-03" author="Vladyslav Pelykh">
+        <createTable tableName="carts">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-04" author="Vladyslav Pelykh">
+        <createTable tableName="cart_items">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cart_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-05" author="Vladyslav Pelykh">
+        <createTable tableName="wishlists">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-06" author="Vladyslav Pelykh">
+        <createTable tableName="wishlist_items">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wishlist_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-07" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="carts" constraintName="FK_CARTS_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="users" onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="03-08" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="wishlists" constraintName="FK_WISHLISTS_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="users" onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="03-09" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="cart_id" baseTableName="cart_items" constraintName="FK_CART_ITEMS_ON_CARTS"
+                                 referencedColumnNames="id" referencedTableName="carts" onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="03-10" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="cart_items" constraintName="FK_CART_ITEMS_ON_BOOKS"
+                                 referencedColumnNames="id" referencedTableName="books" onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="03-11" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="wishlist_items" constraintName="FK_WISHLIST_ITEMS_ON_BOOKS"
+                                 referencedColumnNames="id" referencedTableName="books" onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="03-12" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="wishlist_id" baseTableName="wishlist_items" constraintName="FK_CART_ITEMS_ON_WISHLISTS"
+                                 referencedColumnNames="id" referencedTableName="wishlists" onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

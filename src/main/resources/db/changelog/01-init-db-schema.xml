@@ -53,6 +53,12 @@
             <column name="cover_image_url" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="INT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet id="3" author="Vladyslav Pelykh">
@@ -135,6 +141,98 @@
         <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="sub_categories"
                                  constraintName="FK_SUB_CATEGORIES_ON_CATEGORY" referencedColumnNames="id"
                                  referencedTableName="categories"/>
+    </changeSet>
+
+    <changeSet id="03-02" author="Vladyslav Pelykh">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-03" author="Vladyslav Pelykh">
+        <createTable tableName="carts">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_carts"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-04" author="Vladyslav Pelykh">
+        <createTable tableName="cart_items">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_cart_items"/>
+            </column>
+            <column name="cart_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-05" author="Vladyslav Pelykh">
+        <createTable tableName="wishlists">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_wishlists"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-06" author="Vladyslav Pelykh">
+        <createTable tableName="wishlist_items">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_wishlist_items"/>
+            </column>
+            <column name="wishlist_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-07" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="carts" constraintName="FK_CART_ON_USERS"
+                                 referencedColumnNames="id" referencedTableName="users" onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="03-08" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="wishlists" constraintName="FK_WISHLIST_ON_USERS"
+                                 referencedColumnNames="id" referencedTableName="users" onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="03-09" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="cart_id" baseTableName="cart_items" constraintName="FK_CART_ITEM_ON_CARTS"
+                                 referencedColumnNames="id" referencedTableName="carts" onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="03-10" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="cart_items" constraintName="FK_CART_ITEM_ON_BOOKS"
+                                 referencedColumnNames="id" referencedTableName="books" onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="03-11" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="wishlist_items" constraintName="FK_WISHLIST_ITEMS_ON_BOOKS"
+                                 referencedColumnNames="id" referencedTableName="books" onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="03-12" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="wishlist_id" baseTableName="wishlist_items" constraintName="FK_CART_ITEMS_ON_WISHLISTS"
+                                 referencedColumnNames="id" referencedTableName="wishlists" onDelete="CASCADE"/>
     </changeSet>
 
 </databaseChangeLog>

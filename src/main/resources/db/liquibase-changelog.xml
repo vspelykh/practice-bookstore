@@ -7,5 +7,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
   <include file="db/changelog/01-init-db-schema.xml"/>
-  <include file="db/changelog/02-insert-data-schema.xml"/>
+<!--  <include file="db/changelog/02-insert-data-schema.xml"/>-->
+<!--  <include file="db/changelog/03-update-db-schema.xml"/>-->
+  <include file="db/changelog/04-insert-data-updated.xml"/>
 </databaseChangeLog>

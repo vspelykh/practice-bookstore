@@ -12,4 +12,6 @@ import javax.persistence.Table;
 @Setter
 public class User extends AbstractBaseEntity {
 
+    private String name;
+
 }

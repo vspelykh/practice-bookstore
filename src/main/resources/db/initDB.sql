@@ -180,11 +180,11 @@ Brilliant and entertaining, Outliers is a landmark work that will simultaneously
         'It Ends With Us is the story of Lily who witnessed her mother getting abused by her father all her life and feeling helpless to do anything about it. Determined to live her life on her terms, she moves to Boston and it is here that she meets Dr. Ryle Kincaid.',
         150,
         'https://img.yakaboo.ua/media/catalog/product/cache/1/image/398x565/31b681157c4c1a5551b0db4896e7972f/8/1/817vqet828l.jpg'),
-       ('4', 'The Confessions', 5, 3, 550, 5, 2, 1, 2009, 350,
+       ('4', 'The Confessions', 5, 3, 550, 10, 2, 1, 2009, 350,
         'The Confession is a 2010 legal thriller novel by John Grisham, his second novel to be published in 2010 (the previous was Theodore Boone: Kid Lawyer). The novel is about the murder of a high school cheerleader and how an innocent man was arrested for it.',
         123,
         'https://images-na.ssl-images-amazon.com/images/I/71p8O18Y3NL.jpg'),
-       ('5', 'Mohawk Saint: Catherine Tekakwitha and the Jesuits', 5, 3, 510, 6, 2, 1, 2009, 350,
+       ('5', 'Mohawk Saint: Catherine Tekakwitha and the Jesuits', 5, 3, 510, 9, 2, 1, 2009, 350,
         'On October 21, 2012, Pope Benedict XVI canonized Saint Kateri Tekakwitha as the first Native North American saint. Mohawk Saint is a work of history that situates her remarkable life in its seventeenth century setting, a time of wars, epidemics, and cultural transformations for the Indian
 peoples of the northeast. The daughter of a Algonquin mother and an Iroquois father, Catherine/Saint Kateri Tekakwitha (1656-1680) has become known over the centuries as a Catholic convert so holy that, almost immediately upon her death, she became the object of a cult. Today she is revered as a
 patron saint by Native Americans and the patroness of ecology and the environment by Catholics more generally, the first Native North American proposed for sainthood.'

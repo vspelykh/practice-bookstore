@@ -215,5 +215,10 @@
                                  referencedColumnNames="id" referencedTableName="books" onDelete="CASCADE"/>
     </changeSet>
 
+    <changeSet id="03-12" author="Vladyslav Pelykh">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="wishlist_items" constraintName="FK_WISHLIST_ITEMS_ON_USERS"
+                                 referencedColumnNames="id" referencedTableName="books" onDelete="CASCADE"/>
+    </changeSet>
+
 
 </databaseChangeLog>

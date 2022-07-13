@@ -100,30 +100,39 @@ public class BookController {
 
     @PostMapping("/form/book")
     public String bookForm(Model model, @ModelAttribute("action") String action, @ModelAttribute("id") Integer id) {
-        if ("edit".equals(action)) {
-            model.addAttribute("book", bookRestController.getById(id).getBody());
-            model.addAttribute("authors", authorController.getAllAuthors(null).getBody());
-            model.addAttribute("publishers", publisherController.getAll(null).getBody());
-            model.addAttribute("subCategories", categoryController.getSubCategories(null).getBody());
-            model.addAttribute("languages", characteristicController.getAllLanguages().getBody());
-            model.addAttribute("covers", characteristicController.getAllCovers().getBody());
-        }
+        model.addAttribute("authors", authorController.getAllAuthors(null).getBody());
+        model.addAttribute("publishers", publisherController.getAll(null).getBody());
+        model.addAttribute("subCategories", categoryController.getSubCategories(null).getBody());
+        model.addAttribute("languages", characteristicController.getAllLanguages().getBody());
+        model.addAttribute("covers", characteristicController.getAllCovers().getBody());
         model.addAttribute("action", action);
-        return "bookForm";
+        if (action.equals("edit")) {
+            model.addAttribute("book", bookRestController.getById(id).getBody());
+            return "bookForm";
+        } else {
+            return "createBookForm";
+        }
     }
 
-    @PostMapping("/create/book")
-    public String createOrEditBook(@ModelAttribute("id") Integer id, @ModelAttribute("vendor_code") Integer vendorCode,
-                                   @ModelAttribute("title") String title, @ModelAttribute("author") Integer author,
-                                   @ModelAttribute("publisher") Integer publisher, @ModelAttribute("pages") Integer pages,
-                                   @ModelAttribute("subCategory") Integer subCategory, @ModelAttribute("cover") Integer cover,
-                                   @ModelAttribute("language") Integer language, @ModelAttribute("year") Integer year,
-                                   @ModelAttribute("price") Integer price, @ModelAttribute("description") String description,
-                                   @ModelAttribute("amount") Integer amount, @ModelAttribute("coverImageUrl") String coverImageUrl) {
+    @PostMapping("/edit/book")
+    public String editBook(@ModelAttribute("id") Integer id, @ModelAttribute("vendor_code") Integer vendorCode,
+                           @ModelAttribute("title") String title, @ModelAttribute("author") Integer author,
+                           @ModelAttribute("publisher") Integer publisher, @ModelAttribute("pages") Integer pages,
+                           @ModelAttribute("subCategory") Integer subCategory, @ModelAttribute("cover") Integer cover,
+                           @ModelAttribute("language") Integer language, @ModelAttribute("year") Integer year,
+                           @ModelAttribute("price") Integer price, @ModelAttribute("description") String description,
+                           @ModelAttribute("amount") Integer amount, @ModelAttribute("coverImageUrl") String coverImageUrl) {
 
-        BookDTO bookDTO = new BookDTO(id, vendorCode, title, authorController.getById(author).getBody(), publisherController.getById(publisher).getBody(),
-                pages, categoryController.getSubCategoryById(subCategory), characteristicController.getLanguageById(language),
-                characteristicController.getCoverById(cover), year, new BigDecimal(price), description, amount, coverImageUrl);
+        BookDTO bookDTO;
+        if (id == -1) {
+            bookDTO = new BookDTO(null, vendorCode, title, authorController.getById(author).getBody(), publisherController.getById(publisher).getBody(),
+                    pages, categoryController.getSubCategoryById(subCategory), characteristicController.getLanguageById(language),
+                    characteristicController.getCoverById(cover), year, new BigDecimal(price), description, amount, coverImageUrl);
+        } else {
+            bookDTO = new BookDTO(id, vendorCode, title, authorController.getById(author).getBody(), publisherController.getById(publisher).getBody(),
+                    pages, categoryController.getSubCategoryById(subCategory), characteristicController.getLanguageById(language),
+                    characteristicController.getCoverById(cover), year, new BigDecimal(price), description, amount, coverImageUrl);
+        }
         bookRestController.createOrEditBook(bookDTO);
         return "redirect:/admin";
     }

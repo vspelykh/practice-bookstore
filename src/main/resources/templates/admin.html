@@ -10,12 +10,10 @@
 <main data-layout-fragment="content" style="padding-top: 55px">
     <!--    create button-->
     <div class="container-xl table-book-body">
-
-        <form method="post" th:action="@{/create/book}">
-            <button type="submit" style="margin-top: 10px"
-                    class="btn btn-dark"
-            >Add new book
-            </button>
+        <form name="create" method="post" th:action="@{/form/book}">
+            <input name="id" type="hidden" th:value="-1">
+            <input name="action" type="hidden" th:value="create">
+            <button onclick="" style="margin-top: 10px" type="submit" class="btn btn-dark">Add new book</button>
         </form>
         <!--        table-->
         <div class="table-responsive">

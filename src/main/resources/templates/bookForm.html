@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      lang="en" data-layout-decorate="~{fragments/layout}">
+<head>
+    <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+    <title>Book form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<main data-layout-fragment="content" style="padding-top: 55px">
+    <!--    create form-->
+    <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+    <div class="container-xl table-book-body">
+        <div class="table-responsive">
+            <h1 style="align-content: center" th:if="book != null">Edit book</h1>
+            <h1 style="align-content: center" th:if="book == null">Create book</h1>
+            <form name="form-book" method="post" th:action="@{/create/book}">
+
+                <input id="id" name="id" type="hidden" th:value="${book.id}">
+                <!--                accordion-->
+                <div class="accordion" id="accordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-vendor">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseVendor" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseVendor">
+                                <label for="vendor_code">Vendor code</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseVendor" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-vendor">
+                            <div class="accordion-body">
+                                <input id="vendor_code" name="vendor_code" type="number" th:value="${book.vendorCode}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingTitle">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseTitle" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseTitle">
+                                <label for="title">Title</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseTitle" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingTitle">
+                            <div class="accordion-body">
+                                <input id="title" name="title" type="text" th:value="${book.title}">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingAuthor">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseAuthor" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseAuthor">
+                                <label for="author">Author</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseAuthor" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingAuthor">
+                            <div class="accordion-body">
+                                <!--/*@thymesVar id="author" type="ua.hillel.bookstore.persistence.dto.AuthorDTO"*/-->
+                                <!--/*@thymesVar id="authors" type="java.util.List"*/-->
+                                <div th:each="author : ${authors}" class="form-check">
+                                    <input id="author" name="author" th:checked="${author.equals(book.author)}"
+                                           th:text="${author.name}"
+                                           th:value="${author.id}"
+                                           class="form-check-input" type="radio">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/*@thymesVar id="publishers" type="java.util.List"*/-->
+                    <!--/*@thymesVar id="publisher" type="ua.hillel.bookstore.persistence.dto.PublisherDTO"*/-->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingPublisher">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapsePublisher" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapsePublisher">
+                                <label for="pub">Publisher</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapsePublisher" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingPublisher">
+                            <div class="accordion-body">
+                                <div th:each="publisher : ${publishers}" class="form-check">
+                                    <input id="publisher" name="publisher" th:checked="${publisher.equals(book.publisher)}"
+                                           th:text="${publisher.name}"
+                                           th:value="${publisher.id}" th:id="${publisher}"
+                                           class="form-check-input" type="radio">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingPages">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapsePages" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapsePages">
+                                <label for="pages">Pages</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapsePages" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingPages">
+                            <div class="accordion-body">
+                                <input id="pages" name="pages" type="number" th:value="${book.pages}">
+                            </div>
+                        </div>
+                    </div>
+                    <!--/*@thymesVar id="subCategories" type="java.util.List"*/-->
+                    <!--/*@thymesVar id="subCategory" type="ua.hillel.bookstore.persistence.dto.SubCategoryDTO"*/-->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingSubCat">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseSubCat" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseSubCat">
+                                <label for="subCategory">Subcategory</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseSubCat" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingSubCat">
+                            <div class="accordion-body">
+                                <div th:each="subCategory : ${subCategories}" class="form-check">
+                                    <input id="subCategory"
+                                           th:checked="${subCategory.equals(book.subCategory)}"
+                                           th:text="${subCategory.name}"
+                                           th:value="${subCategory.id}" th:id="${subCategory}"
+                                           class="form-check-input"
+                                           type="radio"
+                                           name="subCategory">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/*@thymesVar id="languages" type="java.util.List"*/-->
+                    <!--/*@thymesVar id="language" type="ua.hillel.bookstore.persistence.dto.LanguageDTO"*/-->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingLang">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseLang" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseLang">
+                                <label for="languages">Language</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseLang" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingLang">
+                            <div class="accordion-body">
+                                <div th:each="language : ${languages}" class="form-check">
+                                    <input id="language" th:checked="${language.equals(book.language)}"
+                                           th:text="${language.name}"
+                                           th:value="${language.id}" th:id="${language}" class="form-check-input"
+                                           type="radio"
+                                           name="language">
+                                    <label th:value="${language.name}" th:id="${language}" class="form-check-label">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/*@thymesVar id="covers" type="java.util.List"*/-->
+                    <!--/*@thymesVar id="cover" type="ua.hillel.bookstore.persistence.dto.CoverDTO"*/-->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingCover">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseCover" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseCover">
+                                <label for="covers">Cover</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseCover" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingCover">
+                            <div class="accordion-body">
+                                <div th:each="cover : ${covers}" class="form-check">
+                                    <input id="cover" th:checked="${cover.equals(book.cover)}"
+                                           th:text="${cover.type}"
+                                           th:value="${cover.id}" th:id="${cover}" class="form-check-input"
+                                           type="radio"
+                                           name="cover">
+                                    <label th:value="${cover.type}" th:id="${cover}" class="form-check-label">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingYear">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseYear" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseYear">
+                                <label for="year">Year of publishing</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseYear" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingYear">
+                            <div class="accordion-body">
+                                <input id="year" name="year" type="number" th:value="${book.year}">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingPrice">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapsePrice" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapsePrice">
+                                <label for="price">Price</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapsePrice" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingPrice">
+                            <div class="accordion-body">
+                                <input id="price" name="price" type="number" th:value="${book.price}">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingDesc">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseDesc" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseDesc">
+                                <label for="description">Description</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseDesc" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingDesc">
+                            <div class="accordion-body">
+                                <input id="description" name="description" type="text" th:value="${book.description}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingAmount">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseAmount" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseAmount">
+                                <label for="amount">Amount</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseAmount" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingAmount">
+                            <div class="accordion-body">
+                                <input id="amount" name="amount" type="number" th:value="${book.amount}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseThree">
+                                <label for="coverImageUrl">Cover image (link)</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingThree">
+                            <div class="accordion-body">
+                                <!--                                        /*@thymesVar id="publishers" type="java.util.List"*/-->
+                                <!--                                        /*@thymesVar id="publisher" type="ua.hillel.bookstore.persistence.dto.PublisherDTO"*/-->
+                                <input id="coverImageUrl" name="coverImageUrl" type="url" th:value="${book.coverImageUrl}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

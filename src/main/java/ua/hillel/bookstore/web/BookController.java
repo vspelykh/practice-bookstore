@@ -7,12 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ua.hillel.bookstore.persistence.dto.BookDTO;
 import ua.hillel.bookstore.persistence.dto.CartItemDTO;
 import ua.hillel.bookstore.persistence.dto.WishlistItemDTO;
 import ua.hillel.bookstore.rest.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -24,11 +26,12 @@ import java.util.stream.IntStream;
 public class BookController {
 
     private final CartController cartController;
+    private final AuthorController authorController;
     private final BookRestController bookRestController;
     private final CategoryController categoryController;
     private final PublisherController publisherController;
     private final WishlistController wishlistController;
-
+    private final CharacteristicController characteristicController;
 
     /* Method left to use with QueryDSL. Need to implement and test which solution work better*/
     @GetMapping("/home")
@@ -60,7 +63,7 @@ public class BookController {
     public String index(Model model) {
         model.addAttribute("books", bookRestController.getAll().getBody());
         model.addAttribute("subCategories", categoryController.getSubCategories(null).getBody());
-        model.addAttribute( "categories", categoryController.getCategories().getBody());
+        model.addAttribute("categories", categoryController.getCategories().getBody());
         model.addAttribute("publishers", publisherController.getAll(null).getBody());
         model.addAttribute("cartCapacity", cartController.getCapacity());
         model.addAttribute("cartSum", cartController.getCartSum());
@@ -80,6 +83,49 @@ public class BookController {
         }
 
         return "book";
+    }
+
+    @PostMapping("/book")
+    public String editBook(RedirectAttributes redirectAttributes, @ModelAttribute("id") int id, @ModelAttribute("action") String action) {
+        if ("delete".equals(action)) {
+            bookRestController.delById(id);
+            return "redirect:admin";
+        } else if ("edit".equals(action)) {
+            redirectAttributes.addAttribute("id", id);
+            redirectAttributes.addAttribute("action", action);
+            return "forward:/create/book";
+        }
+        return null;
+    }
+
+    @PostMapping("/form/book")
+    public String bookForm(Model model, @ModelAttribute("action") String action, @ModelAttribute("id") Integer id) {
+        if ("edit".equals(action)) {
+            model.addAttribute("book", bookRestController.getById(id).getBody());
+            model.addAttribute("authors", authorController.getAllAuthors(null).getBody());
+            model.addAttribute("publishers", publisherController.getAll(null).getBody());
+            model.addAttribute("subCategories", categoryController.getSubCategories(null).getBody());
+            model.addAttribute("languages", characteristicController.getAllLanguages().getBody());
+            model.addAttribute("covers", characteristicController.getAllCovers().getBody());
+        }
+        model.addAttribute("action", action);
+        return "bookForm";
+    }
+
+    @PostMapping("/create/book")
+    public String createOrEditBook(@ModelAttribute("id") Integer id, @ModelAttribute("vendor_code") Integer vendorCode,
+                                   @ModelAttribute("title") String title, @ModelAttribute("author") Integer author,
+                                   @ModelAttribute("publisher") Integer publisher, @ModelAttribute("pages") Integer pages,
+                                   @ModelAttribute("subCategory") Integer subCategory, @ModelAttribute("cover") Integer cover,
+                                   @ModelAttribute("language") Integer language, @ModelAttribute("year") Integer year,
+                                   @ModelAttribute("price") Integer price, @ModelAttribute("description") String description,
+                                   @ModelAttribute("amount") Integer amount, @ModelAttribute("coverImageUrl") String coverImageUrl) {
+
+        BookDTO bookDTO = new BookDTO(id, vendorCode, title, authorController.getById(author).getBody(), publisherController.getById(publisher).getBody(),
+                pages, categoryController.getSubCategoryById(subCategory), characteristicController.getLanguageById(language),
+                characteristicController.getCoverById(cover), year, new BigDecimal(price), description, amount, coverImageUrl);
+        bookRestController.createOrEditBook(bookDTO);
+        return "redirect:/admin";
     }
 
     @GetMapping("/cart")

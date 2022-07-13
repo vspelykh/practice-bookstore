@@ -2,11 +2,13 @@ package ua.hillel.bookstore.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import ua.hillel.bookstore.rest.BookRestController;
 import ua.hillel.bookstore.rest.CategoryController;
 import ua.hillel.bookstore.rest.PublisherController;
 
-@Controller("/admin")
+@Controller()
 @RequiredArgsConstructor
 public class AdminController {
 
@@ -14,5 +16,11 @@ public class AdminController {
     private final CategoryController categoryController;
     private final PublisherController publisherController;
 
-//TODO
+    @GetMapping("/admin")
+    public String admin(Model model){
+        model.addAttribute("books", bookRestController.getAll().getBody());
+
+        return "admin";
+    }
+
 }

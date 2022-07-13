@@ -38,4 +38,8 @@ public class CategoryController {
             return new ResponseEntity<>(subCategoryService.findAll(), HttpStatus.OK);
         }
     }
+    @GetMapping("/getById")
+    public SubCategoryDTO getSubCategoryById(Integer subCategory) {
+        return subCategoryService.get(subCategory);
+    }
 }

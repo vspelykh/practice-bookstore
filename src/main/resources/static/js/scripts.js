@@ -115,18 +115,54 @@ $(document).ready(function() {
 $(document).ready(function() {
 
     var table = $('#cartTable').dataTable({
-        "pageLength": -1,
+        "pageLength": 20,
         "language": {
-            search: false
+            search: "Search:",
+            searchPlaceholder: "Find books by title and/or author"
         },
         "columnDefs": [
-            { "searchable": false},
-            {"orderable": true, "targets": [1,2,3,4,5,6]}
+            // {
+            //     target: [7,8],
+            //     visible: false,
+            //     searchable: false
+            // },
+            { "searchable": true, "targets": [1,2,3,4,5,6] },
+            { "orderable": true, "targets": [1,2,3,4,5,6]},
+            {"orderable": false, "targets": [0]}
         ],
         lengthMenu:  [
             [2 , 5 , 10, 20, -1],
             [2, 5 , 10, 20, 'All'],
         ],
-        order: [1, 'asc']
+        order: [1, 'asc'],
+
+    });
+});
+
+//admin table
+$(document).ready(function() {
+
+    var table = $('#adminTable').dataTable({
+        "pageLength": 10,
+        "language": {
+            search: "Search:",
+            searchPlaceholder: "Find books by title and/or author"
+        },
+        "columnDefs": [
+            // {
+            //     target: [7,8],
+            //     visible: false,
+            //     searchable: false
+            // },
+            { "searchable": true, "targets": [1,2,3,4,5,6,8,9] },
+            { "orderable": true, "targets": [1,2,3,4,5,6,8,9]},
+            {"orderable": false, "targets": [0]}
+        ],
+        lengthMenu:  [
+            [2 , 5 , 10, 20, -1],
+            [2, 5 , 10, 20, 'All'],
+        ],
+        order: [1, 'asc'],
+
     });
 });

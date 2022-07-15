@@ -29,18 +29,19 @@
                                    th:text="${sizeToChoose}"></a>
                             </div>
                         </div>
-                        <table id="bookTable" class="table table-striped table-hover table-bordered">
+                        <table id="adminTable" class="table table-striped table-hover table-bordered">
                             <thead>
                             <tr>
                                 <th width="10%">Cover<i></i></th>
                                 <th>Title<i></i></th>
                                 <th>Author<i></i></th>
+                                <th>Quantity</th>
+                                <th>Price<i></i></th>
                                 <th>Publisher<i></i></th>
                                 <th>Year<i></i></th>
-                                <th>Price<i></i></th>
-                                <th></th>
                                 <th>Category</th>
                                 <th>Subcategory</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -54,25 +55,52 @@
                                 </td>
                                 <td th:text="${book.title}"></td>
                                 <td th:text="${book.author.name}"></td>
+                                <td>
+                                    <form name="edit-amount" method="post" th:action="@{/book/editAmount}">
+                                        <input id="id" name="id" type="hidden" th:value="${book.id}">
+                                        <div class="form-group">
+                                            <label for="amount"></label>
+                                            <input style="width: 50px" required="required" type="number" id="amount"
+                                                   name="amount" th:value="${book.amount}"
+                                                   th:placeholder="${book.amount}" th:default="${book.amount}">
+                                            <button type="submit" class="btn btn-primary">Edit</button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form name="edit-price" method="post" th:action="@{/book/editPrice}">
+                                        <input name="id" type="hidden" th:value="${book.id}">
+                                        <div class="form-group">
+                                            <label for="price"></label>
+                                            <input style="width: 50px" required="required" type="number" id="price"
+                                                   name="price" th:value="${book.price}"
+                                                   th:placeholder="${book.price}" th:default="${book.price}">
+                                            <button type="submit" class="btn btn-primary">Edit</button>
+                                        </div>
+                                    </form>
+                                </td>
                                 <td th:text="${book.publisher.name}"></td>
                                 <td th:text="${book.year}"></td>
-                                <td th:text="${book.price}"></td>
+                                <td th:text="${book.subCategory.category.name}"></td>
+                                <td th:text="${book.subCategory.name}"></td>
                                 <td>
                                     <div class="list-group">
                                         <form name="delete" method="post" th:action="@{/form/book}">
                                             <input name="id" type="hidden" th:value="${book.id}">
                                             <input name="action" type="hidden" th:value="edit">
-                                            <button onclick="" style="margin-top: 10px" type="submit" class="btn btn-primary">Edit</button>
+                                            <button onclick="" style="margin-top: 10px" type="submit"
+                                                    class="btn btn-primary">Edit
+                                            </button>
                                         </form>
                                         <form name="delete" method="post" th:action="@{/book}">
                                             <input name="id" type="hidden" th:value="${book.id}">
                                             <input name="action" type="hidden" th:value="delete">
-                                            <button onclick="return confirm('Are you sure?')" style="margin-top: 10px" type="submit" class="btn btn-danger">Delete</button>
+                                            <button onclick="return confirm('Are you sure?')" style="margin-top: 10px"
+                                                    type="submit" class="btn btn-danger">Delete
+                                            </button>
                                         </form>
                                     </div>
                                 </td>
-                                <td th:text="${book.subCategory.category.name}"></td>
-                                <td th:text="${book.subCategory.name}"></td>
                             </tr>
                             </tbody>
                         </table>

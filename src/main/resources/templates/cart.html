@@ -50,7 +50,7 @@
                                         <div class="form-group">
                                             <label for="quantity">Select quantity</label>
                                             <input style="width: 50px" required="required" type="number" id="quantity"
-                                                   name="quantity"
+                                                   name="quantity" th:value="${item.quantity}"
                                                    th:placeholder="${item.quantity}" th:default="${item.quantity}">
                                             <button type="submit" class="btn btn-primary">Edit</button>
                                         </div>

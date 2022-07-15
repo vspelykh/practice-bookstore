@@ -127,13 +127,31 @@ public class BookController {
         if (id == -1) {
             bookDTO = new BookDTO(null, vendorCode, title, authorController.getById(author).getBody(), publisherController.getById(publisher).getBody(),
                     pages, categoryController.getSubCategoryById(subCategory), characteristicController.getLanguageById(language),
-                    characteristicController.getCoverById(cover), year, new BigDecimal(price), description, amount, coverImageUrl);
+                    characteristicController.getCoverById(cover), year, description, coverImageUrl);
         } else {
             bookDTO = new BookDTO(id, vendorCode, title, authorController.getById(author).getBody(), publisherController.getById(publisher).getBody(),
                     pages, categoryController.getSubCategoryById(subCategory), characteristicController.getLanguageById(language),
-                    characteristicController.getCoverById(cover), year, new BigDecimal(price), description, amount, coverImageUrl);
+                    characteristicController.getCoverById(cover), year, description, coverImageUrl);
         }
+        bookDTO.setPrice(new BigDecimal(price));
+        bookDTO.setAmount(amount);
         bookRestController.createOrEditBook(bookDTO);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/book/editAmount")
+    public String editAmount(@ModelAttribute("id") Integer id, @ModelAttribute("amount") Integer amount){
+        BookDTO book = bookRestController.getById(id).getBody();
+        Objects.requireNonNull(book).setAmount(amount);
+        bookRestController.createOrEditBook(book);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/book/editPrice")
+    public String editPrice(@ModelAttribute("id") Integer id, @ModelAttribute("price") Integer price){
+        BookDTO book = bookRestController.getById(id).getBody();
+        Objects.requireNonNull(book).setPrice(new BigDecimal(price));
+        bookRestController.createOrEditBook(book);
         return "redirect:/admin";
     }
 

@@ -120,21 +120,22 @@ public class BookController {
                            @ModelAttribute("publisher") Integer publisher, @ModelAttribute("pages") Integer pages,
                            @ModelAttribute("subCategory") Integer subCategory, @ModelAttribute("cover") Integer cover,
                            @ModelAttribute("language") Integer language, @ModelAttribute("year") Integer year,
-                           @ModelAttribute("price") Integer price, @ModelAttribute("description") String description,
-                           @ModelAttribute("amount") Integer amount, @ModelAttribute("coverImageUrl") String coverImageUrl) {
+                           @ModelAttribute("price") Integer price, @ModelAttribute("amount") Integer amount,
+                           @ModelAttribute("coverImageUrl") String coverImageUrl) {
 
         BookDTO bookDTO;
         if (id == -1) {
             bookDTO = new BookDTO(null, vendorCode, title, authorController.getById(author).getBody(), publisherController.getById(publisher).getBody(),
                     pages, categoryController.getSubCategoryById(subCategory), characteristicController.getLanguageById(language),
-                    characteristicController.getCoverById(cover), year, description, coverImageUrl);
+                    characteristicController.getCoverById(cover), year, coverImageUrl);
         } else {
             bookDTO = new BookDTO(id, vendorCode, title, authorController.getById(author).getBody(), publisherController.getById(publisher).getBody(),
                     pages, categoryController.getSubCategoryById(subCategory), characteristicController.getLanguageById(language),
-                    characteristicController.getCoverById(cover), year, description, coverImageUrl);
+                    characteristicController.getCoverById(cover), year, coverImageUrl);
         }
         bookDTO.setPrice(new BigDecimal(price));
         bookDTO.setAmount(amount);
+        bookDTO.setDescription(Objects.requireNonNull(bookRestController.getById(id).getBody()).getDescription());
         bookRestController.createOrEditBook(bookDTO);
         return "redirect:/admin";
     }
@@ -151,6 +152,14 @@ public class BookController {
     public String editPrice(@ModelAttribute("id") Integer id, @ModelAttribute("price") Integer price){
         BookDTO book = bookRestController.getById(id).getBody();
         Objects.requireNonNull(book).setPrice(new BigDecimal(price));
+        bookRestController.createOrEditBook(book);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/book/editDescription")
+    public String editDescription(@ModelAttribute("id") Integer id, @ModelAttribute("description") String description){
+        BookDTO book = bookRestController.getById(id).getBody();
+        Objects.requireNonNull(book).setDescription(description);
         bookRestController.createOrEditBook(book);
         return "redirect:/admin";
     }

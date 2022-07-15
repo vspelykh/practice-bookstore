@@ -14,6 +14,31 @@
     <div class="container-xl table-book-body">
         <div class="table-responsive">
             <h1 style="align-content: center">Edit book</h1>
+            <div class="accordion" id="accordion-desc">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingDesc">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapseDesc" aria-expanded="false"
+                                aria-controls="panelsStayOpen-collapseDesc">
+                            <label for="description">Description</label>
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseDesc" class="accordion-collapse collapse"
+                         aria-labelledby="panelsStayOpen-headingDesc">
+                        <div class="accordion-body">
+                            <form id="edit-desc" name="edit-desc" method="post" th:action="@{/book/editDescription}">
+                                    <textarea id="description" name="description" rows="20" cols="100"
+                                              th:value="${book.description}" th:default="${book.description}"
+                                              th:text="${book.description}"></textarea>
+                                <br>
+                                <input th:if="book != null" name="id" type="hidden" th:value="${book.id}">
+                                <input type="submit" value="Edit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <form name="form-book" method="post" th:action="@{/edit/book}">
                 <input th:if="book != null" id="id" name="id" type="hidden" th:value="${book.id}">
                 <!--                accordion-->
@@ -29,7 +54,8 @@
                         <div id="panelsStayOpen-collapseVendor" class="accordion-collapse collapse"
                              aria-labelledby="panelsStayOpen-vendor">
                             <div class="accordion-body">
-                                <input required="required" id="vendor_code" name="vendor_code" type="number" th:value="${book.vendorCode}">
+                                <input required="required" id="vendor_code" name="vendor_code" type="number"
+                                       th:value="${book.vendorCode}">
                             </div>
                         </div>
                     </div>
@@ -44,7 +70,8 @@
                         <div id="panelsStayOpen-collapseTitle" class="accordion-collapse collapse"
                              aria-labelledby="panelsStayOpen-headingTitle">
                             <div class="accordion-body">
-                                <input  size="70" required="required" id="title" name="title" type="text" th:value="${book.title}">
+                                <input size="70" required="required" id="title" name="title" type="text"
+                                       th:value="${book.title}">
                             </div>
                         </div>
                     </div>
@@ -86,7 +113,8 @@
                              aria-labelledby="panelsStayOpen-headingPublisher">
                             <div class="accordion-body">
                                 <div th:each="publisher : ${publishers}" class="form-check">
-                                    <input id="publisher" name="publisher" th:checked="${publisher.equals(book.publisher)}"
+                                    <input id="publisher" name="publisher"
+                                           th:checked="${publisher.equals(book.publisher)}"
                                            th:text="${publisher.name}"
                                            th:value="${publisher.id}" th:id="${publisher}"
                                            class="form-check-input" type="radio">
@@ -106,7 +134,8 @@
                         <div id="panelsStayOpen-collapsePages" class="accordion-collapse collapse"
                              aria-labelledby="panelsStayOpen-headingPages">
                             <div class="accordion-body">
-                                <input required="required" id="pages" name="pages" type="number" th:value="${book.pages}">
+                                <input required="required" id="pages" name="pages" type="number"
+                                       th:value="${book.pages}">
                             </div>
                         </div>
                     </div>
@@ -217,25 +246,9 @@
                         <div id="panelsStayOpen-collapsePrice" class="accordion-collapse collapse"
                              aria-labelledby="panelsStayOpen-headingPrice">
                             <div class="accordion-body">
-                                <input required="required" id="price" name="price" type="number" th:value="${book.price}">
+                                <input required="required" id="price" name="price" type="number"
+                                       th:value="${book.price}">
 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsStayOpen-headingDesc">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseDesc" aria-expanded="false"
-                                    aria-controls="panelsStayOpen-collapseDesc">
-                                <label for="description">Description</label>
-                            </button>
-                        </h2>
-                        <div id="panelsStayOpen-collapseDesc" class="accordion-collapse collapse"
-                             aria-labelledby="panelsStayOpen-headingDesc">
-                            <div class="accordion-body">
-                                <input required="required" id="description" name="description" type="text" th:value="${book.description}">
                             </div>
                         </div>
                     </div>
@@ -251,7 +264,8 @@
                         <div id="panelsStayOpen-collapseAmount" class="accordion-collapse collapse"
                              aria-labelledby="panelsStayOpen-headingAmount">
                             <div class="accordion-body">
-                                <input required="required" id="amount" name="amount" type="number" th:value="${book.amount}">
+                                <input required="required" id="amount" name="amount" type="number"
+                                       th:value="${book.amount}">
                             </div>
                         </div>
                     </div>
@@ -269,7 +283,8 @@
                             <div class="accordion-body">
                                 <!--                                        /*@thymesVar id="publishers" type="java.util.List"*/-->
                                 <!--                                        /*@thymesVar id="publisher" type="ua.hillel.bookstore.persistence.dto.PublisherDTO"*/-->
-                                <input required="required" id="coverImageUrl" name="coverImageUrl" type="url" th:value="${book.coverImageUrl}">
+                                <input size="70" maxlength="70" required="required" id="coverImageUrl"
+                                       name="coverImageUrl" type="url" th:value="${book.coverImageUrl}">
                             </div>
                         </div>
                     </div>

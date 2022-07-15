@@ -10,11 +10,30 @@
 <main data-layout-fragment="content" style="padding-top: 55px">
     <!--    create button-->
     <div class="container-xl table-book-body">
-        <form name="create" method="post" th:action="@{/form/book}">
-            <input name="id" type="hidden" th:value="-1">
-            <input name="action" type="hidden" th:value="create">
-            <button onclick="" style="margin-top: 10px" type="submit" class="btn btn-dark">Add new book</button>
-        </form>
+        <div id="parent" class="navbar navbar-expand-lg navbar-dark logo-margin bg-secondary">
+            <form class="child" name="createBook" method="post" th:action="@{/form/book}">
+                <input name="id" type="hidden" th:value="-1">
+                <input name="action" type="hidden" th:value="create">
+                <button onclick="" style="margin-top: 10px" type="submit" class="btn btn-dark">Add new book</button>
+            </form>
+            <form class="child" name="createAuthor" method="post" th:action="@{/form/author}">
+                <input name="id" type="hidden" th:value="-1">
+                <input name="action" type="hidden" th:value="create">
+                <button onclick="" style="margin-top: 10px" type="submit" class="btn btn-dark">Add new author(TODO)
+                </button>
+            </form>
+            <form class="child" name="createPublisher" method="post" th:action="@{/form/publisher}">
+                <input name="id" type="hidden" th:value="-1">
+                <input name="action" type="hidden" th:value="create">
+                <button onclick="" style="margin-top: 10px" type="submit" class="btn btn-dark">Add new publisher(TODO)
+                </button>
+            </form>
+            <form class="child" name="getOrders" method="get" th:action="@{/form/publisher}">
+                <input name="id" type="hidden" th:value="-1">
+                <input name="action" type="hidden" th:value="create">
+                <button onclick="" style="margin-top: 10px" type="submit" class="btn btn-dark">Add new publisher(TODO)</button>
+            </form>
+        </div>
         <!--        table-->
         <div class="table-responsive">
             <div class="table-wrapper">

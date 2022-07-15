@@ -77,9 +77,10 @@
         <div class="product-price container-book basic-style">
             <!--/*@thymesVar id="cartSum" type="java.lang.Integer"*/-->
             <span style="margin-left: auto" th:text="'Total sum is ' + ${cartSum} + ' grn'"></span>
-            <a style=" margin-right: auto" th:if="${cartSum!=0}" href="#" class="cart-btn">Make an order</a>
+            <a style=" margin-right: auto" th:if="${cartSum!=0}" th:href="@{/ordering}" class="cart-btn">Make an
+                order</a>
+            </a>
         </div>
-        `
     </div>
     <div class="container-book product-description" th:if="${isEmpty}">
         <h1 style="margin-left: auto; margin-right: auto">Your cart is empty</h1>

@@ -23,7 +23,7 @@ public class CartController {
 
     private final CartService cartService;
 
-    @GetMapping("get")
+    @GetMapping("/getCart")
     public ResponseEntity<CartDTO> getCart(){
 
         return new ResponseEntity<>(cartService.getCart(SecurityUtil.getFakeAuthUserId()), HttpStatus.OK);

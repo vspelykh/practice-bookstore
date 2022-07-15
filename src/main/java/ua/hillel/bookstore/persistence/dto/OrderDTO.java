@@ -10,6 +10,6 @@ public class OrderDTO implements Serializable {
     private final Integer id;
     private final UserDTO user;
     private final String address;
-    private final String status;
+    private String status;
     private final String post;
 }

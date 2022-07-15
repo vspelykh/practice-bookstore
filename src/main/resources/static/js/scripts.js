@@ -115,7 +115,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 
     var table = $('#cartTable').dataTable({
-        "pageLength": 20,
+        "pageLength": -1,
         "language": {
             search: "Search:",
             searchPlaceholder: "Find books by title and/or author"
@@ -165,4 +165,9 @@ $(document).ready(function() {
         order: [1, 'asc'],
 
     });
+});
+
+//order form
+$(document).ready(function() {
+    $('.datepicker').pickadate();
 });

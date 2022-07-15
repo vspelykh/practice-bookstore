@@ -114,10 +114,11 @@ CREATE TABLE wishlist_items
 CREATE TABLE orders
 (
     id      SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    address VARCHAR NOT NULL,
-    status  VARCHAR NOT NULL,
-    post    VARCHAR NOT NULL,
+    user_id INTEGER   NOT NULL,
+    address VARCHAR   NOT NULL,
+    status  VARCHAR   NOT NULL,
+    post    VARCHAR   NOT NULL,
+    date    TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users ON DELETE CASCADE
 );
 

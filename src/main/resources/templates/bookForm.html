@@ -14,31 +14,6 @@
     <div class="container-xl table-book-body">
         <div class="table-responsive">
             <h1 style="align-content: center">Edit book</h1>
-            <div class="accordion" id="accordion-desc">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingDesc">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#panelsStayOpen-collapseDesc" aria-expanded="false"
-                                aria-controls="panelsStayOpen-collapseDesc">
-                            <label for="description">Description</label>
-                        </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseDesc" class="accordion-collapse collapse"
-                         aria-labelledby="panelsStayOpen-headingDesc">
-                        <div class="accordion-body">
-                            <form id="edit-desc" name="edit-desc" method="post" th:action="@{/book/editDescription}">
-                                    <textarea id="description" name="description" rows="20" cols="100"
-                                              th:value="${book.description}" th:default="${book.description}"
-                                              th:text="${book.description}"></textarea>
-                                <br>
-                                <input th:if="book != null" name="id" type="hidden" th:value="${book.id}">
-                                <input type="submit" value="Edit">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <form name="form-book" method="post" th:action="@{/edit/book}">
                 <input th:if="book != null" id="id" name="id" type="hidden" th:value="${book.id}">
                 <!--                accordion-->
@@ -248,7 +223,25 @@
                             <div class="accordion-body">
                                 <input required="required" id="price" name="price" type="number"
                                        th:value="${book.price}">
-
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingDesc">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseDesc" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseDesc">
+                                <label for="description">Description</label>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseDesc" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingDesc">
+                            <div class="accordion-body">
+                                    <textarea id="description" name="description" rows="20" cols="100"
+                                              th:value="${book.description}" th:default="${book.description}"
+                                              th:text="${book.description}"></textarea>
+                                    <br>
                             </div>
                         </div>
                     </div>
@@ -283,7 +276,7 @@
                             <div class="accordion-body">
                                 <!--                                        /*@thymesVar id="publishers" type="java.util.List"*/-->
                                 <!--                                        /*@thymesVar id="publisher" type="ua.hillel.bookstore.persistence.dto.PublisherDTO"*/-->
-                                <input size="70" maxlength="70" required="required" id="coverImageUrl"
+                                <input size="150" maxlength="150" required="required" id="coverImageUrl"
                                        name="coverImageUrl" type="url" th:value="${book.coverImageUrl}">
                             </div>
                         </div>

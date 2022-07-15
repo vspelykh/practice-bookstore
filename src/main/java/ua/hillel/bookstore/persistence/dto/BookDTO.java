@@ -22,7 +22,7 @@ public class BookDTO implements Serializable {
     private final CoverDTO cover;
     private final Integer year;
     private BigDecimal price;
-    private String description;
+    private final String description;
     private int amount;
     private final String coverImageUrl;
 

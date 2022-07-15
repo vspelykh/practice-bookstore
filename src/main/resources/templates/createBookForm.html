@@ -11,7 +11,7 @@
     <!--    create form-->
     <div class="container-xl table-book-body">
         <div class="table-responsive">
-            <h1 style="align-content: center" >Create book</h1>
+            <h1 style="align-content: center">Create book</h1>
             <form name="form-book" method="post" th:action="@{/edit/book}">
 
                 <input name="id" type="hidden" th:value="-1">
@@ -234,7 +234,8 @@
                         <div id="panelsStayOpen-collapseDesc" class="accordion-collapse collapse"
                              aria-labelledby="panelsStayOpen-headingDesc">
                             <div class="accordion-body">
-                                <input required="required" id="description" name="description" type="text">
+                                <textarea id="description" name="description" rows="20" cols="100"></textarea>
+                                <br>
                             </div>
                         </div>
                     </div>
@@ -266,9 +267,8 @@
                         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
                              aria-labelledby="panelsStayOpen-headingThree">
                             <div class="accordion-body">
-                                <!--                                        /*@thymesVar id="publishers" type="java.util.List"*/-->
-                                <!--                                        /*@thymesVar id="publisher" type="ua.hillel.bookstore.persistence.dto.PublisherDTO"*/-->
-                                <input required="required" id="coverImageUrl" name="coverImageUrl" type="url">
+                                <input size="150" maxlength="150" required="required" id="coverImageUrl"
+                                       name="coverImageUrl" type="url">
                             </div>
                         </div>
                     </div>

@@ -11,6 +11,12 @@
     <!--    create button-->
     <div class="container-xl table-book-body">
         <div id="parent" class="navbar navbar-expand-lg navbar-dark logo-margin bg-secondary">
+            <div style="margin-right: 20px" class="child">
+                <!--/*@thymesVar id="cartSum" type="java.lang.Integer"*/-->
+                <a th:href="@{/orders}"><img src="/img/orders.png" alt="Cart" width="40" height="40" class="fa"/></a>
+                <!--/*@thymesVar id="newOrders" type="java.lang.Integer"*/-->
+                <span class="badge badge-notify my-cart-badge" id='lblCartCount' th:text="${newOrders}"></span>
+            </div>
             <form class="child" name="createBook" method="post" th:action="@{/form/book}">
                 <input name="id" type="hidden" th:value="-1">
                 <input name="action" type="hidden" th:value="create">

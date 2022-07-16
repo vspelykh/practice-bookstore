@@ -11,8 +11,9 @@ public class OrderDTO implements Serializable {
     private final Integer id;
     private final UserDTO user;
     private final String address;
-    private String status;
+    private Status status;
     private final String post;
     private final LocalDateTime date;
+    private Integer sum;
     private final String comment;
 }

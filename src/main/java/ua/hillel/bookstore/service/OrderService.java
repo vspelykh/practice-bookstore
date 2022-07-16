@@ -34,7 +34,7 @@ public class OrderService {
         return mapper.toDTO(repository.getReferenceById(id));
     }
 
-    public List<OrderItemDTO> getOrderItemsByOrderId(int id){
+    public List<OrderItemDTO> getOrderItemsByOrderId(int id) {
         return itemRepository.getAllByOrderId(id).stream().map(itemMapper::toDTO).collect(Collectors.toList());
     }
 
@@ -42,7 +42,11 @@ public class OrderService {
         return mapper.toDTO(repository.save(mapper.toEntity(order)));
     }
 
-    public void saveOrderItems(List<OrderItemDTO> orderItems){
+    public void saveOrderItems(List<OrderItemDTO> orderItems) {
         itemRepository.saveAll(orderItems.stream().map(itemMapper::toEntity).collect(Collectors.toList()));
+    }
+
+    public List<OrderDTO> getAllOrders(int userId) {
+        return repository.getOrdersByUserId(userId).stream().map(mapper::toDTO).collect(Collectors.toList());
     }
 }

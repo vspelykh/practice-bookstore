@@ -5,14 +5,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.hillel.bookstore.persistence.dto.CartItemDTO;
 import ua.hillel.bookstore.persistence.dto.OrderDTO;
+import ua.hillel.bookstore.persistence.entity.Status;
 import ua.hillel.bookstore.rest.*;
 import ua.hillel.bookstore.utils.SecurityUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Controller()
 @RequiredArgsConstructor
@@ -28,7 +31,9 @@ public class AdminController {
     @GetMapping("/admin")
     public String admin(Model model) {
         model.addAttribute("books", bookRestController.getAll().getBody());
-
+        model.addAttribute("newOrders",
+                orderController.getAllOrders(Status.NEW).getBody() == null ? 0 :
+                        orderController.getAllOrders(Status.NEW).getBody().size());
         return "admin";
     }
 
@@ -48,11 +53,24 @@ public class AdminController {
         return "publisherForm";
     }
 
-    @GetMapping("getAllOrders")
+    @GetMapping("/orders")
     public String getOrders(Model model) {
 
-        model.addAttribute("orders", orderController.getAllOrders());
+        model.addAttribute("orders", orderController.getAllOrders().getBody());
+        model.addAttribute("statuses", Status.values());
         return "orders";
+    }
+    @GetMapping("/order/{id}")
+    public String getOrder(Model model, @PathVariable("id") Integer orderId) {
+        model.addAttribute("order", orderController.getOrder(orderId).getBody());
+        model.addAttribute("statuses", Status.values());
+        return "orderManage";
+    }
+
+    @GetMapping("/my-orders")
+    public String userOrders(Model model){
+        model.addAttribute("orders", Objects.requireNonNull(orderController.getUserOrders().getBody()));
+        return "userOrders";
     }
 
     @GetMapping("/ordering")
@@ -82,7 +100,12 @@ public class AdminController {
         OrderDTO
                 order = new OrderDTO(null, userController.get(SecurityUtil.getFakeAuthUserId()), address, post
                 , LocalDateTime.now(), comment);
-        order.setStatus("NEW");
+        order.setStatus(Status.NEW);
+        int sum = 0;
+        for (CartItemDTO item : cartItems){
+            sum += (item.getQuantity() * item.getBook().getPrice().intValue());
+        }
+        order.setSum(sum);
         orderController.createOrder(order, cartItems, userController.get(SecurityUtil.getFakeAuthUserId()));
         bookRestController.editAmountAfterOrdering(cartItems);
         cartController.cleanCart();

@@ -171,3 +171,65 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('.datepicker').pickadate();
 });
+
+//order table
+$(document).ready(function() {
+    var table = $('#orderTable').dataTable({
+        "createdRow": function (row, data, index, rowData) {
+            if( data[0] ===  `New`) {
+                $(row).css("background-color", "#78bf00");
+            } else if (data[0] === 'Pending'){
+                $(row).css("background-color", "yellow");
+            } else if (data[0] === 'Shipped'){
+                $(row).css("background-color", "deepskyblue");
+            }else if (data[0] === 'Delivered') {
+                $(row).css("background-color", "#eccccf");
+            }else if (data[0] === 'Canceled') {
+                $(row).css("background-color", "#8a8a8a");
+            }
+        },
+        "pageLength": 10,
+        "language": {
+            search: "Search:",
+        },
+        "columnDefs": [
+            // {
+            //     target: [7,8],
+            //     visible: false,
+            //     searchable: false
+            // },
+            { "searchable": true, "targets": [1,2,3,4,5] },
+            { "orderable": true, "targets": [1,2,3,4,5]},
+            {"orderable": false, "targets": [0]}
+        ],
+        lengthMenu:  [
+            [2 , 5 , 10, 20, -1],
+            [2, 5 , 10, 20, 'All'],
+        ],
+        order: [5, 'desc'],
+
+    });
+
+    $('input.filter-statuses').on('click', function (){
+        table.fnDraw();
+    });
+
+    $.fn.dataTable.ext.search.push(
+    function statuses(settings, searchData, index, rowData) {
+        // No filtered checked - show all rows
+        if ($('.filter-statuses:checked').length === 0) {
+            return true;
+        }
+
+        // Filter(s) checked, apply logic
+        var found = false;
+        $('.filter-statuses').each(function(index, elem) {
+            if (elem.checked && rowData[0] === elem.value) {
+                found = true;
+            }
+        });
+
+        return found;
+    }
+    );
+});

@@ -63,7 +63,13 @@ public class OrderController {
 
     @PostMapping("/changeStatus")
     public OrderDTO changeOrderStatus(OrderDTO order, Status status) {
-        order.setStatus(status.toString());
+        order.setStatus(status);
         return service.saveOrder(order);
+    }
+
+    @GetMapping("/userOrders")
+    public ResponseEntity<List<OrderDTO>> getUserOrders() {
+
+        return new ResponseEntity<>(service.getAllOrders(SecurityUtil.getFakeAuthUserId()), HttpStatus.OK);
     }
 }

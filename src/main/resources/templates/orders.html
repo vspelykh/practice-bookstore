@@ -1,10 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      lang="en" data-layout-decorate="~{fragments/layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Orders</title>
+    <title>Admin panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<main data-layout-fragment="content" style="padding-top: 55px">
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav" style="margin-top: 190px; float: right">
+            <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <!--                        accordion-->
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                            aria-controls="panelsStayOpen-collapseOne">
+                                        Status:
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                                     aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body">
+                                        <!--                        /*@thymesVar id="statuses" type="java.util.List"*/-->
+                                        <!--                        /*@thymesVar id="status" type="ua.hillel.bookstore.persistence.entity.Status"*/-->
+                                        <label class="form-check" th:each="status : ${statuses}">
+                                            <input class="form-check-input filter-statuses" type="checkbox"
+                                                   th:value="${status.getCamelCase()}"
+                                                   th:id="${status}">
+                                            <label th:text="${status.getCamelCase()}" class="form-check-label"
+                                                   th:for="${status}">
+                                            </label>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content" class="sb-sidenav">
+            <div class="container-xl table-book-body">
+                <div class="table-responsive">
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-8"><h2>Orders</h2></div>
+                                <table id="orderTable" class="table table-striped table-hover table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Status<i></i></th>
+                                        <th>Name<i></i></th>
+                                        <th>Address<i></i></th>
+                                        <th>Post<i></i></th>
+                                        <th>Sum<i></i></th>
+                                        <th>Date</th>
+                                        <th>Comment</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--                                table body-->
+                                    <!--/*@thymesVar id="orders" type="java.util.List"*/-->
+                                    <!--/*@thymesVar id="order" type="ua.hillel.bookstore.persistence.dto.OrderDTO"*/-->
+
+                                    <tr th:each="order: ${orders}">
+                                        <td th:text="${order.status.getCamelCase()}"></td>
+                                        <td th:text="${order.user.name} + ' ' + ${order.user.surname}"></td>
+                                        <td th:text="${order.address}"></td>
+                                        <td th:text="${order.post}"></td>
+                                        <td th:text="${order.sum}"></td>
+                                        <td th:text="${order.date}"></td>
+                                        <td th:text="${order.comment}"></td>
+                                        <td>
+                                            <a th:href="@{'/order/{id}'(id=${order.id})}">
+                                                <button style="margin-left: auto;margin-right: auto"
+                                                        class="btn btn-dark" onclick=""
+                                                >Manage
+                                                </button>
+                                            </a>
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
 
 </body>
 </html>

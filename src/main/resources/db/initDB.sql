@@ -120,6 +120,7 @@ CREATE TABLE orders
     status  VARCHAR   NOT NULL,
     post    VARCHAR   NOT NULL,
     date    TIMESTAMP NOT NULL,
+    sum     INTEGER   NOT NULL,
     comment VARCHAR,
     FOREIGN KEY (user_id) REFERENCES users ON DELETE CASCADE
 );

@@ -39,6 +39,9 @@ public class Order extends AbstractBaseEntity {
     @NotNull
     private LocalDateTime date;
 
+    @Column(name = "sum", nullable = false)
+    private Integer sum;
+
     @Column(name = "comment")
     private String comment;
 

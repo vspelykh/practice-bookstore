@@ -15,6 +15,7 @@ public interface OrderMapper {
     @Mapping(target = "status", source = "entity.status")
     @Mapping(target = "post", source = "entity.post")
     @Mapping(target = "date", source = "entity.date")
+    @Mapping(target = "sum", source = "entity.sum")
     @Mapping(target = "comment", source = "entity.comment")
     OrderDTO toDTO(Order entity);
 
@@ -24,6 +25,7 @@ public interface OrderMapper {
     @Mapping(target = "status", source = "dto.status")
     @Mapping(target = "post", source = "dto.post")
     @Mapping(target = "date", source = "dto.date")
+    @Mapping(target = "sum", source = "dto.sum")
     @Mapping(target = "comment", source = "dto.comment")
     Order toEntity(OrderDTO dto);
 }

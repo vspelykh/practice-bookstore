@@ -84,6 +84,7 @@ public class AdminController {
                 , LocalDateTime.now(), comment);
         order.setStatus("NEW");
         orderController.createOrder(order, cartItems, userController.get(SecurityUtil.getFakeAuthUserId()));
+        bookRestController.editAmountAfterOrdering(cartItems);
         cartController.cleanCart();
         return "successPage";
     }

@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.hillel.bookstore.persistence.dto.BookDTO;
+import ua.hillel.bookstore.persistence.dto.CartItemDTO;
 import ua.hillel.bookstore.persistence.entity.Book;
 import ua.hillel.bookstore.service.BookService;
 import ua.hillel.bookstore.utils.BookPredicatesBuilder;
@@ -82,5 +83,17 @@ public class BookRestController {
             }
         }
         return service.getMostRelated(related);
+    }
+
+    public void editAmountAfterOrdering(List<CartItemDTO> cartItems) {
+        for (CartItemDTO cartItem : cartItems){
+            BookDTO book = cartItem.getBook();
+            System.out.println(cartItem.getQuantity() + " quantity");
+            System.out.println(book.getAmount() + " amount");
+            int newAmount = book.getAmount() - cartItem.getQuantity();
+            System.out.println(newAmount);
+            book.setAmount(newAmount);
+            service.save(book);
+        }
     }
 }

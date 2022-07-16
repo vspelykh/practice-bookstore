@@ -51,7 +51,8 @@
                                             <label for="quantity">Select quantity</label>
                                             <input style="width: 50px" required="required" type="number" id="quantity"
                                                    name="quantity" th:value="${item.quantity}"
-                                                   th:placeholder="${item.quantity}" th:default="${item.quantity}">
+                                                   th:placeholder="${item.quantity}" th:default="${item.quantity}"
+                                            th:max="${item.book.amount}">
                                             <button type="submit" class="btn btn-primary">Edit</button>
                                         </div>
                                 </form>

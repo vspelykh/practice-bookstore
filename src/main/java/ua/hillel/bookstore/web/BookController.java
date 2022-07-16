@@ -120,7 +120,7 @@ public class BookController {
                            @ModelAttribute("publisher") Integer publisher, @ModelAttribute("pages") Integer pages,
                            @ModelAttribute("subCategory") Integer subCategory, @ModelAttribute("cover") Integer cover,
                            @ModelAttribute("language") Integer language, @ModelAttribute("year") Integer year,
-                           @ModelAttribute("price") Integer price, @ModelAttribute ("description") String description,
+                           @ModelAttribute("price") Integer price, @ModelAttribute("description") String description,
                            @ModelAttribute("amount") Integer amount, @ModelAttribute("coverImageUrl") String coverImageUrl) {
 
         BookDTO bookDTO;
@@ -140,7 +140,7 @@ public class BookController {
     }
 
     @PostMapping("/book/editAmount")
-    public String editAmount(@ModelAttribute("id") Integer id, @ModelAttribute("amount") Integer amount){
+    public String editAmount(@ModelAttribute("id") Integer id, @ModelAttribute("amount") Integer amount) {
         BookDTO book = bookRestController.getById(id).getBody();
         Objects.requireNonNull(book).setAmount(amount);
         bookRestController.createOrEditBook(book);
@@ -148,7 +148,7 @@ public class BookController {
     }
 
     @PostMapping("/book/editPrice")
-    public String editPrice(@ModelAttribute("id") Integer id, @ModelAttribute("price") Integer price){
+    public String editPrice(@ModelAttribute("id") Integer id, @ModelAttribute("price") Integer price) {
         BookDTO book = bookRestController.getById(id).getBody();
         Objects.requireNonNull(book).setPrice(new BigDecimal(price));
         bookRestController.createOrEditBook(book);
@@ -158,10 +158,19 @@ public class BookController {
 
     @GetMapping("/cart")
     public String cart(Model model) {
-
-        model.addAttribute("isEmpty", cartController.getCartItems().isEmpty());
+        List<CartItemDTO> cartItems = cartController.getCartItems();
+        for (CartItemDTO item : cartItems) {
+            if (item.getBook().getAmount() == 0) {
+                cartController.deleteFromCart(item.getId());
+                cartItems.remove(item);
+            } else if (item.getQuantity() > item.getBook().getAmount()) {
+                cartController.editQuantity(item.getId(), item.getBook().getAmount());
+                cartItems.add(item);
+            }
+        }
+        model.addAttribute("isEmpty", cartItems.isEmpty());
         model.addAttribute("cartSum", cartController.getCartSum());
-        model.addAttribute("items", cartController.getCartItems());
+        model.addAttribute("items", cartItems);
         return "cart";
     }
 

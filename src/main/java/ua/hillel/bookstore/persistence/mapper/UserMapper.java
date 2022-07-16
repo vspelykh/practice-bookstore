@@ -11,11 +11,13 @@ public interface UserMapper {
 
     @Mapping(target = "id", source = "entity.id")
     @Mapping(target = "name", source = "entity.name")
+    @Mapping(target = "surname", source = "entity.surname")
     @Mapping(target = "role", source = "entity.role")
     UserDTO toDTO(User entity);
 
     @Mapping(target = "id", source = "dto.id")
     @Mapping(target = "name", source = "dto.name")
+    @Mapping(target = "surname", source = "dto.surname")
     @Mapping(target = "role", source = "dto.role")
     User toEntity(UserDTO dto);
 }

@@ -14,6 +14,8 @@ public interface OrderMapper {
     @Mapping(target = "address", source = "entity.address")
     @Mapping(target = "status", source = "entity.status")
     @Mapping(target = "post", source = "entity.post")
+    @Mapping(target = "date", source = "entity.date")
+    @Mapping(target = "comment", source = "entity.comment")
     OrderDTO toDTO(Order entity);
 
     @Mapping(target = "id", source = "dto.id")
@@ -21,5 +23,7 @@ public interface OrderMapper {
     @Mapping(target = "address", source = "dto.address")
     @Mapping(target = "status", source = "dto.status")
     @Mapping(target = "post", source = "dto.post")
+    @Mapping(target = "date", source = "dto.date")
+    @Mapping(target = "comment", source = "dto.comment")
     Order toEntity(OrderDTO dto);
 }

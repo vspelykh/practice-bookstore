@@ -14,6 +14,10 @@ public class OrderItem extends AbstractBaseEntity {
     @JoinColumn(name = "order_id")
     private Order order;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToOne
     @JoinColumn(name = "book_id")
     private Book book;

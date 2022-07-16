@@ -39,8 +39,7 @@ public class OrderService {
     }
 
     public OrderDTO saveOrder(OrderDTO order) {
-        repository.save(mapper.toEntity(order));
-        return order;
+        return mapper.toDTO(repository.save(mapper.toEntity(order)));
     }
 
     public void saveOrderItems(List<OrderItemDTO> orderItems){

@@ -14,12 +14,14 @@ public interface OrderItemMapper {
 
     @Mapping(target = "id", source = "entity.id")
     @Mapping(target = "order", source = "entity.order")
+    @Mapping(target = "user", source = "entity.user")
     @Mapping(target = "book", source = "entity.book")
     @Mapping(target = "price", source = "entity.price")
     OrderItemDTO toDTO(OrderItem entity);
 
     @Mapping(target = "id", source = "dto.id")
     @Mapping(target = "order", source = "dto.order")
+    @Mapping(target = "user", source = "dto.user")
     @Mapping(target = "book", source = "dto.book")
     @Mapping(target = "price", source = "dto.price")
     OrderItem toEntity(OrderItemDTO dto);

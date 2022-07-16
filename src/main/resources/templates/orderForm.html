@@ -7,98 +7,115 @@
     <link rel="stylesheet" href="/css/book.css">
 </head>
 <body>
-<main data-layout-fragment="content" style="padding-top: 55px">
+<main data-layout-fragment="content" style="padding-top: 55px; background-color: whitesmoke">
 
     <section class="order-form my-4 mx-4">
-        <div class="order-container pt-4">
-
-            <div class="row">
-                <div class="col-12">
-                    <h1>Order form</h1>
-                    <span>just put info, we will call you after confirmation</span>
-                    <hr class="mt-1">
-                </div>
-                <div class="col-12">
-
-                    <div class="row mx-4">
-                        <div class="col-12 mb-2">
-                            <label class="order-form-label">Name</label>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <input class="order-form-input" placeholder="First">
-                        </div>
-                        <div class="col-12 col-sm-6 mt-2 mt-sm-0">
-                            <input class="order-form-input" placeholder="Last">
-                        </div>
+        <div class="container-book order-container basic-style pt-4">
+            <div class="left-column">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Order form</h1>
+                        <span>just put info, we will call you after confirmation</span>
+                        <hr class="mt-1">
                     </div>
-
-                    <div class="row mt-3 mx-4">
-                        <div class="col-12">
-                            <label class="order-form-label">Type of thing you want to order</label>
-                        </div>
-                        <div class="col-12">
-                            <input class="order-form-input" placeholder=" ">
-                        </div>
-                    </div>
-
-                    <div class="row mt-3 mx-4">
-                        <div class="col-12">
-                            <label class="order-form-label">Another type of thing you want to order</label>
-                        </div>
-                        <div class="col-12">
-                            <input class="order-form-input" placeholder=" ">
-                        </div>
-                    </div>
-
-                    <div class="row mt-3 mx-4">
-                        <div class="col-12">
-                            <label class="order-form-label" for="date-picker-example">Date</label>
-                        </div>
-                        <div class="col-12">
-                            <input class="order-form-input datepicker" placeholder="Selected date" type="text"
-                                   id="date-picker-example">
-                        </div>
-                    </div>
-
-                    <div class="row mt-3 mx-4">
-                        <div class="col-12">
-                            <label class="order-form-label">Adress</label>
-                        </div>
-                        <div class="col-12">
-                            <input class="order-form-input" placeholder="Street Address">
-                        </div>
-                        <div class="col-12 mt-2">
-                            <input class="order-form-input" placeholder="Street Address Line 2">
-                        </div>
-                        <div class="col-12 col-sm-6 mt-2 pr-sm-2">
-                            <input class="order-form-input" placeholder="City">
-                        </div>
-                        <div class="col-12 col-sm-6 mt-2 pl-sm-0">
-                            <input class="order-form-input" placeholder="Region">
-                        </div>
-                        <div class="col-12 col-sm-6 mt-2 pr-sm-2">
-                            <input class="order-form-input" placeholder="Postal / Zip Code">
-                        </div>
-                        <div class="col-12 col-sm-6 mt-2 pl-sm-0">
-                            <input class="order-form-input" placeholder="Country">
-                        </div>
-                    </div>
-
-                    <div class="row mt-3 mx-4">
-                        <div class="col-12">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" name="validation" id="validation" value="1">
-                                <label for="validation" class="form-check-label">I know what I need to know</label>
+                    <div class="col-12">
+                        <form name="form-order" method="post" th:action="@{/order/create}">
+                            <div class="row mx-4">
+                                <div class="col-12 mb-2">
+                                    <label class="order-form-label">Name</label>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <input required="required" name="name" class="order-form-input" placeholder="First">
+                                </div>
+                                <div class="col-12 col-sm-6 mt-2 mt-sm-0">
+                                    <input required="required" name="surname" class="order-form-input"
+                                           placeholder="Last">
+                                </div>
                             </div>
-                        </div>
+                            <div class="row mt-3 mx-4">
+                                <div class="col-12">
+                                    <label class="order-form-label">Comment</label>
+                                </div>
+                                <div class="col-12">
+                                    <input name="comment" class="order-form-input" placeholder="not required" th:default="'empty'">
+                                </div>
+                            </div>
+                            <div class="row mt-3 mx-4">
+                                <div class="col-12">
+                                    <label class="order-form-label">Address</label>
+                                </div>
+                                <div class="col-12">
+                                    <input required="required" name="street" class="order-form-input"
+                                           placeholder="Street Address">
+                                </div>
+                                <div class="col-12 col-sm-6 mt-2 pr-sm-2">
+                                    <input required="required" name="city" class="order-form-input" placeholder="City">
+                                </div>
+                                <div class="col-12 col-sm-6 mt-2 pl-sm-0">
+                                    <input required="required" name="region" class="order-form-input"
+                                           placeholder="Region">
+                                </div>
+                                <div class="col-12 col-sm-6 mt-2 pr-sm-2">
+                                    <input required="required" name="zip" class="order-form-input"
+                                           placeholder="Postal / Zip Code">
+                                </div>
+                                <div class="col-12 col-sm-6 mt-2 pl-sm-0">
+                                    <input required="required" name="country" class="order-form-input"
+                                           placeholder="Country">
+                                </div>
+                                <div class="col-12 col-sm-6 mt-2 pl-sm-0">
+                                    <input required="required" name="post" class="order-form-input"
+                                           placeholder="Post(Nova Poshta eth.)">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-dark d-block mx-auto btn-submit">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <button type="button" id="btnSubmit" class="btn btn-dark d-block mx-auto btn-submit">Submit</button>
-                        </div>
+                </div>
+            </div>
+            <div class="right-column" style="background-color: whitesmoke; margin-top: 0">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Order items</h1>
+                        <span>check is it right</span>
+                        <hr class="mt-1">
                     </div>
+                    <div class="col-sm-4">
+                    </div>
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Title<i></i></th>
+                            <th>Author<i></i></th>
+                            <th>Price<i></i></th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--                                table body-->
+                        <!--/*@thymesVar id="cartItems" type="java.util.List"*/-->
+                        <!--/*@thymesVar id="item" type="ua.hillel.bookstore.persistence.dto.CartItemDTO"*/-->
 
+                        <tr th:each="item: ${cartItems}">
+                            <td th:text="${item.book.title}"></td>
+                            <td th:text="${item.book.author.name}"></td>
+                            <td th:text="${item.book.price}"></td>
+                            <td th:text="${item.quantity}"></td>
+                            <td th:text="${item.quantity} * ${item.book.price}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--/*@thymesVar id="totalSum" type="java.lang.Integer"*/-->
+                    <span style="margin-left: auto; font-weight: bold"
+                          th:text="'Total sum is ' + ${totalSum} + ' grn'">
+                    </span>
                 </div>
             </div>
         </div>

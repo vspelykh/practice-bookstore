@@ -13,6 +13,7 @@ import ua.hillel.bookstore.persistence.repository.CartItemRepository;
 import ua.hillel.bookstore.persistence.repository.CartRepository;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,8 +40,8 @@ public class CartService {
 
     public void clearCart(Integer id) {
         Cart cart = repository.getReferenceById(id);
-        cart.getItems().clear();
-        repository.save(cart);
+        Set<CartItem> items = cart.getItems();
+        itemRepository.deleteAll(items);
     }
 
     public void addToCart(Integer cartId, BookDTO bookDTO) {

@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import ua.hillel.bookstore.persistence.dto.CartItemDTO;
 import ua.hillel.bookstore.persistence.dto.OrderDTO;
 import ua.hillel.bookstore.persistence.dto.OrderItemDTO;
+import ua.hillel.bookstore.persistence.dto.UserDTO;
 import ua.hillel.bookstore.persistence.entity.Status;
 import ua.hillel.bookstore.service.OrderService;
+import ua.hillel.bookstore.utils.SecurityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,43 +25,44 @@ public class OrderController {
     private final OrderService service;
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<OrderDTO>> getAllOrders(){
+    public ResponseEntity<List<OrderDTO>> getAllOrders() {
 
         return new ResponseEntity<>(service.getAllOrders(), HttpStatus.OK);
     }
 
     @GetMapping("/getAllByStatus")
-    public ResponseEntity<List<OrderDTO>> getAllOrders(Status status){
+    public ResponseEntity<List<OrderDTO>> getAllOrders(Status status) {
 
         return new ResponseEntity<>(service.getAllOrdersByStatus(status), HttpStatus.OK);
     }
 
     @GetMapping("/getOrder")
-    public ResponseEntity<OrderDTO> getOrder(Integer id){
+    public ResponseEntity<OrderDTO> getOrder(Integer id) {
 
         return new ResponseEntity<>(service.getOrderById(id), HttpStatus.OK);
     }
 
     @GetMapping("/getItems")
-    public ResponseEntity<List<OrderItemDTO>> getOrderItems(Integer orderId){
+    public ResponseEntity<List<OrderItemDTO>> getOrderItems(Integer orderId) {
 
         return new ResponseEntity<>(service.getOrderItemsByOrderId(orderId), HttpStatus.OK);
     }
 
     @PostMapping("/saveOrder")
-    public OrderDTO createOrder(@RequestBody OrderDTO order, List<CartItemDTO> cartItems){
+    public OrderDTO createOrder(@RequestBody OrderDTO order, List<CartItemDTO> cartItems, UserDTO user) {
+        order = service.saveOrder(order);
         List<OrderItemDTO> orderItems = new ArrayList<>();
-        for (CartItemDTO cartItem : cartItems){
+        for (CartItemDTO cartItem : cartItems) {
             OrderItemDTO orderItem =
-                    new OrderItemDTO(null, order, cartItem.getBook(), cartItem.getBook().getPrice().intValue());
+                    new OrderItemDTO(null, order, user, cartItem.getBook(), cartItem.getBook().getPrice().intValue());
             orderItems.add(orderItem);
         }
         service.saveOrderItems(orderItems);
-        return service.saveOrder(order);
+        return order;
     }
 
     @PostMapping("/changeStatus")
-    public OrderDTO changeOrderStatus(OrderDTO order, Status status){
+    public OrderDTO changeOrderStatus(OrderDTO order, Status status) {
         order.setStatus(status.toString());
         return service.saveOrder(order);
     }

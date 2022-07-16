@@ -39,4 +39,7 @@ public class Order extends AbstractBaseEntity {
     @NotNull
     private LocalDateTime date;
 
+    @Column(name = "comment")
+    private String comment;
+
 }

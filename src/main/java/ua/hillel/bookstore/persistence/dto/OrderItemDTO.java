@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class OrderItemDTO implements Serializable {
     private final Integer id;
     private final OrderDTO order;
+    private final UserDTO user;
     private final BookDTO book;
     private final Integer price;
 }

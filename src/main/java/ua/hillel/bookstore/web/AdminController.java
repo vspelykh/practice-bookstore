@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.hillel.bookstore.persistence.dto.CartItemDTO;
 import ua.hillel.bookstore.persistence.dto.OrderDTO;
-import ua.hillel.bookstore.persistence.mapper.UserMapper;
-import ua.hillel.bookstore.persistence.repository.UserRepository;
 import ua.hillel.bookstore.rest.*;
 import ua.hillel.bookstore.utils.SecurityUtil;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller()
@@ -24,9 +23,7 @@ public class AdminController {
     private final PublisherController publisherController;
     private final OrderController orderController;
     private final CartController cartController;
-    //TODO userController or userId in UserDTO, Status in OrderDTO
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
+    private final UserController userController;
 
     @GetMapping("/admin")
     public String admin(Model model) {
@@ -52,27 +49,42 @@ public class AdminController {
     }
 
     @GetMapping("getAllOrders")
-    public String getOrders(Model model){
+    public String getOrders(Model model) {
 
         model.addAttribute("orders", orderController.getAllOrders());
         return "orders";
     }
 
     @GetMapping("/ordering")
-    public String ordering(){
+    public String ordering(Model model) {
 
+        List<CartItemDTO> cartItems = cartController.getCartItems();
+        int totalSum = 0;
+        for (CartItemDTO item : cartItems) {
+            int itemSum = item.getBook().getPrice().intValue() * item.getQuantity();
+            totalSum += itemSum;
+        }
+        model.addAttribute("cartItems", cartItems);
+        model.addAttribute("totalSum", totalSum);
         return "orderForm";
     }
 
     @PostMapping("/order/create")
-    public String createOrder(@ModelAttribute("name") String name, @ModelAttribute("address") String address,
-                              @ModelAttribute("post") String post){
+    public String createOrder(@ModelAttribute("name") String name, @ModelAttribute("surname") String surname,
+                              @ModelAttribute("street") String street, @ModelAttribute("city") String city,
+                              @ModelAttribute("region") String region, @ModelAttribute("zip") String zip,
+                              @ModelAttribute("country") String country, @ModelAttribute("post") String post,
+                              @ModelAttribute("comment") String comment) {
 
         List<CartItemDTO> cartItems = cartController.getCartItems();
-        OrderDTO order = new OrderDTO(null, userMapper.toDTO(userRepository.getReferenceById(SecurityUtil.getFakeAuthUserId()))
-        , address, post);
+        String address = "Street: " + street + ", city: " + city + ", region: " + region + ", postal: " + zip +
+                ", " + country;
+        OrderDTO
+                order = new OrderDTO(null, userController.get(SecurityUtil.getFakeAuthUserId()), address, post
+                , LocalDateTime.now(), comment);
         order.setStatus("NEW");
-        orderController.createOrder(order, cartItems);
+        orderController.createOrder(order, cartItems, userController.get(SecurityUtil.getFakeAuthUserId()));
+        cartController.cleanCart();
         return "successPage";
     }
 }

@@ -65,4 +65,9 @@ public class CartController {
 
         cartService.deleteCartItem(id);
     }
+
+    @PostMapping("/cleanCart")
+    public void cleanCart() {
+        cartService.clearCart(SecurityUtil.getFakeAuthUserId());
+    }
 }

@@ -1,7 +1,6 @@
 package ua.hillel.bookstore.persistence.dto;
 
 import lombok.Data;
-import ua.hillel.bookstore.persistence.entity.Role;
 
 import java.io.Serializable;
 

@@ -4,9 +4,7 @@ package ua.hillel.bookstore.persistence.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ua.hillel.bookstore.persistence.dto.OrderItemDTO;
-import ua.hillel.bookstore.persistence.dto.WishlistItemDTO;
 import ua.hillel.bookstore.persistence.entity.OrderItem;
-import ua.hillel.bookstore.persistence.entity.WishlistItem;
 import ua.hillel.bookstore.persistence.mapper.base.BaseMapperConfig;
 
 @Mapper(componentModel = "spring", uses = BaseMapperConfig.class)

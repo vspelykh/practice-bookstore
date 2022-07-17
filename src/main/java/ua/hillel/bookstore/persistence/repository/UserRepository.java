@@ -8,4 +8,6 @@ import ua.hillel.bookstore.persistence.entity.User;
 @Repository
 @Transactional(readOnly = true)
 public interface UserRepository extends JpaRepository<User, Integer> {
+
+    User getUserByEmail(String email);
 }

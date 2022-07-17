@@ -41,7 +41,7 @@ spring:
         use_second_level_cache: false
         use_query_cache: false
   liquibase:
-    enabled: true
+    enabled: false
     url: ${spring.datasource.url}
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}

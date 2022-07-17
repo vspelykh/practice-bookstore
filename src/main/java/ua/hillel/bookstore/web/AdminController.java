@@ -11,7 +11,6 @@ import ua.hillel.bookstore.persistence.dto.CartItemDTO;
 import ua.hillel.bookstore.persistence.dto.OrderDTO;
 import ua.hillel.bookstore.persistence.entity.Status;
 import ua.hillel.bookstore.rest.*;
-import ua.hillel.bookstore.utils.SecurityUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -60,6 +59,7 @@ public class AdminController {
         model.addAttribute("statuses", Status.values());
         return "orders";
     }
+
     @GetMapping("/order/{id}")
     public String getOrder(Model model, @PathVariable("id") Integer orderId) {
         model.addAttribute("order", orderController.getOrder(orderId).getBody());
@@ -68,7 +68,7 @@ public class AdminController {
     }
 
     @GetMapping("/my-orders")
-    public String userOrders(Model model){
+    public String userOrders(Model model) {
         model.addAttribute("orders", Objects.requireNonNull(orderController.getUserOrders().getBody()));
         return "userOrders";
     }
@@ -98,17 +98,24 @@ public class AdminController {
         String address = "Street: " + street + ", city: " + city + ", region: " + region + ", postal: " + zip +
                 ", " + country;
         OrderDTO
-                order = new OrderDTO(null, userController.get(SecurityUtil.getFakeAuthUserId()), address, post
+                order = new OrderDTO(null, userController.get(userController.getAuthUserId()), address, post
                 , LocalDateTime.now(), comment);
         order.setStatus(Status.NEW);
         int sum = 0;
-        for (CartItemDTO item : cartItems){
+        for (CartItemDTO item : cartItems) {
             sum += (item.getQuantity() * item.getBook().getPrice().intValue());
         }
         order.setSum(sum);
-        orderController.createOrder(order, cartItems, userController.get(SecurityUtil.getFakeAuthUserId()));
+        orderController.createOrder(order, cartItems, userController.get(userController.getAuthUserId()));
         bookRestController.editAmountAfterOrdering(cartItems);
         cartController.cleanCart();
         return "successPage";
+
+    }
+
+    @GetMapping("/login")
+    public String login() {
+
+        return "login";
     }
 }

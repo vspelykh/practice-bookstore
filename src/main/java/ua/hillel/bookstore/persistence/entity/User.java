@@ -19,6 +19,9 @@ public class User extends AbstractBaseEntity {
     @Column(name = "surname", nullable = false)
     private String surname;
 
+    @Column(name = "email", nullable = false)
+    private String email;
+
     @OneToMany(mappedBy = "user")
     private List<WishlistItem> wishlistItems = new ArrayList<>();
 

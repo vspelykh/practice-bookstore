@@ -13,7 +13,6 @@ import ua.hillel.bookstore.persistence.dto.OrderItemDTO;
 import ua.hillel.bookstore.persistence.dto.UserDTO;
 import ua.hillel.bookstore.persistence.entity.Status;
 import ua.hillel.bookstore.service.OrderService;
-import ua.hillel.bookstore.utils.SecurityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +22,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService service;
+    private final UserController userController;
 
     @GetMapping("/getAll")
     public ResponseEntity<List<OrderDTO>> getAllOrders() {
@@ -70,6 +70,6 @@ public class OrderController {
     @GetMapping("/userOrders")
     public ResponseEntity<List<OrderDTO>> getUserOrders() {
 
-        return new ResponseEntity<>(service.getAllOrders(SecurityUtil.getFakeAuthUserId()), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAllOrders(userController.getAuthUserId()), HttpStatus.OK);
     }
 }

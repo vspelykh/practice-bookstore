@@ -28,6 +28,7 @@ public class BookController {
     private final CartController cartController;
     private final AuthorController authorController;
     private final BookRestController bookRestController;
+    private final UserController userController;
     private final CategoryController categoryController;
     private final PublisherController publisherController;
     private final WishlistController wishlistController;
@@ -65,8 +66,13 @@ public class BookController {
         model.addAttribute("subCategories", categoryController.getSubCategories(null).getBody());
         model.addAttribute("categories", categoryController.getCategories().getBody());
         model.addAttribute("publishers", publisherController.getAll(null).getBody());
-        model.addAttribute("cartCapacity", cartController.getCapacity());
-        model.addAttribute("cartSum", cartController.getCartSum());
+        if (userController.getAuthUserId() != 0) {
+            model.addAttribute("cartCapacity", cartController.getCapacity());
+            model.addAttribute("cartSum", cartController.getCartSum());
+        } else {
+            model.addAttribute("cartCapacity", 0);
+            model.addAttribute("cartSum", 0);
+        }
         return "index";
     }
 
@@ -87,10 +93,10 @@ public class BookController {
 
     @PostMapping("/book")
     public String editBook(RedirectAttributes redirectAttributes, @ModelAttribute("id") int id, @ModelAttribute("action") String action) {
-        if ("delete".equals(action)) {
+        if ("delete" .equals(action)) {
             bookRestController.delById(id);
             return "redirect:admin";
-        } else if ("edit".equals(action)) {
+        } else if ("edit" .equals(action)) {
             redirectAttributes.addAttribute("id", id);
             redirectAttributes.addAttribute("action", action);
             return "forward:/create/book";
@@ -178,9 +184,9 @@ public class BookController {
     public String editQuantity(@ModelAttribute("id") int id, @ModelAttribute("quantity") Integer quantity,
                                @ModelAttribute("action") String action) {
 
-        if ("edit".equals(action)) {
+        if ("edit" .equals(action)) {
             cartController.editQuantity(id, quantity);
-        } else if ("add".equals(action)) {
+        } else if ("add" .equals(action)) {
             BookDTO book = bookRestController.getById(id).getBody();
             List<CartItemDTO> cartItems = cartController.getCartItems();
             for (CartItemDTO itemDTO : cartItems) {
@@ -189,7 +195,7 @@ public class BookController {
                 }
             }
             cartController.addItemToCart(book);
-        } else if ("delete".equals(action)) {
+        } else if ("delete" .equals(action)) {
             cartController.deleteFromCart(id);
         }
         return "redirect:cart";
@@ -206,10 +212,10 @@ public class BookController {
 
     @PostMapping("/wishlist")
     public String editWishlist(@ModelAttribute("id") int id, @ModelAttribute("action") String action) {
-        if ("add".equals(action)) {
+        if ("add" .equals(action)) {
             wishlistController.addToWishlist(bookRestController.getById(id).getBody());
             return "redirect:wishlist";
-        } else if ("delete".equals(action)) {
+        } else if ("delete" .equals(action)) {
             wishlistController.removeFromWishlist(id);
         }
         return "redirect:wishlist";

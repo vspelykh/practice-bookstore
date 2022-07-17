@@ -16,4 +16,8 @@ public class UserService {
     public UserDTO getUser(int id){
         return mapper.toDTO(repository.getReferenceById(id));
     }
+
+    public UserDTO getUserByEmail(String email) {
+       return mapper.toDTO(repository.getUserByEmail(email));
+    }
 }

@@ -1,14 +1,11 @@
 package ua.hillel.bookstore.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.hillel.bookstore.persistence.dto.BookDTO;
-import ua.hillel.bookstore.persistence.dto.CartDTO;
 import ua.hillel.bookstore.persistence.dto.CartItemDTO;
 import ua.hillel.bookstore.service.CartService;
 
@@ -21,11 +18,6 @@ public class CartController {
     private final CartService cartService;
     private final UserController userController;
 
-    @GetMapping("/getCart")
-    public ResponseEntity<CartDTO> getCart() {
-
-        return new ResponseEntity<>(cartService.getCart(userController.getAuthUserId()), HttpStatus.OK);
-    }
 
     @GetMapping("/editQuantity")
     public void editQuantity(int itemId, int quantity) {
@@ -55,7 +47,7 @@ public class CartController {
 
     @PostMapping("/addToCart")
     public void addItemToCart(BookDTO book) {
-        cartService.addToCart(userController.getAuthUserId(), book);
+        cartService.addToCart(userController.getAuthUser(), book);
     }
 
     @DeleteMapping("/deleteFromCart")

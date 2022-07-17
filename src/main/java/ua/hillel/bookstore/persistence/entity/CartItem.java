@@ -12,8 +12,8 @@ import javax.persistence.*;
 public class CartItem extends AbstractBaseEntity {
 
     @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToOne
     @JoinColumn(name = "book_id")

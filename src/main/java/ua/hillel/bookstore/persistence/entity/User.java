@@ -5,7 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -24,6 +26,9 @@ public class User extends AbstractBaseEntity {
 
     @OneToMany(mappedBy = "user")
     private List<WishlistItem> wishlistItems = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<CartItem> items = new HashSet<>();
 
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)

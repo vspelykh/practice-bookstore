@@ -27,7 +27,7 @@ public class UserController {
         return service.getUser(id);
     }
 
-    @GetMapping("/getAuthUser")
+    @GetMapping("/getAuthUserId")
     public Integer getAuthUserId() {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -44,5 +44,10 @@ public class UserController {
             return 0;
         }
         return service.getUserByEmail(username).getId();
+    }
+
+    @GetMapping("/getAuthUser")
+    public UserDTO getAuthUser() {
+       return service.getUser(getAuthUserId());
     }
 }

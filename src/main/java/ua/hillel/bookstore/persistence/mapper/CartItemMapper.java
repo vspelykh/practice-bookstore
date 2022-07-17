@@ -10,13 +10,13 @@ import ua.hillel.bookstore.persistence.mapper.base.BaseMapperConfig;
 public interface CartItemMapper {
 
     @Mapping(target = "id", source = "entity.id")
-    @Mapping(target = "cart", source = "entity.cart")
+    @Mapping(target = "user", source = "entity.user")
     @Mapping(target = "book", source = "entity.book")
     @Mapping(target = "quantity", source = "entity.quantity")
     CartItemDTO toDTO(CartItem entity);
 
     @Mapping(target = "id", source = "dto.id")
-    @Mapping(target = "cart", source = "dto.cart")
+    @Mapping(target = "user", source = "dto.user")
     @Mapping(target = "book", source = "dto.book")
     @Mapping(target = "quantity", source = "dto.quantity")
     CartItem toEntity(CartItemDTO dto);

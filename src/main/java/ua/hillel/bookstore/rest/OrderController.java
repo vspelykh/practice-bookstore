@@ -54,7 +54,8 @@ public class OrderController {
         List<OrderItemDTO> orderItems = new ArrayList<>();
         for (CartItemDTO cartItem : cartItems) {
             OrderItemDTO orderItem =
-                    new OrderItemDTO(null, order, user, cartItem.getBook(), cartItem.getBook().getPrice().intValue());
+                    new OrderItemDTO(null, order, user, cartItem.getBook(),
+                            cartItem.getQuantity(), cartItem.getBook().getPrice().intValue());
             orderItems.add(orderItem);
         }
         service.saveOrderItems(orderItems);

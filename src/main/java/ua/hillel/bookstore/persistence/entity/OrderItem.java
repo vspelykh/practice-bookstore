@@ -22,6 +22,9 @@ public class OrderItem extends AbstractBaseEntity {
     @JoinColumn(name = "book_id")
     private Book book;
 
+    @Column(name = "quantity")
+    private Integer quantity;
+
     @Column(name = "price", nullable = false)
     Integer price;
 

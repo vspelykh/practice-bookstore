@@ -16,6 +16,7 @@ public interface OrderItemMapper {
     @Mapping(target = "order", source = "entity.order")
     @Mapping(target = "user", source = "entity.user")
     @Mapping(target = "book", source = "entity.book")
+    @Mapping(target = "quantity", source = "entity.quantity")
     @Mapping(target = "price", source = "entity.price")
     OrderItemDTO toDTO(OrderItem entity);
 
@@ -23,6 +24,7 @@ public interface OrderItemMapper {
     @Mapping(target = "order", source = "dto.order")
     @Mapping(target = "user", source = "dto.user")
     @Mapping(target = "book", source = "dto.book")
+    @Mapping(target = "quantity", source = "dto.quantity")
     @Mapping(target = "price", source = "dto.price")
     OrderItem toEntity(OrderItemDTO dto);
 }

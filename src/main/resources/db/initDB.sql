@@ -1,6 +1,5 @@
 DROP TABLE IF EXISTS cart_items;
 DROP TABLE IF EXISTS wishlist_items;
-DROP TABLE IF EXISTS carts;
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS authorities;
@@ -84,34 +83,26 @@ CREATE TABLE users
     email    VARCHAR(50) UNIQUE NOT NULL,
     role     VARCHAR            NOT NULL,
     password VARCHAR(500)       NOT NULL,
-    enabled SMALLINT DEFAULT 1
+    enabled  SMALLINT DEFAULT 1
 );
 
 CREATE TABLE authorities
 (
-    email VARCHAR(50) NOT NULL,
+    email     VARCHAR(50) NOT NULL,
     authority VARCHAR(50) NOT NULL,
-    FOREIGN KEY (email) REFERENCES users(email)
+    FOREIGN KEY (email) REFERENCES users (email)
 );
 
 CREATE UNIQUE INDEX ix_auth_username
     on authorities (email, authority);
 
-CREATE TABLE carts
-(
-    id      SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users ON DELETE CASCADE
-);
-
-
 CREATE TABLE cart_items
 (
     id       SERIAL PRIMARY KEY,
-    cart_id  INTEGER NOT NULL,
+    user_id  INTEGER NOT NULL,
     book_id  INTEGER NOT NULL,
     quantity INTEGER NOT NULL,
-    FOREIGN KEY (cart_id) REFERENCES carts ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users ON DELETE CASCADE,
     FOREIGN KEY (book_id) REFERENCES books ON DELETE CASCADE
 );
 
@@ -143,6 +134,7 @@ CREATE TABLE order_items
     order_id INTEGER NOT NULL,
     user_id  INTEGER NOT NULL,
     book_id  INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
     price    INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users ON DELETE CASCADE,
     FOREIGN KEY (order_id) REFERENCES orders ON DELETE CASCADE,
@@ -252,13 +244,5 @@ INSERT INTO authorities (email, authority)
 values ('user@ukr.net', 'ROLE_USER'),
        ('admin@gmail.com', 'ROLE_ADMIN');
 
-
-INSERT INTO carts (user_id)
-VALUES (1),
-       (2);
-
-INSERT INTO cart_items (cart_id, book_id, quantity)
-VALUES (1, 2, 3),
-       (1, 5, 4);
 
 

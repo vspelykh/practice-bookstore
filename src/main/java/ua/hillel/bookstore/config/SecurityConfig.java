@@ -2,7 +2,6 @@ package ua.hillel.bookstore.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,13 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select email,authority "
                         + "from authorities "
                         + "where email = ?")
-//                .withDefaultSchema()
                 .passwordEncoder(passwordEncoder());
-        /*For test in memory*/
-//        auth.inMemoryAuthentication()
-//                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
-//                .and()
-//                .withUser("user").password(passwordEncoder().encode("user")).roles("USER");
     }
 
 

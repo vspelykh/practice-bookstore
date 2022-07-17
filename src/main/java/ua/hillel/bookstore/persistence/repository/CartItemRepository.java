@@ -5,7 +5,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.hillel.bookstore.persistence.entity.CartItem;
 
+import java.util.List;
+
 @Repository
 @Transactional(readOnly = true)
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
+
+    List<CartItem> getByUserId(int userId);
 }

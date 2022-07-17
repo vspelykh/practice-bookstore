@@ -553,13 +553,37 @@ Zachary Ezra Rawlins is a graduate student in Vermont when he discovers a myster
         <insert tableName="users">
             <column name="id" autoIncrement="true"/>
             <column name="name" value="Vlad"/>
+            <column name="surname" value="Pelykh"/>
+            <column name="email" value="user@ukr.net"/>
+            <column name="role" value="USER"/>
+            <column name="password" value="$2a$12$b0lr9CbsQV0ZlRGszi4IZOK8RbcmxpDG4DbuVwDKQQAOSCEnTrMG2"/>
         </insert>
     </changeSet>
 
     <changeSet id="04-09" author="Vladyslav Pelykh">
-        <insert tableName="carts">
+        <insert tableName="users">
             <column name="id" autoIncrement="true"/>
-            <column name="user_id" valueNumeric="1"/>
+            <column name="name" value="Admin"/>
+            <column name="surname" value="Adminov"/>
+            <column name="email" value="admin@gmail.com"/>
+            <column name="role" value="ADMIN"/>
+            <column name="password" value="$2a$12$QGwo0U3WW6iDANsfPlb.tO8W/SVohPmi9/xoffYMepKB9zTiKPpx6"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="05-01" author="Vlad">
+        <insert tableName="authorities">
+            <column name="email" value="user@ukr.net">
+            </column>
+            <column name="authority" value="ROLE_USER"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="05-02" author="Vlad">
+        <insert tableName="authorities">
+            <column name="email" value="admin@gmail.com">
+            </column>
+            <column name="authority" value="ROLE_ADMIN"/>
         </insert>
     </changeSet>
 

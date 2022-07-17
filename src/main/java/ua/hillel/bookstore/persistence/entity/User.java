@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -33,5 +35,10 @@ public class User extends AbstractBaseEntity {
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     Role role;
+
+    @Column(name = "password", nullable = false)
+    @NotBlank
+    @Size(min = 5, max = 128)
+    private String password;
 
 }

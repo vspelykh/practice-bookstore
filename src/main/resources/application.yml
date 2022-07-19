@@ -54,3 +54,7 @@ logging:
     org.hibernate:
       SQL: DEBUG
       type: TRACE
+server:
+  error:
+    whitelabel:
+      enabled: false

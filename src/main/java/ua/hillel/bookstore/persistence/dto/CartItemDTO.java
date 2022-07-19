@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Data
 public class CartItemDTO implements Serializable {
     private Integer id;
-    private final CartDTO cart;
+    private final UserDTO user;
     private final BookDTO book;
     private int quantity;
 

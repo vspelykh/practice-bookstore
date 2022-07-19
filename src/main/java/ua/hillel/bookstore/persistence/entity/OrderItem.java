@@ -6,10 +6,13 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cart_items")
+@Table(name = "order_items")
 @Getter
 @Setter
-public class CartItem extends AbstractBaseEntity {
+public class OrderItem extends AbstractBaseEntity {
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -19,7 +22,10 @@ public class CartItem extends AbstractBaseEntity {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @Column
-    private int quantity;
+    @Column(name = "quantity")
+    private Integer quantity;
+
+    @Column(name = "price", nullable = false)
+    Integer price;
 
 }

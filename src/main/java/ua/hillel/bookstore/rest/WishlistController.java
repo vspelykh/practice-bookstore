@@ -11,23 +11,22 @@ import ua.hillel.bookstore.service.WishlistService;
 
 import java.util.List;
 
-import static ua.hillel.bookstore.utils.SecurityUtil.getFakeAuthUserId;
-
 @RestController("/api-wishlist")
 @RequiredArgsConstructor
 public class WishlistController {
 
     private final WishlistService wishlistService;
+    private final UserController userController;
 
     @GetMapping("/items")
     public List<WishlistItemDTO> getBooksFromWishlist() {
 
-        return wishlistService.getWishlistItems(getFakeAuthUserId());
+        return wishlistService.getWishlistItems(userController.getAuthUserId());
     }
 
     @PostMapping("/addToWish")
     public void addToWishlist(BookDTO book) {
-        wishlistService.addToWishlist(getFakeAuthUserId(), book);
+        wishlistService.addToWishlist(userController.getAuthUserId(), book);
     }
 
     @DeleteMapping("/deleteFromWish")

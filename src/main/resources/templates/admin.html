@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      lang="en" data-layout-decorate="~{fragments/layout}">
+<head>
+    <title>Admin panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- page content -->
+<main data-layout-fragment="content" style="padding-top: 55px">
+    <!--    create button-->
+    <div class="container-xl table-book-body">
+        <div id="parent" class="navbar navbar-expand-lg navbar-dark logo-margin bg-secondary">
+            <div style="margin-right: 20px" class="child">
+                <!--/*@thymesVar id="cartSum" type="java.lang.Integer"*/-->
+                <a th:href="@{/orders}"><img src="/img/orders.png" alt="Cart" width="40" height="40" class="fa"/></a>
+                <!--/*@thymesVar id="newOrders" type="java.lang.Integer"*/-->
+                <span class="badge badge-notify my-cart-badge" id='lblCartCount' th:text="${newOrders}"></span>
+            </div>
+            <form class="child" name="createBook" method="post" th:action="@{/form/book}">
+                <input name="id" type="hidden" th:value="-1">
+                <input name="action" type="hidden" th:value="create">
+                <button onclick="" style="margin-top: 10px" type="submit" class="btn btn-dark">Add new book</button>
+            </form>
+            <form class="child" name="createAuthor" method="post" th:action="@{/form/author}">
+                <input name="id" type="hidden" th:value="-1">
+                <input name="action" type="hidden" th:value="create">
+                <button onclick="" style="margin-top: 10px" type="submit" class="btn btn-dark">Add new author(TODO)
+                </button>
+            </form>
+            <form class="child" name="createPublisher" method="post" th:action="@{/form/publisher}">
+                <input name="id" type="hidden" th:value="-1">
+                <input name="action" type="hidden" th:value="create">
+                <button onclick="" style="margin-top: 10px" type="submit" class="btn btn-dark">Add new publisher(TODO)
+                </button>
+            </form>
+            <form class="child" name="getOrders" method="get" th:action="@{/form/publisher}">
+                <input name="id" type="hidden" th:value="-1">
+                <input name="action" type="hidden" th:value="create">
+                <button onclick="" style="margin-top: 10px" type="submit" class="btn btn-dark">Add new publisher(TODO)</button>
+            </form>
+        </div>
+        <!--        table-->
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8"><h2>Books <b>Details</b></h2></div>
+                        <div class="col-sm-4">
+                            <div class="dropdown-menu">
+                                <a th:each="sizeToChoose : ${sizes}"
+                                   th:class="${sizeToChoose==size} ? 'dropdown-item active' : 'dropdown-item'"
+                                   th:href="@{/(size=${sizeToChoose}, page=${pageNumber})}"
+                                   th:text="${sizeToChoose}"></a>
+                            </div>
+                        </div>
+                        <table id="adminTable" class="table table-striped table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="10%">Cover<i></i></th>
+                                <th>Title<i></i></th>
+                                <th>Author<i></i></th>
+                                <th>Quantity</th>
+                                <th>Price<i></i></th>
+                                <th>Publisher<i></i></th>
+                                <th>Year<i></i></th>
+                                <th>Category</th>
+                                <th>Subcategory</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--                                table body-->
+                            <!--/*@thymesVar id="books" type="org.springframework.data.domain.Page"*/-->
+                            <!--/*@thymesVar id="book" type="ua.hillel.bookstore.persistence.dto.BookDTO"*/-->
+
+                            <tr th:each="book: ${books}">
+                                <td>
+                                    <img width="85%" height="85%" th:src="@{${book.coverImageUrl}}" alt="title">
+                                </td>
+                                <td th:text="${book.title}"></td>
+                                <td th:text="${book.author.name}"></td>
+                                <td>
+                                    <form name="edit-amount" method="post" th:action="@{/book/editAmount}">
+                                        <input id="id" name="id" type="hidden" th:value="${book.id}">
+                                        <div class="form-group">
+                                            <label for="amount"></label>
+                                            <input style="width: 50px" required="required" type="number" id="amount"
+                                                   name="amount" th:value="${book.amount}"
+                                                   th:placeholder="${book.amount}" th:default="${book.amount}">
+                                            <button type="submit" class="btn btn-primary">Edit</button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form name="edit-price" method="post" th:action="@{/book/editPrice}">
+                                        <input name="id" type="hidden" th:value="${book.id}">
+                                        <div class="form-group">
+                                            <label for="price"></label>
+                                            <input style="width: 50px" required="required" type="number" id="price"
+                                                   name="price" th:value="${book.price}"
+                                                   th:placeholder="${book.price}" th:default="${book.price}">
+                                            <button type="submit" class="btn btn-primary">Edit</button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td th:text="${book.publisher.name}"></td>
+                                <td th:text="${book.year}"></td>
+                                <td th:text="${book.subCategory.category.name}"></td>
+                                <td th:text="${book.subCategory.name}"></td>
+                                <td>
+                                    <div class="list-group">
+                                        <form name="delete" method="post" th:action="@{/form/book}">
+                                            <input name="id" type="hidden" th:value="${book.id}">
+                                            <input name="action" type="hidden" th:value="edit">
+                                            <button onclick="" style="margin-top: 10px" type="submit"
+                                                    class="btn btn-primary">Edit
+                                            </button>
+                                        </form>
+                                        <form name="delete" method="post" th:action="@{/book}">
+                                            <input name="id" type="hidden" th:value="${book.id}">
+                                            <input name="action" type="hidden" th:value="delete">
+                                            <button onclick="return confirm('Are you sure?')" style="margin-top: 10px"
+                                                    type="submit" class="btn btn-danger">Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

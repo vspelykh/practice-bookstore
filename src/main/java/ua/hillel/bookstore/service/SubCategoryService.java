@@ -42,6 +42,6 @@ public class SubCategoryService {
     }
 
     public List<SubCategoryDTO> findByCategory(int categoryId){
-        return repository.getAllByCategory(categoryId).stream().map(mapper::toDTO).collect(Collectors.toList());
+        return repository.getAllByCategoryId(categoryId).stream().map(mapper::toDTO).collect(Collectors.toList());
     }
 }

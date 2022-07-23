@@ -27,11 +27,11 @@ public class CategoryController {
     }
 
     @GetMapping("/allSub")
-    public ResponseEntity<List<SubCategoryDTO>> getSubCategories(List<CategoryDTO> categories) {
+    public ResponseEntity<List<SubCategoryDTO>> getSubCategories(List<Integer> categories) {
         List<SubCategoryDTO> subCategories = new ArrayList<>();
         if (categories != null && !categories.isEmpty()) {
-            for (CategoryDTO category : categories) {
-                subCategories.addAll(subCategoryService.findByCategory(category.getId()));
+            for (Integer category : categories) {
+                subCategories.addAll(subCategoryService.findByCategory(category));
             }
             return new ResponseEntity<>(subCategories, HttpStatus.OK);
         } else {

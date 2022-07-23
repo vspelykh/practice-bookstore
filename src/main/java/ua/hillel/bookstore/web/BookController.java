@@ -3,6 +3,7 @@ package ua.hillel.bookstore.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -34,47 +35,73 @@ public class BookController {
     private final WishlistController wishlistController;
     private final CharacteristicController characteristicController;
 
-    /* Method left to use with QueryDSL. Need to implement and test which solution work better*/
-    @GetMapping("/home")
-    public String home(@RequestParam(required = false, value = "search") String search,
+    @GetMapping
+    public String home(@RequestParam(name = "search", required = false) String search,
+                       @RequestParam(value = "categories", required = false) List<Integer> categories,
+                       @RequestParam(name = "subcategories", required = false) List<Integer> subcategories,
+                       @RequestParam(name = "publishers", required = false) List<Integer> publishers,
+                       @RequestParam(name = "min", required = false) Integer minPrice,
+                       @RequestParam(name = "max", required = false) Integer maxPrice,
                        @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber,
-                       @RequestParam(name = "size", required = false, defaultValue = "20") Integer pageSize,
+                       @RequestParam(name = "size", required = false, defaultValue = "5") Integer pageSize,
                        @RequestParam(name = "sort", required = false, defaultValue = "title") String sortBy,
                        HttpServletResponse response, Model model) {
 
-        Page<BookDTO> page = bookRestController.search(response, search, pageNumber, pageSize, sortBy).getBody();
+        if (categories != null) {
+            model.addAttribute("categories", categories);
+        }
+        if (subcategories != null) {
+            model.addAttribute("subcategories", subcategories);
+        }
+        if (publishers != null){
+            model.addAttribute("publishers", publishers);
+        }
+        if (minPrice != null){
+            model.addAttribute("minPrice", minPrice);
+        }
+        if (maxPrice != null){
+            model.addAttribute("maxPrice", maxPrice);
+        }
+        if (search != null){
+            model.addAttribute("search", search);
+        }
+        Page<BookDTO> page = bookRestController.search(response, categories, subcategories, publishers, search,
+                minPrice, maxPrice, pageNumber, pageSize, sortBy).getBody();
+        model.addAttribute("books", page);
+        model.addAttribute("sizes", CollectionUtils.arrayToList(new int[]{2, 5, 10, 15, 20}));
+        model.addAttribute("currentSize", pageSize);
+        model.addAttribute("categoriesDTO", categoryController.getCategories().getBody());
+        if (categories != null) {
+            model.addAttribute("subcategoriesDTO", categoryController.getSubCategories(categories).getBody());
+        }
+        model.addAttribute("publishersDTO", publisherController.getAll(null).getBody());
+        model.addAttribute("cartCapacity", cartController.getCapacity());
+        model.addAttribute("cartSum", cartController.getCartSum());
         if (Objects.requireNonNull(page).getTotalPages() > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, page.getTotalPages())
                     .boxed()
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        model.addAttribute("sizes", CollectionUtils.arrayToList(new int[]{2, 5, 10, 15, 20}));
-        model.addAttribute("size", pageSize);
-        model.addAttribute("books", page);
-        model.addAttribute("categories", categoryController.getCategories().getBody());
-        model.addAttribute("subCategories", categoryController.getSubCategories(null).getBody());
-        model.addAttribute("publishers", publisherController.getAll(null).getBody());
-        model.addAttribute("cartCapacity", cartController.getCapacity());
-        model.addAttribute("cartSum", cartController.getCartSum());
         return "home";
     }
 
-    @GetMapping
-    public String index(Model model) {
-        model.addAttribute("books", bookRestController.getAll().getBody());
-        model.addAttribute("subCategories", categoryController.getSubCategories(null).getBody());
-        model.addAttribute("categories", categoryController.getCategories().getBody());
-        model.addAttribute("publishers", publisherController.getAll(null).getBody());
-        if (userController.getAuthUserId() != 0) {
-            model.addAttribute("cartCapacity", cartController.getCapacity());
-            model.addAttribute("cartSum", cartController.getCartSum());
-        } else {
-            model.addAttribute("cartCapacity", 0);
-            model.addAttribute("cartSum", 0);
-        }
-        return "index";
-    }
+    //Current method works with Datatables implementation
+//    @GetMapping
+//    public String index(Model model) {
+//        model.addAttribute("books", bookRestController.getAll().getBody());
+//        model.addAttribute("subCategories", categoryController.getSubCategories(null).getBody());
+//        model.addAttribute("categories", categoryController.getCategories().getBody());
+//        model.addAttribute("publishers", publisherController.getAll(null).getBody());
+//        if (userController.getAuthUserId() != 0) {
+//            model.addAttribute("cartCapacity", cartController.getCapacity());
+//            model.addAttribute("cartSum", cartController.getCartSum());
+//        } else {
+//            model.addAttribute("cartCapacity", 0);
+//            model.addAttribute("cartSum", 0);
+//        }
+//        return "index";
+//    }
 
     @GetMapping("/book/{id}")
     public String bookInfo(@PathVariable("id") int id, Model model) {
@@ -93,10 +120,10 @@ public class BookController {
 
     @PostMapping("/book")
     public String editBook(RedirectAttributes redirectAttributes, @ModelAttribute("id") int id, @ModelAttribute("action") String action) {
-        if ("delete" .equals(action)) {
+        if ("delete".equals(action)) {
             bookRestController.delById(id);
             return "redirect:admin";
-        } else if ("edit" .equals(action)) {
+        } else if ("edit".equals(action)) {
             redirectAttributes.addAttribute("id", id);
             redirectAttributes.addAttribute("action", action);
             return "forward:/create/book";
@@ -184,9 +211,9 @@ public class BookController {
     public String editQuantity(@ModelAttribute("id") int id, @ModelAttribute("quantity") Integer quantity,
                                @ModelAttribute("action") String action) {
 
-        if ("edit" .equals(action)) {
+        if ("edit".equals(action)) {
             cartController.editQuantity(id, quantity);
-        } else if ("add" .equals(action)) {
+        } else if ("add".equals(action)) {
             BookDTO book = bookRestController.getById(id).getBody();
             List<CartItemDTO> cartItems = cartController.getCartItems();
             for (CartItemDTO itemDTO : cartItems) {
@@ -195,7 +222,7 @@ public class BookController {
                 }
             }
             cartController.addItemToCart(book);
-        } else if ("delete" .equals(action)) {
+        } else if ("delete".equals(action)) {
             cartController.deleteFromCart(id);
         }
         return "redirect:cart";
@@ -212,10 +239,10 @@ public class BookController {
 
     @PostMapping("/wishlist")
     public String editWishlist(@ModelAttribute("id") int id, @ModelAttribute("action") String action) {
-        if ("add" .equals(action)) {
+        if ("add".equals(action)) {
             wishlistController.addToWishlist(bookRestController.getById(id).getBody());
             return "redirect:wishlist";
-        } else if ("delete" .equals(action)) {
+        } else if ("delete".equals(action)) {
             wishlistController.removeFromWishlist(id);
         }
         return "redirect:wishlist";

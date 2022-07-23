@@ -1,7 +1,7 @@
 package ua.hillel.bookstore.service;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,6 +12,7 @@ import ua.hillel.bookstore.persistence.repository.BookRepository;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,7 +31,7 @@ public class BookService extends GenericQueryDSL<Book> {
     }
 
     public boolean delete(Integer id) {
-        if (!bookRepository.existsById(id)){
+        if (!bookRepository.existsById(id)) {
             return false;
         }
         bookRepository.deleteById(id);
@@ -43,9 +44,22 @@ public class BookService extends GenericQueryDSL<Book> {
         return bookRepository.save(entity);
     }
 
-    public Page<BookDTO> findAll(BooleanExpression build, Pageable pageable) {
-        Page<Book> entities = bookRepository.findAll(build, pageable);
-        return entities.map(mapper::toDTO);
+    public Page<BookDTO> findAll(Pageable pageable, Predicate<Book> authorOrTitle, Predicate<Book> categoryPredicate,
+                                 Predicate<Book> subcategoryPredicate, Predicate<Book> publisherPredicate,
+                                 Predicate<Book> pricePredicate) {
+        List<BookDTO> books = bookRepository.findAll().stream().filter(authorOrTitle).filter(categoryPredicate)
+                .filter(subcategoryPredicate).filter(publisherPredicate).filter(pricePredicate).map(mapper::toDTO)
+                .collect(Collectors.toList());
+        /*Class PageImpl works not correct. That's why I use this algorithm:*/
+        int totalPages = books.size() / pageable.getPageSize();
+        int indexFrom = pageable.getPageSize() * pageable.getPageNumber();
+        int indexTo;
+        if (pageable.getPageNumber() == totalPages) {
+            indexTo = books.size();
+        } else {
+            indexTo = indexFrom + pageable.getPageSize();
+        }
+        return new PageImpl<>(books.subList(indexFrom, indexTo), pageable, books.size());
     }
 
     public Page<BookDTO> findAll(PageRequest of) {
@@ -58,31 +72,31 @@ public class BookService extends GenericQueryDSL<Book> {
     }
 
     public Integer getMarkOfEqual(BookDTO searched, BookDTO book) {
-        if (searched.equals(book)){
+        if (searched.equals(book)) {
             return 0;
         }
         int mark = 0;
-        if (searched.getAuthor().equals(book.getAuthor())){
-            mark+=3;
+        if (searched.getAuthor().equals(book.getAuthor())) {
+            mark += 3;
         }
-        if (searched.getPublisher().equals(book.getPublisher())){
-            mark+=2;
+        if (searched.getPublisher().equals(book.getPublisher())) {
+            mark += 2;
         }
-        if (searched.getSubCategory().equals(book.getSubCategory())){
-            mark+=4;
+        if (searched.getSubCategory().equals(book.getSubCategory())) {
+            mark += 4;
         }
-        if (searched.getSubCategory().getCategory().equals(book.getSubCategory().getCategory())){
-            mark+=2;
+        if (searched.getSubCategory().getCategory().equals(book.getSubCategory().getCategory())) {
+            mark += 2;
         }
         String[] split1 = searched.getTitle().split(" ");
         String[] split2 = book.getTitle().split(" ");
-        for (String s1 : split1){
-            for (String s2 : split2){
-                if (s1.contains(s2) || s2.contains(s1)){
+        for (String s1 : split1) {
+            for (String s2 : split2) {
+                if (s1.contains(s2) || s2.contains(s1)) {
                     mark++;
                 }
-                if (s1.equals(s2)){
-                    mark+=2;
+                if (s1.equals(s2)) {
+                    mark += 2;
                 }
             }
         }

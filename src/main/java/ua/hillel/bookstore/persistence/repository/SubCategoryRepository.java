@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface SubCategoryRepository extends JpaRepository<SubCategory, Integer> {
 
-    List<SubCategory> getAllByCategory(@Param("categoryId") Integer categoryId);
+    List<SubCategory> getAllByCategoryId(@Param("categoryId") Integer categoryId);
 }
